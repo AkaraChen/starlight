@@ -9755,15 +9755,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "starlight@workspace:."
   dependencies:
-    "@types/node": "npm:^18.19.9"
-    "@types/react": "npm:^18.2.48"
-    "@types/react-dom": "npm:^18.2.18"
-    eslint: "npm:^8.56.0"
-    eslint-plugin-react: "npm:^7.33.2"
     prettier: "npm:^3.2.5"
-    react-dom: "npm:^18.2.0"
     typescript: "npm:^5.3.3"
-    vitepress: "npm:^1.0.1"
   languageName: unknown
   linkType: soft
 
