@@ -8,11 +8,11 @@ Commands are functions that can be searched and executed from the Starlight inte
 
 ```typescript
 type Command = {
-  id: string;
-  displayName: string;
-  description: string;
-  handler: () => void;
-};
+  id: string
+  displayName: string
+  description: string
+  handler: () => void
+}
 ```
 
 ## Custom search
@@ -24,8 +24,8 @@ Plugin can define custom search behavior by providing a `search` function in the
 Search function only be called when available commands are less than 5.
 
 ```typescript
-import fs from 'fs/promises';
-import { Command } from '@starlight/core';
+import fs from 'fs/promises'
+import { Command } from '@starlight/core'
 
 export const spec = {
   name: 'my-plugin',
@@ -33,13 +33,10 @@ export const spec = {
   commands: [
     /* ... */
   ],
-  search: async (
-    query: string,
-    abortSignal: AbortSignal
-  ): Command[] | undefined => {
-    const files = await fs.readdir(os.homedir());
+  search: async (query: string, abortSignal: AbortSignal): Command[] | undefined => {
+    const files = await fs.readdir(os.homedir())
     if (abortSignal.aborted) {
-      return;
+      return
     }
     return files
       .filter((file) => file.includes(query))
@@ -50,9 +47,9 @@ export const spec = {
         handler: () => {
           // Open file
         }
-      }));
+      }))
   }
-};
+}
 ```
 
 ::: tip Slow search

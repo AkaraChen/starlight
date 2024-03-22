@@ -3,8 +3,8 @@
 layout: home
 
 hero:
-  name: "Starlight Docs"
-  text: "Docs for users, developers and maintainers."
+  name: 'Starlight Docs'
+  text: 'Docs for users, developers and maintainers.'
   tagline: The all-in-one documentation for Starlight.
   actions:
     - theme: brand
@@ -13,7 +13,6 @@ hero:
     - theme: alt
       text: Developer guide
       link: /developer/
-
 # features:
 #   - title: Feature A
 #     details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
@@ -22,4 +21,3 @@ hero:
 #   - title: Feature C
 #     details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
 ---
-

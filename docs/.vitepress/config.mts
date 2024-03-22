@@ -1,12 +1,10 @@
 import { defineConfig } from 'vitepress'
 
 export default defineConfig({
-  title: "Starlight Docs",
-  description: "Docs for users, developer and maintainers.",
+  title: 'Starlight Docs',
+  description: 'Docs for users, developer and maintainers.',
   themeConfig: {
-    nav: [
-      { text: 'Home', link: '/' },
-    ],
+    nav: [{ text: 'Home', link: '/' }],
 
     sidebar: [
       {
@@ -57,11 +55,9 @@ export default defineConfig({
       }
     ],
 
-    socialLinks: [
-      { icon: 'github', link: 'https://github.com/vuejs/vitepress' }
-    ],
+    socialLinks: [{ icon: 'github', link: 'https://github.com/vuejs/vitepress' }],
     search: {
-      provider: 'local',
+      provider: 'local'
     }
   }
 })

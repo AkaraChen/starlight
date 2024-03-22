@@ -6,10 +6,10 @@ A view is a React component that is displayed in the Starlight interface. Views 
 
 ```typescript
 type View = {
-  id: string;
-  displayName: string;
-  component: FC;
-};
+  id: string
+  displayName: string
+  component: FC
+}
 ```
 
 ## Open view
@@ -45,30 +45,24 @@ export const commands = [
 Starlight sdk provides a few components to help you build views, such as `Container`, `Search`, `List`, `File`, and `Button`.
 
 ```tsx
-import { Search, List, File, Button } from '@starlight/core';
+import { Search, List, File, Button } from '@starlight/core'
 
 const view: View = {
   id: 'my-view',
   displayName: 'My View',
-  component: (
-    command: Command,
-    query: string
-  ) => {
-    const [keyword, setKeyword] = useState('');
-    const [files, setFiles] = useState<string[]>([]);
-    const [filteredFiles, setFilteredFiles] = useState<string[]>([]);
+  component: (command: Command, query: string) => {
+    const [keyword, setKeyword] = useState('')
+    const [files, setFiles] = useState<string[]>([])
+    const [filteredFiles, setFilteredFiles] = useState<string[]>([])
 
     useEffect(() => {
       // Load files
-      setFiles(['file1.txt', 'file2.txt']);
-    }, []);
+      setFiles(['file1.txt', 'file2.txt'])
+    }, [])
 
     return (
       <Container>
-        <Search
-          value={keyword}
-          onChange={(e) => setKeyword(e.target.value)}
-        />
+        <Search value={keyword} onChange={(e) => setKeyword(e.target.value)} />
         <List>
           {filteredFiles.map((file) => (
             <File
@@ -88,7 +82,7 @@ const view: View = {
           Click me
         </Button>
       </Container>
-    );
+    )
   }
-};
+}
 ```
