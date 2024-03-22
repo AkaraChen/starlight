@@ -26,6 +26,22 @@ export default defineConfig({
           {
             text: 'Get Started',
             link: '/developer/get-started'
+          },
+          {
+            text: 'Concepts',
+            link: '/developer/concepts'
+          },
+          {
+            text: 'Life Cycle',
+            link: '/developer/life-cycle'
+          },
+          {
+            text: 'Commands',
+            link: '/developer/commands'
+          },
+          {
+            text: 'Views',
+            link: '/developer/views'
           }
         ]
       },
