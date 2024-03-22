@@ -3,6 +3,8 @@ import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
 
+const isDev = import.meta.env.DEV
+
 function createWindow(): void {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
@@ -36,14 +38,16 @@ function createWindow(): void {
     mainWindow.loadFile(join(__dirname, '../renderer/index.html'))
   }
 
-  globalShortcut.register('Alt+Space', () => {
-    mainWindow.show()
-    mainWindow.focus()
-  })
+  if (!isDev) {
+    globalShortcut.register('Alt+Space', () => {
+      mainWindow.show()
+      mainWindow.focus()
+    })
 
-  mainWindow.on('blur', () => {
-    mainWindow.hide()
-  })
+    mainWindow.on('blur', () => {
+      mainWindow.hide()
+    })
+  }
 }
 
 // This method will be called when Electron has finished
@@ -81,5 +85,7 @@ app.on('window-all-closed', () => {
   }
 })
 
-// In this file you can include the rest of your app"s specific main process
-// code. You can also put them in separate files and require them here.
+app.setLoginItemSettings({
+  openAsHidden: true,
+  openAtLogin: true
+})
