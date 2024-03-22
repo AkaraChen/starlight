@@ -4,7 +4,7 @@ layout: home
 
 hero:
   name: "Starlight Docs"
-  text: "Docs for users, developer and maintainers."
+  text: "Docs for users, developers and maintainers."
   tagline: The all-in-one documentation for Starlight.
   actions:
     - theme: brand
