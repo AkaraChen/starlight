@@ -16,7 +16,10 @@
     "build:unpack": "npm run build && electron-builder --dir",
     "build:win": "npm run build && electron-builder --win",
     "build:mac": "electron-vite build && electron-builder --mac",
-    "build:linux": "electron-vite build && electron-builder --linux"
+    "build:linux": "electron-vite build && electron-builder --linux",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
   },
   "dependencies": {
     "@electron-toolkit/preload": "^3.0.0",
@@ -44,11 +47,13 @@
     "react-dom": "^18.2.0",
     "tailwindcss": "^3.4.1",
     "typescript": "^5.3.3",
-    "vite": "^5.0.12"
+    "vite": "^5.0.12",
+    "vitepress": "^1.0.1"
   },
   "workspaces": [
     "./packages/*",
-    "./crates/*"
+    "./crates/*",
+    "./docs/*"
   ],
   "packageManager": "yarn@4.1.1"
 }
