@@ -84,6 +84,7 @@ export const search = async (
 
 export const metadata = {
   name: 'my-plugin',
-  version: '1.0.0'
+  version: '1.0.0',
+  icon: __dirname + '/icon.svg',
 }
 ```

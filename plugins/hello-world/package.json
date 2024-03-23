@@ -1,0 +1,22 @@
+{
+  "name": "hello-world",
+  "packageManager": "yarn@4.1.1",
+  "dependencies": {
+    "@starlight-app/plugin-sdk": "workspace:^"
+  },
+  "devDependencies": {
+    "tsup": "^8.0.2"
+  },
+  "scripts": {
+    "build": "tsup"
+  },
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.mts"
+    },
+    "./package.json": "./package.json"
+  }
+}
