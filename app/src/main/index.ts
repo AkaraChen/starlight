@@ -85,7 +85,9 @@ app.on('window-all-closed', () => {
   }
 })
 
-app.setLoginItemSettings({
-  openAsHidden: true,
-  openAtLogin: true
-})
+if (!isDev) {
+  app.setLoginItemSettings({
+    openAsHidden: true,
+    openAtLogin: true
+  })
+}

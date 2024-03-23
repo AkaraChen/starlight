@@ -13,7 +13,8 @@
     "./crates/*",
     "./website",
     "./app",
-    "./docs"
+    "./docs",
+    "./plugins/*"
   ],
   "packageManager": "yarn@4.1.1"
 }
