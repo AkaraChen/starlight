@@ -20,6 +20,7 @@
     "@electron-toolkit/utils": "^3.0.0",
     "@starlight-app/plugin-sdk": "workspace:^",
     "clsx": "^2.1.0",
+    "electron-better-ipc": "^2.0.1",
     "electron-updater": "^6.1.7",
     "fuse.js": "^7.0.0",
     "hello-world": "workspace:^",

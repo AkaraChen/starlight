@@ -5,9 +5,11 @@ import icon from '../../resources/icon.png?asset'
 
 const isDev = import.meta.env.DEV
 
+export let mainWindow: BrowserWindow
+
 function createWindow(): void {
   // Create the browser window.
-  const mainWindow = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     width: 900,
     height: 670,
     show: false,
