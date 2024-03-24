@@ -1,20 +1,20 @@
-import { ICommand, ILifecycle, IMetaData } from '@starlight-app/plugin-sdk'
+import { ICommand, ILifecycle, IMetaData, Plugin } from '@starlight-app/plugin-sdk'
 
-export const metaData: IMetaData = {
+const metaData: IMetaData = {
   name: 'Hello World',
   version: '1.0.0',
   description: 'A simple plugin that says hello world',
   icon: '🌍'
 }
 
-export const lifecycle: ILifecycle = {
+const lifecycle: ILifecycle = {
   activate() {
     console.log('Hello World Plugin Activated')
     return true
   }
 }
 
-export const commands: ICommand[] = [
+const commands: ICommand[] = [
   {
     id: 'hello-world',
     displayName: 'Hello World',
@@ -24,3 +24,9 @@ export const commands: ICommand[] = [
     }
   }
 ]
+
+export default class HelloWorld extends Plugin {
+  metaData = metaData
+  lifecycle = lifecycle
+  commands = commands
+}
