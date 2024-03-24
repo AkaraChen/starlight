@@ -5,8 +5,10 @@ import { serve } from '@honojs/node-server'
 import { getRandomPort } from 'get-port-please'
 import { ipcMain } from 'electron-better-ipc'
 
-export const server = new Hono()
+const server = new Hono()
 export const io = new Server(server as unknown as HTTPServer)
+
+export type AppType = typeof server
 
 let port: number
 
