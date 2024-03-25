@@ -2,7 +2,7 @@ import { ICommand, ILifecycle, IMetaData, IPlugin, IView, SearchFunction } from 
 
 export * from './types'
 
-export abstract class Plugin implements IPlugin {
+export class Plugin implements IPlugin {
   metaData: IMetaData
   lifecycle?: ILifecycle
   commands?: ICommand[]
