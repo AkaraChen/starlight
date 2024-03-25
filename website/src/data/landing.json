@@ -9,7 +9,7 @@
     "logo": "Starlight",
     "links": [
       { "label": "About", "href": "#" },
-      { "label": "Docs", "href": "#" },
+      { "label": "Docs", "href": "https://starlight-app-docs.vercel.app" },
       { "label": "FAQs", "href": "#" },
       { "label": "Blog", "href": "#" }
     ]
