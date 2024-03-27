@@ -6,13 +6,19 @@ import {
   ITransformedView,
   transformPlugin
 } from './transform'
+import EventEmitter from 'events'
+import { StarLightEvent } from '../../constants/event'
 
-export class PluginManager {
+export class PluginManager extends EventEmitter {
   context = new IocContext()
 
   plugins: ITransformedPlugin[] = []
   commands: ITranformedCommand[] = []
   views: ITransformedView[] = []
+
+  eventNames(): StarLightEvent[] {
+    return [StarLightEvent.PLUGIN_REGISTER, StarLightEvent.PLUGIN_UNREGISTER]
+  }
 
   resister(plugin: Plugin): void {
     if (this.context.has(plugin.metaData.name)) {
@@ -31,6 +37,7 @@ export class PluginManager {
     })
     const instance = this.context.get(Plugin)
     instance.lifecycle?.activate?.()
+    this.emit(StarLightEvent.PLUGIN_REGISTER)
   }
 
   unregister(plugin: Plugin): void {
@@ -40,6 +47,7 @@ export class PluginManager {
     this.plugins = this.plugins.filter((p) => p.id !== plugin.metaData.name)
     this.commands = this.commands.filter((c) => c.pluginId !== plugin.metaData.name)
     this.views = this.views.filter((v) => v.pluginId !== plugin.metaData.name)
+    this.emit(StarLightEvent.PLUGIN_UNREGISTER)
   }
 
   getById<T>(id: string): T {
