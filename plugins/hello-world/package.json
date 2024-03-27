@@ -15,6 +15,7 @@
   "exports": {
     ".": {
       "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
       "types": "./dist/index.d.mts"
     },
     "./package.json": "./package.json"

@@ -12,6 +12,7 @@ export interface ITransformedPlugin extends IPlugin {
   id: string
   commands?: ITranformedCommand[]
   views?: ITransformedView[]
+  supported: () => boolean
 }
 
 const callWithErrorHandling = (plugin: IPlugin, callback: () => void): void => {
@@ -53,6 +54,25 @@ export function transformPlugin(plugin: IPlugin): ITransformedPlugin {
         handler: () => callWithErrorHandling(plugin, () => command.handler())
       }
     }),
-    views: plugin.views?.map((view) => ({ ...view, pluginId: id }))
+    views: plugin.views?.map((view) => ({ ...view, pluginId: id })),
+    supported() {
+      const support = plugin.metaData.support
+      if (typeof support === 'function') {
+        return support()
+      }
+      if (typeof support === 'boolean') {
+        return support
+      }
+      switch (process.platform) {
+        case 'win32':
+          return support?.windows ?? false
+        case 'darwin':
+          return support?.mac ?? false
+        case 'linux':
+          return support?.linux ?? false
+        default:
+          return false
+      }
+    }
   }
 }

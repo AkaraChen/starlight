@@ -1,0 +1,16 @@
+{
+  "name": "@starlight/plugin-utils",
+  "packageManager": "yarn@4.1.1",
+  "dependencies": {
+    "@starlight-app/plugin-sdk": "workspace:^"
+  },
+  "devDependencies": {
+    "tsup": "^8.0.2"
+  },
+  "scripts": {
+    "build": "tsup"
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts"
+}

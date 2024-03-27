@@ -1,10 +1,15 @@
 import { is } from '@electron-toolkit/utils'
 import { BrowserWindow, shell, globalShortcut } from 'electron'
 import { join } from 'path'
+import createDebug from 'debug'
+
+const debug = createDebug('starlight:window')
 
 export let mainWindow: BrowserWindow
 
 export function createWindow(): void {
+  debug('create window')
+
   // Create the browser window.
   mainWindow = new BrowserWindow({
     width: 900,
@@ -13,7 +18,8 @@ export function createWindow(): void {
     autoHideMenuBar: true,
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
-      sandbox: false
+      sandbox: false,
+      webSecurity: false
     },
     backgroundMaterial: 'acrylic',
     frame: false
@@ -36,11 +42,13 @@ export function createWindow(): void {
 
   if (!is.dev) {
     globalShortcut.register('Alt+Space', () => {
+      debug('toggle window')
       mainWindow.show()
       mainWindow.focus()
     })
 
     mainWindow.on('blur', () => {
+      debug('hide window')
       mainWindow.hide()
     })
   }

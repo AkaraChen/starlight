@@ -4,76 +4,92 @@ import { PluginManager } from '../../plugin'
 import { zValidator } from '@hono/zod-validator'
 import { z } from 'zod'
 import { HTTPException } from 'hono/http-exception'
+import { ICommandDto } from '@starlight/plugin-utils'
+import createDebug from 'debug'
 
-const manager = PluginManager.getInstance()
+const debug = createDebug('starlight:plugin-router')
 
-export const plugin = new Hono()
-  .get('/events', (c) => {
-    return streamSSE(c, async (sse) => {
-      // event will always be a StarLightEvent
-      manager.observable.subscribe((event) => {
-        sse.writeSSE({
-          data: event
+export const createPluginRouter = () => {
+  const manager = PluginManager.getInstance()
+
+  return new Hono()
+    .get('/events', (c) => {
+      debug('subscribe events')
+      return streamSSE(c, async (sse) => {
+        // event will always be a StarLightEvent
+        manager.observable.subscribe((event) => {
+          debug('send event', event)
+          sse.writeSSE({
+            data: event
+          })
+        })
+        sse.onAbort(() => {
+          debug('unsubscribe events')
         })
       })
     })
-  })
-  .get('/commands', (c) => {
-    return c.json(manager.commands)
-  })
-  .get('/views', (c) => {
-    return c.json(manager.views)
-  })
-  .get(
-    '/search',
-    zValidator(
-      'query',
-      z.object({
-        keyword: z.string()
-      })
-    ),
-    async (c) => {
-      const { keyword } = c.req.valid('query')
-      const abortController = new AbortController()
-      setTimeout(() => {
-        abortController.abort()
-      }, 1000)
-      const search = await Promise.all(
-        manager.plugins
-          .filter((plugin) => !!plugin.search)
-          .map((plugin) => plugin.search!(keyword, abortController.signal))
-      )
-      const result = search.flat()
-      return streamSSE(c, async (sse) => {
-        sse.writeSSE({
-          data: JSON.stringify(result)
+    .get('/commands', (c) => {
+      debug('get commands')
+      return c.json(manager.commands as unknown as Array<ICommandDto>)
+    })
+    .get('/views', (c) => {
+      debug('get views')
+      return c.json(manager.views)
+    })
+    .get(
+      '/search',
+      zValidator(
+        'query',
+        z.object({
+          keyword: z.string()
         })
-        sse.close()
-      })
-    }
-  )
-  .post(
-    '/execute',
-    zValidator(
-      'json',
-      z.object({
-        pluginId: z.string(),
-        commandName: z.string()
-      })
-    ),
-    (c) => {
-      const { pluginId, commandName } = c.req.valid('json')
-      const command = manager.commands.find(
-        (command) => command.pluginId === pluginId && command.displayName === commandName
-      )
-      if (!command) {
-        throw new HTTPException(404, {
-          message: 'Command not found'
+      ),
+      async (c) => {
+        const { keyword } = c.req.valid('query')
+        debug('search', keyword)
+        const abortController = new AbortController()
+        setTimeout(() => {
+          debug('abort search')
+          abortController.abort()
+        }, 1000)
+        const search = await Promise.all(
+          manager.plugins
+            .filter((plugin) => !!plugin.search)
+            .map((plugin) => plugin.search!(keyword, abortController.signal))
+        )
+        const result = search.flat()
+        return streamSSE(c, async (sse) => {
+          sse.writeSSE({
+            data: JSON.stringify(result)
+          })
+          sse.close()
         })
       }
-      command.handler()
-      return c.json({
-        message: 'Command executed'
-      })
-    }
-  )
+    )
+    .post(
+      '/execute',
+      zValidator(
+        'json',
+        z.object({
+          pluginId: z.string(),
+          commandName: z.string()
+        })
+      ),
+      (c) => {
+        const { pluginId, commandName } = c.req.valid('json')
+        debug('execute command', pluginId, commandName)
+        const command = manager.commands.find(
+          (command) => command.pluginId === pluginId && command.displayName === commandName
+        )
+        if (!command) {
+          throw new HTTPException(404, {
+            message: 'Command not found'
+          })
+        }
+        command.handler()
+        return c.json({
+          message: 'Command executed'
+        })
+      }
+    )
+}

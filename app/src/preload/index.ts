@@ -1,8 +1,17 @@
-import { contextBridge } from 'electron'
+import { contextBridge, Notification } from 'electron'
 import { electronAPI } from '@electron-toolkit/preload'
 
 // Custom APIs for renderer
-const api = {}
+const api = {
+  sendNotification: (title: string, body: string) => {
+    new Notification({
+      title,
+      body
+    }).show()
+  },
+}
+
+export type API = typeof api
 
 // Use `contextBridge` APIs to expose Electron APIs to
 // renderer only if context isolation is enabled, otherwise

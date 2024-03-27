@@ -1,16 +1,22 @@
 import { Hono } from 'hono'
 import { serve } from '@honojs/node-server'
 import { getRandomPort } from 'get-port-please'
-import { ipcMain } from 'electron-better-ipc'
-import { plugin } from './router/plugin'
+import { ipcMain } from 'electron'
+import { createPluginRouter } from './router/plugin'
+import { cors } from 'hono/cors'
+import createDebug from 'debug'
+import { ClientEvent } from '../../constants/ipc'
 
-const server = new Hono().route('/plugin', plugin)
+const debug = createDebug('starlight:server')
 
-export type AppType = typeof server
+export type AppType = Awaited<ReturnType<typeof createServer>>
 
 let port: number
 
-ipcMain.answerRenderer('port', () => port)
+ipcMain.on(ClientEvent.PORT, (event) => {
+  debug('get port', port)
+  event.returnValue = port
+})
 
 const findPort = async (): Promise<number> => {
   const res = await getRandomPort('localhost')
@@ -18,9 +24,18 @@ const findPort = async (): Promise<number> => {
   return res
 }
 
-export const initServer = async (): Promise<void> => {
+export const createServer = async () => {
+  const server = new Hono()
+    .use(
+      '/*',
+      cors({
+        origin: '*'
+      })
+    )
+    .route('/plugin', createPluginRouter())
   serve({
     ...server,
     port: await findPort()
   })
+  return server
 }
