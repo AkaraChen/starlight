@@ -1690,6 +1690,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@starlight-app/docs@workspace:docs":
+  version: 0.0.0-use.local
+  resolution: "@starlight-app/docs@workspace:docs"
+  dependencies:
+    vitepress: "npm:^1.0.1"
+  languageName: unknown
+  linkType: soft
+
 "@starlight-app/landing@workspace:website":
   version: 0.0.0-use.local
   resolution: "@starlight-app/landing@workspace:website"
@@ -4512,14 +4520,6 @@ __metadata:
   conditions: os=darwin
   languageName: node
   linkType: hard
-
-"docs@workspace:docs":
-  version: 0.0.0-use.local
-  resolution: "docs@workspace:docs"
-  dependencies:
-    vitepress: "npm:^1.0.1"
-  languageName: unknown
-  linkType: soft
 
 "doctrine@npm:^2.1.0":
   version: 2.1.0
