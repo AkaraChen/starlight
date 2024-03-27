@@ -14,16 +14,6 @@ export class PluginManager {
   commands: ITranformedCommand[] = []
   views: ITransformedView[] = []
 
-  private callWithErrorHandling(plugin: Plugin, callback: () => void): void {
-    try {
-      callback()
-    } catch (error) {
-      if (plugin.lifecycle?.error && error instanceof Error) {
-        plugin.lifecycle.error(error)
-      }
-    }
-  }
-
   resister(plugin: Plugin): void {
     if (this.context.has(plugin.metaData.name)) {
       throw new Error(`Plugin with name ${plugin.metaData.name} already exists`)
@@ -40,12 +30,12 @@ export class PluginManager {
       singleton: true
     })
     const instance = this.context.get(Plugin)
-    this.callWithErrorHandling(plugin, () => instance.lifecycle?.activate?.())
+    instance.lifecycle?.activate?.()
   }
 
   unregister(plugin: Plugin): void {
     const instance = this.context.get(Plugin)
-    this.callWithErrorHandling(plugin, () => instance.lifecycle?.deactivate?.())
+    instance.lifecycle?.deactivate?.()
     this.context.remove(plugin.metaData.name)
     this.plugins = this.plugins.filter((p) => p.id !== plugin.metaData.name)
     this.commands = this.commands.filter((c) => c.pluginId !== plugin.metaData.name)
