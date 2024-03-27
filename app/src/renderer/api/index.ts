@@ -1,8 +1,8 @@
 import { getPort } from '../ipc'
 import { hc } from 'hono/client'
-import { io } from 'socket.io-client'
+// @ts-ignore this is a type import
+import type { AppType } from '../../main/server'
 
 const port = await getPort()
 
-export const api = hc(`http://localhost:${port}`)
-export const socket = io(`http://localhost:${port}`)
+export const api = hc<AppType>(`http://localhost:${port}`)
