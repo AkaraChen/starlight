@@ -14,7 +14,7 @@ export class PluginManager {
   commands: ITranformedCommand[] = []
   views: ITransformedView[] = []
 
-  callWithErrorHandling(plugin: Plugin, callback: () => void): void {
+  private callWithErrorHandling(plugin: Plugin, callback: () => void): void {
     try {
       callback()
     } catch (error) {
@@ -58,5 +58,20 @@ export class PluginManager {
 
   getByType<T>(type: new () => T): T {
     return this.context.get(type)
+  }
+
+  // for singleton
+
+  static instance: PluginManager
+
+  static getInstance(): PluginManager {
+    if (!this.instance) {
+      throw new Error('PluginManager is not initialized')
+    }
+    return this.instance
+  }
+
+  static init(): void {
+    this.instance = new PluginManager()
   }
 }
