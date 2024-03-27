@@ -1,12 +1,10 @@
 import { Hono } from 'hono'
-import { Server as HTTPServer } from 'http'
-import { Server } from 'socket.io'
 import { serve } from '@honojs/node-server'
 import { getRandomPort } from 'get-port-please'
 import { ipcMain } from 'electron-better-ipc'
+import { plugin } from './router/plugin'
 
-const server = new Hono()
-export const io = new Server(server as unknown as HTTPServer)
+const server = new Hono().route('/plugin', plugin)
 
 export type AppType = typeof server
 
@@ -20,7 +18,9 @@ const findPort = async (): Promise<number> => {
   return res
 }
 
-serve({
-  ...server,
-  port: await findPort()
-})
+export const initServer = async (): Promise<void> => {
+  serve({
+    ...server,
+    port: await findPort()
+  })
+}

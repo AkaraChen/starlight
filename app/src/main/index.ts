@@ -1,6 +1,8 @@
 import { app } from 'electron'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import { createWindow } from './window'
+import { PluginManager } from './plugin'
+import { initServer } from './server'
 
 app.whenReady().then(() => {
   electronApp.setAppUserModelId('com.electron')
@@ -11,6 +13,9 @@ app.whenReady().then(() => {
 
   createWindow()
 })
+
+PluginManager.init()
+initServer()
 
 if (!is.dev) {
   app.setLoginItemSettings({
