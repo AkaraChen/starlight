@@ -10,13 +10,12 @@ const manager = PluginManager.getInstance()
 export const plugin = new Hono()
   .get('/events', (c) => {
     return streamSSE(c, async (sse) => {
-      manager.eventNames().forEach((event) =>
-        manager.on(event, () =>
-          sse.writeSSE({
-            data: event
-          })
-        )
-      )
+      // event will always be a StarLightEvent
+      manager.observable.subscribe((event) => {
+        sse.writeSSE({
+          data: event
+        })
+      })
     })
   })
   .get('/commands', (c) => {

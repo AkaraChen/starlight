@@ -8,6 +8,7 @@ import {
 } from './transform'
 import EventEmitter from 'events'
 import { StarLightEvent } from '../../constants/event'
+import { Observable, fromEvent, merge } from 'rxjs'
 
 export class PluginManager extends EventEmitter {
   context = new IocContext()
@@ -19,6 +20,8 @@ export class PluginManager extends EventEmitter {
   eventNames(): StarLightEvent[] {
     return [StarLightEvent.PLUGIN_REGISTER, StarLightEvent.PLUGIN_UNREGISTER]
   }
+
+  observable = merge(...this.eventNames().map((event) => fromEvent(this, event))) as Observable<StarLightEvent>
 
   resister(plugin: Plugin): void {
     if (this.context.has(plugin.metaData.name)) {
