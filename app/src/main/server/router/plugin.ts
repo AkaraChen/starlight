@@ -1,8 +1,6 @@
 import { Hono } from 'hono'
 import { streamSSE } from 'hono/streaming'
 import { PluginManager } from '../../plugin'
-import Fuse from 'fuse.js'
-import { ITranformedCommand } from '../../plugin/transform'
 import { zValidator } from '@hono/zod-validator'
 import { z } from 'zod'
 import { HTTPException } from 'hono/http-exception'
@@ -20,15 +18,20 @@ export const plugin = new Hono()
     ),
     async (c) => {
       const { keyword } = c.req.valid('query')
+      const abortController = new AbortController()
+      setTimeout(() => {
+        abortController.abort()
+      }, 1000)
+      const search = await Promise.all(
+        manager.plugins
+          .filter((plugin) => !!plugin.search)
+          .map((plugin) => plugin.search!(keyword, abortController.signal))
+      )
+      const result = search.flat()
       return streamSSE(c, async (sse) => {
-        const fuse = new Fuse(manager.commands, {
-          keys: ['description', 'displayName'] as Array<keyof ITranformedCommand>
-        })
-        const result = fuse.search(keyword)
         sse.writeSSE({
           data: JSON.stringify(result)
         })
-        // TODO: add more search results
         sse.close()
       })
     }
