@@ -1,5 +1,5 @@
 {
-  "name": "luna-landing",
+  "name": "@starlight-app/landing",
   "type": "module",
   "version": "0.0.1",
   "scripts": {

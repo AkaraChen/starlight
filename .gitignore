@@ -152,3 +152,6 @@ dist
 
 # vitepress
 **/.vitepress/cache
+
+# turbo.build
+.turbo

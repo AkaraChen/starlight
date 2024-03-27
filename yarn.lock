@@ -1645,6 +1645,74 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@starlight-app/app@workspace:app":
+  version: 0.0.0-use.local
+  resolution: "@starlight-app/app@workspace:app"
+  dependencies:
+    "@electron-toolkit/eslint-config-prettier": "npm:^2.0.0"
+    "@electron-toolkit/eslint-config-ts": "npm:^1.0.1"
+    "@electron-toolkit/preload": "npm:^3.0.0"
+    "@electron-toolkit/tsconfig": "npm:^1.0.1"
+    "@electron-toolkit/utils": "npm:^3.0.0"
+    "@hono/zod-validator": "npm:^0.2.1"
+    "@honojs/node-server": "npm:^0.1.3"
+    "@starlight-app/plugin-sdk": "workspace:^"
+    "@starlight/plugin-utils": "workspace:^"
+    "@types/node": "npm:^18.19.9"
+    "@types/react": "npm:^18.2.48"
+    "@types/react-dom": "npm:^18.2.18"
+    "@vitejs/plugin-react": "npm:^4.2.1"
+    autoprefixer: "npm:^10.4.19"
+    clsx: "npm:^2.1.0"
+    cross-env: "npm:^7.0.3"
+    debug: "npm:^4.3.4"
+    electron: "npm:28.2.0"
+    electron-builder: "npm:^24.9.1"
+    electron-updater: "npm:^6.1.7"
+    electron-vite: "npm:^2.0.0"
+    eslint: "npm:^8.56.0"
+    eslint-plugin-react: "npm:^7.33.2"
+    fuse.js: "npm:^7.0.0"
+    get-port-please: "npm:^3.1.2"
+    hello-world: "workspace:^"
+    hono: "npm:^4.1.3"
+    postcss: "npm:^8.4.38"
+    prettier: "npm:^3.2.4"
+    react: "npm:^18.2.0"
+    react-dom: "npm:^18.2.0"
+    rxjs: "npm:^7.8.1"
+    supports-color: "npm:^9.4.0"
+    swr: "npm:^2.2.5"
+    tailwindcss: "npm:^3.4.1"
+    typescript: "npm:5.3.3"
+    vite: "npm:^5.0.12"
+    zod: "npm:^3.22.4"
+  languageName: unknown
+  linkType: soft
+
+"@starlight-app/landing@workspace:website":
+  version: 0.0.0-use.local
+  resolution: "@starlight-app/landing@workspace:website"
+  dependencies:
+    "@astrojs/check": "npm:^0.5.5"
+    "@astrojs/sitemap": "npm:^3.1.1"
+    "@astrojs/tailwind": "npm:^5.1.0"
+    "@fontsource-variable/rubik": "npm:^5.0.21"
+    "@typescript-eslint/eslint-plugin": "npm:^7.0.2"
+    "@typescript-eslint/parser": "npm:^7.0.2"
+    astro: "npm:^4.4.4"
+    astro-robots-txt: "npm:^1.0.0"
+    eslint: "npm:^8.57.0"
+    eslint-plugin-astro: "npm:^0.31.4"
+    eslint-plugin-jsx-a11y: "npm:^6.8.0"
+    prettier: "npm:^3.2.5"
+    prettier-plugin-astro: "npm:^0.13.0"
+    tailwind-scrollbar: "npm:^3.1.0"
+    tailwindcss: "npm:^3.4.1"
+    typescript: "npm:^5.3.3"
+  languageName: unknown
+  linkType: soft
+
 "@starlight-app/plugin-sdk@workspace:^, @starlight-app/plugin-sdk@workspace:packages/plugin-sdk":
   version: 0.0.0-use.local
   resolution: "@starlight-app/plugin-sdk@workspace:packages/plugin-sdk"
@@ -2873,51 +2941,6 @@ __metadata:
   checksum: 10c0/a3ff90e63f738e8a0d8a2f52fc336cd130adf1c00c7fe8e575a3b2bbb23b733135d530589882b45735fb8e43ff9ad8ed19d5992b4ac81029371efbb4bc6ffdb2
   languageName: node
   linkType: hard
-
-"app@workspace:app":
-  version: 0.0.0-use.local
-  resolution: "app@workspace:app"
-  dependencies:
-    "@electron-toolkit/eslint-config-prettier": "npm:^2.0.0"
-    "@electron-toolkit/eslint-config-ts": "npm:^1.0.1"
-    "@electron-toolkit/preload": "npm:^3.0.0"
-    "@electron-toolkit/tsconfig": "npm:^1.0.1"
-    "@electron-toolkit/utils": "npm:^3.0.0"
-    "@hono/zod-validator": "npm:^0.2.1"
-    "@honojs/node-server": "npm:^0.1.3"
-    "@starlight-app/plugin-sdk": "workspace:^"
-    "@starlight/plugin-utils": "workspace:^"
-    "@types/node": "npm:^18.19.9"
-    "@types/react": "npm:^18.2.48"
-    "@types/react-dom": "npm:^18.2.18"
-    "@vitejs/plugin-react": "npm:^4.2.1"
-    autoprefixer: "npm:^10.4.19"
-    clsx: "npm:^2.1.0"
-    cross-env: "npm:^7.0.3"
-    debug: "npm:^4.3.4"
-    electron: "npm:28.2.0"
-    electron-builder: "npm:^24.9.1"
-    electron-updater: "npm:^6.1.7"
-    electron-vite: "npm:^2.0.0"
-    eslint: "npm:^8.56.0"
-    eslint-plugin-react: "npm:^7.33.2"
-    fuse.js: "npm:^7.0.0"
-    get-port-please: "npm:^3.1.2"
-    hello-world: "workspace:^"
-    hono: "npm:^4.1.3"
-    postcss: "npm:^8.4.38"
-    prettier: "npm:^3.2.4"
-    react: "npm:^18.2.0"
-    react-dom: "npm:^18.2.0"
-    rxjs: "npm:^7.8.1"
-    supports-color: "npm:^9.4.0"
-    swr: "npm:^2.2.5"
-    tailwindcss: "npm:^3.4.1"
-    typescript: "npm:5.3.3"
-    vite: "npm:^5.0.12"
-    zod: "npm:^3.22.4"
-  languageName: unknown
-  linkType: soft
 
 "aproba@npm:^1.0.3 || ^2.0.0":
   version: 2.0.0
@@ -7314,29 +7337,6 @@ __metadata:
   checksum: 10c0/cb53e582785c48187d7a188d3379c181b5ca2a9c78d2bce3e7dee36f32761d1c42983da3fe12b55cb74e1779fa94cdc2e5367c028a9b35317184ede0c07a30a9
   languageName: node
   linkType: hard
-
-"luna-landing@workspace:website":
-  version: 0.0.0-use.local
-  resolution: "luna-landing@workspace:website"
-  dependencies:
-    "@astrojs/check": "npm:^0.5.5"
-    "@astrojs/sitemap": "npm:^3.1.1"
-    "@astrojs/tailwind": "npm:^5.1.0"
-    "@fontsource-variable/rubik": "npm:^5.0.21"
-    "@typescript-eslint/eslint-plugin": "npm:^7.0.2"
-    "@typescript-eslint/parser": "npm:^7.0.2"
-    astro: "npm:^4.4.4"
-    astro-robots-txt: "npm:^1.0.0"
-    eslint: "npm:^8.57.0"
-    eslint-plugin-astro: "npm:^0.31.4"
-    eslint-plugin-jsx-a11y: "npm:^6.8.0"
-    prettier: "npm:^3.2.5"
-    prettier-plugin-astro: "npm:^0.13.0"
-    tailwind-scrollbar: "npm:^3.1.0"
-    tailwindcss: "npm:^3.4.1"
-    typescript: "npm:^5.3.3"
-  languageName: unknown
-  linkType: soft
 
 "magic-string@npm:^0.30.3, magic-string@npm:^0.30.5, magic-string@npm:^0.30.7":
   version: 0.30.8

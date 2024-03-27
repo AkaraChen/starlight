@@ -8,7 +8,7 @@ const api = {
       title,
       body
     }).show()
-  },
+  }
 }
 
 export type API = typeof api
