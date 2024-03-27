@@ -8,6 +8,23 @@ import { HTTPException } from 'hono/http-exception'
 const manager = PluginManager.getInstance()
 
 export const plugin = new Hono()
+  .get('/events', (c) => {
+    return streamSSE(c, async (sse) => {
+      manager.eventNames().forEach((event) =>
+        manager.on(event, () =>
+          sse.writeSSE({
+            data: event
+          })
+        )
+      )
+    })
+  })
+  .get('/commands', (c) => {
+    return c.json(manager.commands)
+  })
+  .get('/views', (c) => {
+    return c.json(manager.views)
+  })
   .get(
     '/search',
     zValidator(
