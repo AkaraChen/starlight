@@ -11,5 +11,6 @@
     "composite": true,
     "jsx": "react-jsx",
     "baseUrl": ".",
-  }
+    "noEmit": true
+  },
 }

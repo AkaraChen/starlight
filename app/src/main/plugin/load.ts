@@ -1,3 +1,8 @@
-import HelloWorld from 'hello-world'
+import { IPlugin } from '@starlight-app/plugin-sdk'
+import { createRequire } from 'module'
 
-export const buildInPlugins = [HelloWorld]
+const require = createRequire(import.meta.url)
+
+export const buildInPlugins: IPlugin[] = [
+  require('hello-world').default
+]

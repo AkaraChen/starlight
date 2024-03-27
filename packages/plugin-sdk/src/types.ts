@@ -1,8 +1,15 @@
+export interface ISupport {
+  windows: boolean
+  mac: boolean
+  linux: boolean
+}
+
 export interface IMetaData {
   name: string
   version: string
   description: string
   icon: string
+  support?: ISupport | (() => boolean) | boolean
 }
 
 export interface ILifecycle {
@@ -26,10 +33,7 @@ export interface IView {
   searchable?: boolean
 }
 
-export type SearchFunction = (
-  query: string,
-  abortSignal: AbortSignal
-) => Promise<ICommand[]>
+export type SearchFunction = (query: string, abortSignal: AbortSignal) => Promise<ICommand[]>
 
 export interface IPlugin {
   metaData: IMetaData
