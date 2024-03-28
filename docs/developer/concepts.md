@@ -34,6 +34,17 @@ const HelloWorld = new PluginBuilder()
       linux: true
     }
   })
+  .lifecycle({
+    activate: () => {
+      console.log('Hello, world!')
+    }
+    deactivate: () => {
+      console.log('Goodbye, world!')
+    }
+    error: (error) => {
+      console.error('An error occurred:', error)
+    }
+  })
   .commands([
     {
       id: 'hello-world',
