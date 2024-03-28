@@ -47,20 +47,17 @@
     ]
   },
   "footerData": {
-    "logo": "Luna Landing",
-    "description": "Discover the Beauty of the Cosmos: Explore the Infinite Wonders of Space with Us",
+    "logo": "Starlight",
+    "description": "The ultra-modern productivity tool for Windows lover",
     "links": [
       { "label": "About", "href": "/" },
-      { "label": "Services", "href": "/" },
+      { "label": "Docs", "href": "https://starlight-app-docs.vercel.app" },
       { "label": "Blog", "href": "/" },
       { "label": "FAQs", "href": "/" },
       { "label": "Contact", "href": "/" }
     ],
     "socials": [
-      { "icon": "FacebookIcon", "href": "/" },
-      { "icon": "InstagramIcon", "href": "/" },
-      { "icon": "TwitterIcon", "href": "/" },
-      { "icon": "GithubIcon", "href": "/" }
+
     ]
   }
 }
