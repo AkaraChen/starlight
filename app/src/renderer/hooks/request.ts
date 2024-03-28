@@ -41,6 +41,9 @@ export const useServerData = (): ServerData => {
         mutate(DataQueryKey.VIEWS)
         break
       }
+      default: {
+        console.warn('Unknown event', event)
+      }
     }
   })
   return { commands, views }
