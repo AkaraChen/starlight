@@ -1,10 +1,11 @@
 import { Hono } from 'hono'
-import { streamSSE } from 'hono/streaming'
+import { stream } from 'hono/streaming'
 import { PluginManager } from '../../plugin'
 import { zValidator } from '@hono/zod-validator'
 import { z } from 'zod'
 import { HTTPException } from 'hono/http-exception'
 import createDebug from 'debug'
+import { ICommandDto } from '@starlight/plugin-utils'
 
 const debug = createDebug('starlight:plugin-router')
 
@@ -14,13 +15,11 @@ export const createPluginRouter = () => {
   return new Hono()
     .get('/events', (c) => {
       debug('subscribe events')
-      return streamSSE(c, async (sse) => {
+      return stream(c, async (sse) => {
         // event will always be a StarLightEvent
         manager.observable.subscribe((event) => {
           debug('send event', event)
-          sse.writeSSE({
-            data: event
-          })
+          sse.write(event)
         })
         sse.onAbort(() => {
           debug('unsubscribe events')
@@ -29,7 +28,7 @@ export const createPluginRouter = () => {
     })
     .get('/commands', (c) => {
       debug('get commands')
-      return c.json(manager.commands.value)
+      return c.json(manager.commands.value as unknown as ICommandDto[])
     })
     .get('/views', (c) => {
       debug('get views')
@@ -57,10 +56,8 @@ export const createPluginRouter = () => {
             .map((plugin) => plugin.search!(keyword, abortController.signal))
         )
         const result = search.flat()
-        return streamSSE(c, async (sse) => {
-          sse.writeSSE({
-            data: JSON.stringify(result)
-          })
+        return stream(c, async (sse) => {
+          sse.write(JSON.stringify(result))
           sse.close()
         })
       }

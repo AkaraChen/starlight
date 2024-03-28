@@ -3,11 +3,11 @@ import { useMemo, useRef, useState } from 'react'
 import { CommandList } from './command'
 import { ICommandDto } from '@starlight/plugin-utils'
 import { api } from '../api'
-import useSWR from 'swr'
 import Fuse from 'fuse.js'
 import { useEventListener } from '../hooks/event'
 import { ClientEvent } from '../../constants/ipc'
 import { AppProvider } from './context'
+import { useServerData } from '../hooks/request'
 
 window.addEventListener('keyup', (event) => {
   if (event.key === 'Escape') {
@@ -28,9 +28,7 @@ function App() {
       inputRef.current.focus()
     }
   })
-  const { data: commands } = useSWR('/commands', () =>
-    api.plugin.commands.$get().then((res) => res.json())
-  )
+  const { commands } = useServerData()
   const [search, setSearch] = useState('')
   const query: ICommandDto[] = useMemo(() => {
     if (!commands) return []
