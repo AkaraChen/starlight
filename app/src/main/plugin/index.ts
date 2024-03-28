@@ -1,4 +1,4 @@
-import { IPlugin } from '@starlight-app/plugin-sdk'
+import { IPlugin, MaybeObservable } from '@starlight-app/plugin-sdk'
 import {
   ITranformedCommand,
   ITransformedPlugin,
@@ -34,6 +34,26 @@ export class PluginManager extends EventEmitter {
   commandSubcribeMap = new Map<string, Subscription>()
   viewsSubcribeMap = new Map<string, Subscription>()
 
+  handleArrayOrObservable<T extends ITranformedCommand | ITransformedView>(
+    transformed: ITransformedPlugin,
+    arrayOrObservable: MaybeObservable<T[]>,
+    subject: BehaviorSubject<T[]>,
+    subscribeMap: Map<string, Subscription>
+  ) {
+    if (Array.isArray(arrayOrObservable)) {
+      subject.next([...subject.value, ...arrayOrObservable])
+    } else {
+      debug('subscribe', transformed.id)
+      const sub = subject.subscribe((items) => {
+        subject.next([
+          ...items,
+          ...subject.value.filter((item) => item.pluginId !== transformed.id)
+        ])
+      })
+      subscribeMap.set(transformed.id, sub)
+    }
+  }
+
   resister(plugin: IPlugin): void {
     debug('register plugin', plugin.metaData.name)
     const transformed = transformPlugin(plugin)
@@ -42,32 +62,20 @@ export class PluginManager extends EventEmitter {
       return
     }
     if (transformed.commands) {
-      if (Array.isArray(transformed.commands)) {
-        this.commands.next([...this.commands.value, ...transformed.commands])
-      } else {
-        debug('subscribe commands', transformed.id)
-        const sub = this.commands.subscribe((commands) => {
-          this.commands.next([
-            ...commands,
-            ...this.commands.value.filter((c) => c.pluginId !== transformed.id)
-          ])
-        })
-        this.commandSubcribeMap.set(transformed.id, sub)
-      }
+      this.handleArrayOrObservable<ITranformedCommand>(
+        transformed,
+        transformed.commands,
+        this.commands,
+        this.commandSubcribeMap
+      )
     }
     if (transformed.views) {
-      if (Array.isArray(transformed.views)) {
-        this.views.next([...this.views.value, ...transformed.views])
-      } else {
-        debug('subscribe views', transformed.id)
-        const sub = this.views.subscribe((views) => {
-          this.views.next([
-            ...views,
-            ...this.views.value.filter((v) => v.pluginId !== transformed.id)
-          ])
-        })
-        this.viewsSubcribeMap.set(transformed.id, sub)
-      }
+      this.handleArrayOrObservable<ITransformedView>(
+        transformed,
+        transformed.views,
+        this.views,
+        this.viewsSubcribeMap
+      )
     }
     this.plugins.push(transformed)
     plugin.lifecycle?.activate?.()
