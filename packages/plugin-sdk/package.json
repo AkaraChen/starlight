@@ -22,5 +22,8 @@
       "types": "./dist/index.d.mts"
     },
     "./package.json": "./package.json"
+  },
+  "dependencies": {
+    "rxjs": "^7.8.1"
   }
 }

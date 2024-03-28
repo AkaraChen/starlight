@@ -1,3 +1,5 @@
+import { Observable } from 'rxjs'
+
 export interface ISupport {
   windows: boolean
   mac: boolean
@@ -35,10 +37,12 @@ export interface IView {
 
 export type SearchFunction = (query: string, abortSignal: AbortSignal) => Promise<ICommand[]>
 
+export type MaybeObservable<T> = T | Observable<T>
+
 export interface IPlugin {
   metaData: IMetaData
   lifecycle?: ILifecycle
-  commands?: ICommand[]
-  views?: IView[]
+  commands?: MaybeObservable<ICommand[]>
+  views?: MaybeObservable<IView[]>
   search?: SearchFunction
 }

@@ -4,7 +4,6 @@ import { PluginManager } from '../../plugin'
 import { zValidator } from '@hono/zod-validator'
 import { z } from 'zod'
 import { HTTPException } from 'hono/http-exception'
-import { ICommandDto } from '@starlight/plugin-utils'
 import createDebug from 'debug'
 
 const debug = createDebug('starlight:plugin-router')
@@ -30,11 +29,11 @@ export const createPluginRouter = () => {
     })
     .get('/commands', (c) => {
       debug('get commands')
-      return c.json(manager.commands as unknown as Array<ICommandDto>)
+      return c.json(manager.commands.value)
     })
     .get('/views', (c) => {
       debug('get views')
-      return c.json(manager.views)
+      return c.json(manager.views.value)
     })
     .get(
       '/search',
@@ -78,7 +77,7 @@ export const createPluginRouter = () => {
       (c) => {
         const { pluginId, commandName } = c.req.valid('json')
         debug('execute command', pluginId, commandName)
-        const command = manager.commands.find(
+        const command = manager.commands.value.find(
           (command) => command.pluginId === pluginId && command.displayName === commandName
         )
         if (!command) {

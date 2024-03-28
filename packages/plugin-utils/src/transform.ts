@@ -1,4 +1,5 @@
-import { ICommand, ILifecycle, IPlugin, IView } from '@starlight-app/plugin-sdk'
+import { ICommand, ILifecycle, IPlugin, IView, MaybeObservable } from '@starlight-app/plugin-sdk'
+import { pipe, map } from 'rxjs'
 
 export interface ITranformedCommand extends ICommand {
   pluginId: string
@@ -10,8 +11,8 @@ export interface ITransformedView extends IView {
 
 export interface ITransformedPlugin extends IPlugin {
   id: string
-  commands?: ITranformedCommand[]
-  views?: ITransformedView[]
+  commands?: MaybeObservable<ITranformedCommand[]>
+  views?: MaybeObservable<ITransformedView[]>
   supported: () => boolean
 }
 
@@ -40,21 +41,52 @@ const transformLifecycle = (lifecycle?: ILifecycle): ILifecycle => {
   return lifecycle
 }
 
+const transformCommand = (plugin: IPlugin, command: ICommand): ITranformedCommand => {
+  return {
+    ...command,
+    pluginId: plugin.metaData.name,
+    handler: () => callWithErrorHandling(plugin, () => command.handler())
+  }
+}
+
+const transformView = (plugin: IPlugin, view: IView): ITransformedView => {
+  return {
+    ...view,
+    pluginId: plugin.metaData.name
+  }
+}
+
 export function transformPlugin(plugin: IPlugin): ITransformedPlugin {
   // Need better way to generate id
   const id = plugin.metaData.name
+  const getCommands = () => {
+    if (!plugin.commands) return []
+    if (plugin.commands instanceof Array) {
+      return plugin.commands.map((command) => transformCommand(plugin, command))
+    }
+    return plugin.commands.pipe(
+      map((project) => {
+        return project.map((command) => transformCommand(plugin, command))
+      })
+    )
+  }
+  const getViews = () => {
+    if (!plugin.views) return []
+    if (plugin.views instanceof Array) {
+      return plugin.views.map((view) => transformView(plugin, view))
+    }
+    return plugin.views.pipe(
+      map((project) => {
+        return project.map((view) => transformView(plugin, view))
+      })
+    )
+  }
   return {
     id,
     metaData: plugin.metaData,
     lifecycle: transformLifecycle(plugin.lifecycle),
-    commands: plugin.commands?.map((command) => {
-      return {
-        ...command,
-        pluginId: id,
-        handler: () => callWithErrorHandling(plugin, () => command.handler())
-      }
-    }),
-    views: plugin.views?.map((view) => ({ ...view, pluginId: id })),
+    commands: getCommands(),
+    views: getViews(),
     supported() {
       const support = plugin.metaData.support
       if (typeof support === 'function') {
