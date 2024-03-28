@@ -62,5 +62,17 @@ const HelloWorld = new PluginBuilder()
       component: () => <div>Hello, world!</div>
     }
   ])
+  .search(async (query: string, abortSignal: AbortSignal) => {
+    return [
+      {
+        id: 'hello-world',
+        displayName: 'Hello World',
+        description: 'Say hello',
+        handler: () => {
+          alert('Hello, world!')
+        }
+      }
+    ]
+  })
   .build()
 ```
