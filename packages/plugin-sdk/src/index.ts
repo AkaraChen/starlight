@@ -1,30 +1,30 @@
-import { ICommand, ILifecycle, IMetaData, IPlugin, IView, SearchFunction } from './types'
+import { IPlugin } from './types'
 
 export * from './types'
 
 export class PluginBuilder {
-  private _meta: IMetaData
-  private _commands: ICommand[] = []
-  private _views: IView[] = []
-  private _lifecycle: ILifecycle = {}
-  private _search: SearchFunction
-  meta(meta: IMetaData) {
+  private _meta: IPlugin['metaData']
+  private _commands: IPlugin['commands'] = []
+  private _views: IPlugin['views'] = []
+  private _lifecycle: IPlugin['lifecycle'] = {}
+  private _search: IPlugin['search']
+  meta(meta: IPlugin['metaData']) {
     this._meta = meta
     return this
   }
-  commands(commands: ICommand[]) {
+  commands(commands: IPlugin['commands']) {
     this._commands = commands
     return this
   }
-  views(views: IView[]) {
+  views(views: IPlugin['views']) {
     this._views = views
     return this
   }
-  lifecycle(lifecycle: ILifecycle) {
+  lifecycle(lifecycle: IPlugin['lifecycle']) {
     this._lifecycle = lifecycle
     return this
   }
-  search(search: SearchFunction) {
+  search(search: IPlugin['search']) {
     this._search = search
     return this
   }
