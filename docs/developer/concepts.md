@@ -21,70 +21,35 @@ A plugin spec is a JavaScript module that exports metadata about the plugin, suc
 For example, here is a plugin spec that defines a command and a view:
 
 ```typescript
-import { Command, View } from '@starlight/core';
+import { PluginBuilder } from '@starlight-app/plugin-sdk'
 
-export const lifecycle = {
-  async activate(): boolean {
-    console.log('Plugin activated');
-    // Return true if the plugin is activated successfully
-    return true;
-  },
-  async deactivate() {
-    console.log('Plugin deactivated');
-  },
-  async update(
-    oldVersion: string,
-    newVersion: string
-  ) {
-    console.log('Plugin updated');
-  },
-  async error(error: Error) {
-    console.error('Plugin error:', error);
-  }
-};
-
-export const commands = [
-  {
-    id: 'hello-world',
-    displayName: 'Hello, World!',
-    description: 'Prints "Hello, World!" to the console',
-    handler: () => {
-      console.log('Hello, World!');
+const HelloWorld = new PluginBuilder()
+  .meta({
+    displayName: 'Hello World',
+    description: 'A simple plugin that says hello',
+    version: '1.0.0',
+    support: {
+      windows: true,
+      mac: true,
+      linux: true
     }
-  }
-]
-
-export const views = [
-  {
-    id: 'hello-world-view',
-    displayName: 'Hello, World View',
-    component: () => <Container>Hello, World!</Container>
-  }
-]
-
-export const search = async (
-  query: string,
-  abortSignal: AbortSignal
-): Command[] | undefined => {
-  const files = await fs.readdir(os.homedir());
-  if (abortSignal.aborted) {
-    return;
-  }
-  return files
-    .filter((file) => file.includes(query))
-    .map((file) => ({
-      id: file,
-      displayName: file,
-      description: 'Open file',
+  })
+  .commands([
+    {
+      id: 'hello-world',
+      displayName: 'Hello World',
+      description: 'Say hello',
       handler: () => {
-        // Open file
+        alert('Hello, world!')
       }
-    }));
-}
-
-export const metadata = {
-  name: 'my-plugin',
-  version: '1.0.0',
-  icon: __dirname + '/icon.svg',
-}
+    }
+  ])
+  .views([
+    {
+      id: 'hello-world',
+      displayName: 'Hello World',
+      component: () => <div>Hello, world!</div>
+    }
+  ])
+  .build()
 ```
