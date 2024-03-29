@@ -63,7 +63,8 @@ const transformMetaData = (metaData: IMetaData): ITransformedMetaData => {
   }
 }
 
-const transformLifecycle = (lifecycle?: ILifecycle): ILifecycle => {
+const transformLifecycle = (plugin: IPlugin): ILifecycle => {
+  const lifecycle = plugin.lifecycle
   if (!lifecycle) {
     return {}
   }
@@ -72,7 +73,7 @@ const transformLifecycle = (lifecycle?: ILifecycle): ILifecycle => {
       continue
     }
     if (typeof lifecycle[key] === 'function') {
-      lifecycle[key] = callWithErrorHandling.bind(null, lifecycle[key])
+      lifecycle[key] = callWithErrorHandling(plugin, () => lifecycle[key]())
     }
   }
   return lifecycle
@@ -137,7 +138,7 @@ export function transformPlugin(plugin: IPlugin): ITransformedPlugin {
   return {
     id,
     metaData: transformMetaData(plugin.metaData),
-    lifecycle: transformLifecycle(plugin.lifecycle),
+    lifecycle: transformLifecycle(plugin),
     commands: getCommands(),
     views: getViews()
   }

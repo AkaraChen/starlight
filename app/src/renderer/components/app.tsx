@@ -118,7 +118,9 @@ function App() {
           />
         </div>
 
-        <div className="h-full flex flex-col py-4">{query && <CommandList />}</div>
+        <div className="h-full my-2 flex flex-col overflow-x-hidden overflow-y-scroll scrollbar-none">
+          {query && <CommandList />}
+        </div>
         <div className="h-16 bg-native/60"></div>
       </div>
     </AppProvider>
