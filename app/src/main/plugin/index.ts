@@ -1,15 +1,18 @@
 import { IPlugin, MaybeObservable } from '@starlight-app/plugin-sdk'
 import {
+  ICommandDto,
   ITranformedCommand,
   ITransformedPlugin,
   ITransformedView,
+  getICommandDto,
   transformPlugin
 } from '@starlight/plugin-utils'
-import { ServerEvent } from '../../constants/ipc'
+import { IpcRequestEventName, ServerEvent } from '../../constants/ipc'
 import { BehaviorSubject, Subscription } from 'rxjs'
 import { buildInPlugins } from './load'
 import createDebug from 'debug'
 import { mainWindow } from '../window'
+import { ipcMain } from 'electron'
 
 const debug = createDebug('starlight:plugin-manager')
 
@@ -123,5 +126,26 @@ export class PluginManager extends MainWindowEmitter {
   static init(): void {
     debug('init PluginManager')
     this.instance = new PluginManager()
+
+    ipcMain.on(IpcRequestEventName.GET_COMMANDS, (event) => {
+      event.returnValue = this.instance.commands.value.map(getICommandDto) as ICommandDto[]
+    })
+
+    ipcMain.on(IpcRequestEventName.GET_VIEWS, (event) => {
+      event.returnValue = this.instance.views.value
+    })
+
+    ipcMain.on(IpcRequestEventName.EXECUTE_COMMAND, (_event, args: string[]) => {
+      const [pluginId, commandId] = args
+      debug('execute command', pluginId, commandId)
+      const command = this.instance.commands.value.find(
+        (c) => c.pluginId === pluginId && c.id === commandId
+      )
+      if (!command) {
+        debug('command not found', pluginId, commandId)
+        return
+      }
+      command.handler()
+    })
   }
 }

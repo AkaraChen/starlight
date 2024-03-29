@@ -4,6 +4,7 @@ import emojiRegex from 'emoji-regex'
 import fs from 'fs'
 import mime from 'mime-types'
 import { IMetaData } from '@starlight-app/plugin-sdk'
+import { ICommandDto } from '.'
 
 export interface ITranformedCommand extends ICommand {
   pluginId: string
@@ -86,7 +87,7 @@ const transformLifecycle = (plugin: IPlugin): ILifecycle => {
 const transformCommand = (plugin: IPlugin, command: ICommand): ITranformedCommand => {
   return {
     ...command,
-    pluginId: plugin.metaData.name,
+    pluginId: plugin.metaData.id,
     handler: () => callWithErrorHandling(plugin, () => command.handler()),
     icon: command?.icon ? transformIcon(command.icon) : plugin.metaData.icon,
     runImediately: command.runImediately ?? true
@@ -96,7 +97,7 @@ const transformCommand = (plugin: IPlugin, command: ICommand): ITranformedComman
 const transformView = (plugin: IPlugin, view: IView): ITransformedView => {
   return {
     ...view,
-    pluginId: plugin.metaData.name,
+    pluginId: plugin.metaData.id,
     icon: view?.icon ? transformIcon(view.icon) : plugin.metaData.icon
   }
 }
@@ -114,8 +115,6 @@ const transformIcon = (icon: string): string => {
 }
 
 export function transformPlugin(plugin: IPlugin): ITransformedPlugin {
-  // Need better way to generate id
-  const id = plugin.metaData.name
   plugin.metaData.icon = transformIcon(plugin.metaData.icon)
   const getCommands = () => {
     if (!plugin.commands) return []
@@ -140,10 +139,17 @@ export function transformPlugin(plugin: IPlugin): ITransformedPlugin {
     )
   }
   return {
-    id,
+    id: plugin.metaData.id,
     metaData: transformMetaData(plugin.metaData),
     lifecycle: transformLifecycle(plugin),
     commands: getCommands(),
     views: getViews()
+  }
+}
+
+export const getICommandDto = (command: ITranformedCommand): ICommandDto => {
+  return {
+    ...command,
+    handler: undefined
   }
 }

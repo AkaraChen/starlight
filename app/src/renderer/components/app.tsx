@@ -2,12 +2,12 @@ import clsx from 'clsx'
 import { useMemo, useRef, useState } from 'react'
 import { CommandList } from './command'
 import { ICommandDto } from '@starlight/plugin-utils'
-import { api } from '../api'
 import Fuse from 'fuse.js'
 import { useEventListener } from '../hooks/event'
-import { ClientEvent } from '../../constants/ipc'
+import { ClientEvent, IpcRequestEventName } from '../../constants/ipc'
 import { AppProvider } from './context'
-import { useServerData } from '../hooks/request'
+import { useAtomValue } from 'jotai'
+import { commandsAtom, callMain } from '../atoms/ipc'
 
 window.addEventListener('keyup', (event) => {
   if (event.key === 'Escape') {
@@ -28,7 +28,7 @@ function App() {
       inputRef.current.focus()
     }
   })
-  const { commands } = useServerData()
+  const commands = useAtomValue(commandsAtom)
   const [search, setSearch] = useState('')
   const query: ICommandDto[] = useMemo(() => {
     if (!commands) return []
@@ -40,19 +40,8 @@ function App() {
   }, [commands, search])
   const [selected, setSelected] = useState<number | null>(null)
   const execute = (command: ICommandDto) => {
-    api.plugin.execute
-      .$post({
-        json: {
-          commandName: command.displayName,
-          pluginId: command.pluginId
-        }
-      })
-      .catch((e) => {
-        window.api.sendNotification(
-          'Command failed',
-          `Failed to execute command ${command.displayName}: ${e.message}`
-        )
-      })
+    window.electron.ipcRenderer.send(ClientEvent.HIDE)
+    callMain(IpcRequestEventName.EXECUTE_COMMAND, command.pluginId, command.id)
   }
   useEventListener(window, 'keydown', (e: KeyboardEvent) => {
     if (e.key === 'Escape') {

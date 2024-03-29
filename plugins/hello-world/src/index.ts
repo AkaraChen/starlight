@@ -2,6 +2,7 @@ import { ICommand, ILifecycle, IMetaData, PluginBuilder } from '@starlight-app/p
 import path from 'path'
 
 const metaData: IMetaData = {
+  id: 'hello-world',
   name: 'Hello World',
   version: '1.0.0',
   description: 'A simple plugin that says hello world',
@@ -12,7 +13,8 @@ const lifecycle: ILifecycle = {}
 
 const commands: ICommand[] = [
   {
-    displayName: 'Hello World',
+    id: 'print-hello-world',
+    displayName: 'Print Hello World',
     description: 'Prints Hello World to the console',
     handler: () => {
       console.log('Hello World')

@@ -10,6 +10,7 @@ let core: Core
 
 const AppLauncher = new PluginBuilder()
   .meta({
+    id: 'app-launcher',
     name: 'App Launcher',
     description: 'Launch your app',
     version: '0.0.1',
@@ -27,6 +28,7 @@ const AppLauncher = new PluginBuilder()
         core?.subject.subscribe((execlutables) => {
           commands.next(
             execlutables.map((e) => ({
+              id: `launch-${e.name}`,
               displayName: e.name,
               description: `Launch ${e.name}`,
               handler() {

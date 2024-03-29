@@ -1,7 +1,8 @@
 import { is } from '@electron-toolkit/utils'
-import { BrowserWindow, shell, globalShortcut } from 'electron'
+import { BrowserWindow, shell, globalShortcut, ipcMain } from 'electron'
 import { join } from 'path'
 import createDebug from 'debug'
+import { ClientEvent } from '../constants/ipc'
 
 const debug = createDebug('starlight:window')
 
@@ -53,3 +54,19 @@ export function createWindow(): void {
     })
   }
 }
+
+ipcMain.on(ClientEvent.HIDE, () => {
+  mainWindow.hide()
+})
+
+ipcMain.on(ClientEvent.BLUR, () => {
+  mainWindow.blur()
+})
+
+ipcMain.on(ClientEvent.FOCUS, () => {
+  mainWindow.focus()
+})
+
+ipcMain.on(ClientEvent.SHOW, () => {
+  mainWindow.show()
+})

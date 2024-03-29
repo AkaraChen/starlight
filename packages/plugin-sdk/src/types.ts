@@ -7,6 +7,7 @@ export interface ISupport {
 }
 
 export interface IMetaData {
+  id: string
   name: string
   version: string
   description: string
@@ -23,6 +24,7 @@ export interface ILifecycle {
 }
 
 export interface ICommand {
+  id: string
   displayName: string
   description: string
   handler: () => void

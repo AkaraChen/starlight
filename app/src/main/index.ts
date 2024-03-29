@@ -2,8 +2,6 @@ import { app } from 'electron'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import { createWindow } from './window'
 import { PluginManager } from './plugin'
-import { createServer } from './server'
-import './ipc'
 import createDebug from 'debug'
 
 const debug = createDebug('starlight:main')
@@ -20,7 +18,6 @@ app.whenReady().then(() => {
 
   createWindow()
   PluginManager.init()
-  createServer()
 })
 
 if (!is.dev) {

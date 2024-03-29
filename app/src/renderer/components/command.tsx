@@ -1,7 +1,6 @@
 import { FC, useEffect, useRef } from 'react'
 import defaultIcon from '../assets/electron.svg'
 import { ICommandDto } from '@starlight/plugin-utils'
-import { api } from '../api'
 import clsx from 'clsx'
 import { useAppContext } from './context'
 import emojiRegex from 'emoji-regex'
@@ -13,7 +12,7 @@ export interface CommandProps extends ICommandDto {
 
 export const Command: FC<CommandProps> = (props) => {
   const { active } = props
-  const { setSelected } = useAppContext()
+  const { setSelected, onExecute } = useAppContext()
   const isEmoji = emojiRegex().test(props.icon)
   useEffect(() => {
     if (active && ref.current) {
@@ -34,12 +33,7 @@ export const Command: FC<CommandProps> = (props) => {
       ref={ref}
       onClick={() => {
         setSelected(null)
-        api.plugin.execute.$post({
-          json: {
-            commandName: props.displayName,
-            pluginId: props.pluginId
-          }
-        })
+        onExecute(props)
       }}
     >
       {isEmoji ? (
