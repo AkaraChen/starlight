@@ -5,7 +5,7 @@
       "name": "Debug Main Process",
       "type": "node",
       "request": "launch",
-      "cwd": "${workspaceRoot}",
+      "cwd": "${workspaceRoot}/app",
       "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/electron-vite",
       "windows": {
         "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/electron-vite.cmd"
@@ -20,7 +20,7 @@
       "port": 9222,
       "request": "attach",
       "type": "chrome",
-      "webRoot": "${workspaceFolder}/src/renderer",
+      "webRoot": "${workspaceFolder}/app/src/renderer",
       "timeout": 60000,
       "presentation": {
         "hidden": true
