@@ -11,25 +11,16 @@ import { IpcRequestEventName, ServerEvent } from '../../constants/ipc'
 import { BehaviorSubject, Subscription } from 'rxjs'
 import { buildInPlugins } from './load'
 import createDebug from 'debug'
-import { mainWindow } from '../window'
-import { ipcMain } from 'electron'
+import { answerEvent, sendEvent } from '../ipc'
 
 const debug = createDebug('starlight:plugin-manager')
 
-export class MainWindowEmitter {
-  emit(event: ServerEvent): void {
-    debug('emit', event)
-    mainWindow.webContents.send(event)
-  }
-}
-
-export class PluginManager extends MainWindowEmitter {
+export class PluginManager {
   plugins: ITransformedPlugin[] = []
   commands = new BehaviorSubject<ITranformedCommand[]>([])
   views = new BehaviorSubject<ITransformedView[]>([])
 
   constructor() {
-    super()
     this.loadBuildIn()
   }
 
@@ -46,7 +37,7 @@ export class PluginManager extends MainWindowEmitter {
     const event = type === 'command' ? ServerEvent.COMMAND_UPDATE : ServerEvent.VIEW_UPDATE
     if (Array.isArray(arrayOrObservable)) {
       subject.next([...subject.value, ...arrayOrObservable])
-      this.emit(event)
+      sendEvent(event)
     } else {
       debug('subscribe', transformed.id)
       const sub = arrayOrObservable.subscribe((items) => {
@@ -54,7 +45,7 @@ export class PluginManager extends MainWindowEmitter {
           ...items,
           ...subject.value.filter((item) => item.pluginId !== transformed.id)
         ])
-        this.emit(event)
+        sendEvent(event)
       })
       subscribeMap.set(transformed.id, sub)
     }
@@ -88,7 +79,7 @@ export class PluginManager extends MainWindowEmitter {
     this.plugins.push(transformed)
     plugin.lifecycle?.activate?.()
     debug('plugin registered', plugin.metaData.name)
-    this.emit(ServerEvent.PLUGIN_REGISTER)
+    sendEvent(ServerEvent.PLUGIN_REGISTER)
   }
 
   unregister(plugin: IPlugin): void {
@@ -103,7 +94,7 @@ export class PluginManager extends MainWindowEmitter {
     this.viewsSubcribeMap.get(plugin.metaData.name)?.unsubscribe()
 
     debug('plugin unregistered', plugin.metaData.name)
-    this.emit(ServerEvent.PLUGIN_UNREGISTER)
+    sendEvent(ServerEvent.PLUGIN_REGISTER)
   }
 
   loadBuildIn() {
@@ -127,16 +118,16 @@ export class PluginManager extends MainWindowEmitter {
     debug('init PluginManager')
     this.instance = new PluginManager()
 
-    ipcMain.on(IpcRequestEventName.GET_COMMANDS, (event) => {
-      event.returnValue = this.instance.commands.value.map(getICommandDto) as ICommandDto[]
+    answerEvent(IpcRequestEventName.GET_COMMANDS, () => {
+      return this.instance.commands.value.map(getICommandDto) as ICommandDto[]
     })
 
-    ipcMain.on(IpcRequestEventName.GET_VIEWS, (event) => {
-      event.returnValue = this.instance.views.value
+    answerEvent(IpcRequestEventName.GET_VIEWS, () => {
+      return this.instance.views.value
     })
 
-    ipcMain.on(IpcRequestEventName.EXECUTE_COMMAND, (_event, args: string[]) => {
-      const [pluginId, commandId] = args
+    answerEvent(IpcRequestEventName.EXECUTE_COMMAND, (payload) => {
+      const [pluginId, commandId] = payload
       debug('execute command', pluginId, commandId)
       const command = this.instance.commands.value.find(
         (c) => c.pluginId === pluginId && c.id === commandId

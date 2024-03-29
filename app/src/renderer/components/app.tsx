@@ -7,7 +7,8 @@ import { useEventListener } from '../hooks/event'
 import { ClientEvent, IpcRequestEventName } from '../../constants/ipc'
 import { AppProvider } from './context'
 import { useAtomValue } from 'jotai'
-import { commandsAtom, callMain } from '../atoms/ipc'
+import { commandsAtom } from '../atoms/data'
+import { callMain, sendEvent } from '../ipc'
 
 window.addEventListener('keyup', (event) => {
   if (event.key === 'Escape') {
@@ -15,7 +16,7 @@ window.addEventListener('keyup', (event) => {
       history.back()
     } else {
       if (!import.meta.env.DEV) {
-        window.electron.ipcRenderer.send(ClientEvent.HIDE)
+        sendEvent(ClientEvent.HIDE)
       }
     }
   }
@@ -40,7 +41,7 @@ function App() {
   }, [commands, search])
   const [selected, setSelected] = useState<number | null>(null)
   const execute = (command: ICommandDto) => {
-    window.electron.ipcRenderer.send(ClientEvent.HIDE)
+    sendEvent(ClientEvent.HIDE)
     callMain(IpcRequestEventName.EXECUTE_COMMAND, command.pluginId, command.id)
   }
   useEventListener(window, 'keydown', (e: KeyboardEvent) => {
