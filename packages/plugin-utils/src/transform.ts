@@ -39,6 +39,9 @@ const callWithErrorHandling = (plugin: IPlugin, callback: () => void): void => {
 
 const transformMetaData = (metaData: IMetaData): ITransformedMetaData => {
   const isSupported = () => {
+    if (typeof metaData.support === 'undefined') {
+      return true
+    }
     const support = metaData.support
     if (typeof support === 'function') {
       return support()
@@ -57,9 +60,10 @@ const transformMetaData = (metaData: IMetaData): ITransformedMetaData => {
         return false
     }
   }
+  const support = isSupported()
   return {
     ...metaData,
-    support: isSupported()
+    support
   }
 }
 

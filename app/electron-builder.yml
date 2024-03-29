@@ -13,6 +13,7 @@ asarUnpack:
   - resources/**
 win:
   executableName: starlight
+  requestedExecutionLevel: needrequireAdministrator
 nsis:
   artifactName: ${name}-${version}-setup.${ext}
   shortcutName: ${productName}

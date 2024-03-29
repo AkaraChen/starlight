@@ -29,6 +29,9 @@ export class PluginBuilder {
     return this
   }
   build(): IPlugin {
+    if (!this._meta) {
+      throw new Error('metaData is required')
+    }
     return {
       metaData: this._meta,
       commands: this._commands,
