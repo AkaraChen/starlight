@@ -57,7 +57,7 @@ export class PluginManager extends EventEmitter {
   resister(plugin: IPlugin): void {
     debug('register plugin', plugin.metaData.name)
     const transformed = transformPlugin(plugin)
-    if (transformed.supported()) {
+    if (transformed.metaData.support) {
       debug('plugin not supported', plugin.metaData.name)
       return
     }

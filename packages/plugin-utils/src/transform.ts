@@ -3,6 +3,7 @@ import { map } from 'rxjs'
 import emojiRegex from 'emoji-regex'
 import fs from 'fs'
 import mime from 'mime-types'
+import { IMetaData } from '@starlight-app/plugin-sdk'
 
 export interface ITranformedCommand extends ICommand {
   pluginId: string
@@ -14,11 +15,15 @@ export interface ITransformedView extends IView {
   icon: string
 }
 
+export interface ITransformedMetaData extends IMetaData {
+  support: boolean
+}
+
 export interface ITransformedPlugin extends IPlugin {
   id: string
+  metaData: ITransformedMetaData
   commands?: MaybeObservable<ITranformedCommand[]>
   views?: MaybeObservable<ITransformedView[]>
-  supported: () => boolean
 }
 
 const callWithErrorHandling = (plugin: IPlugin, callback: () => void): void => {
@@ -28,6 +33,32 @@ const callWithErrorHandling = (plugin: IPlugin, callback: () => void): void => {
     if (plugin.lifecycle?.error && error instanceof Error) {
       plugin.lifecycle.error(error)
     }
+  }
+}
+
+const transformMetaData = (metaData: IMetaData): ITransformedMetaData => {
+  const isSupported = () => {
+    const support = metaData.support
+    if (typeof support === 'function') {
+      return support()
+    }
+    if (typeof support === 'boolean') {
+      return support
+    }
+    switch (process.platform) {
+      case 'win32':
+        return support?.windows ?? false
+      case 'darwin':
+        return support?.mac ?? false
+      case 'linux':
+        return support?.linux ?? false
+      default:
+        return false
+    }
+  }
+  return {
+    ...metaData,
+    support: isSupported()
   }
 }
 
@@ -103,28 +134,9 @@ export function transformPlugin(plugin: IPlugin): ITransformedPlugin {
   }
   return {
     id,
-    metaData: plugin.metaData,
+    metaData: transformMetaData(plugin.metaData),
     lifecycle: transformLifecycle(plugin.lifecycle),
     commands: getCommands(),
-    views: getViews(),
-    supported() {
-      const support = plugin.metaData.support
-      if (typeof support === 'function') {
-        return support()
-      }
-      if (typeof support === 'boolean') {
-        return support
-      }
-      switch (process.platform) {
-        case 'win32':
-          return support?.windows ?? false
-        case 'darwin':
-          return support?.mac ?? false
-        case 'linux':
-          return support?.linux ?? false
-        default:
-          return false
-      }
-    }
+    views: getViews()
   }
 }
