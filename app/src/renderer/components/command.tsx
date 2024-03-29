@@ -17,7 +17,7 @@ export const Command: FC<CommandProps> = (props) => {
   return (
     <div
       className={clsx(
-        'flex items-baseline justify-center px-3 py-2 hover:bg-black/5 rounded select-none',
+        'flex items-center justify-center px-3 py-2 hover:bg-black/5 rounded select-none',
         active && 'bg-black/5'
       )}
       onClick={() => {
@@ -33,7 +33,7 @@ export const Command: FC<CommandProps> = (props) => {
       {isEmoji ? (
         <div className="size-3">{props.icon}</div>
       ) : (
-        <img src={defaultIcon} alt={props.displayName} className={'w-3 h-3'} />
+        <img src={props.icon || defaultIcon} alt={props.displayName} className={'size-5'} />
       )}
       <div className={'ml-3 w-full flex items-center'}>
         <h2 className={'text-sm font-medium text-zinc-800'}>{props.displayName}</h2>

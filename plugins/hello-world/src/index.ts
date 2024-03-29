@@ -1,4 +1,5 @@
 import { ICommand, ILifecycle, IMetaData, PluginBuilder } from '@starlight-app/plugin-sdk'
+import path from 'path'
 
 const metaData: IMetaData = {
   name: 'Hello World',
@@ -21,7 +22,8 @@ const commands: ICommand[] = [
     description: 'Prints Hello World to the console',
     handler: () => {
       console.log('Hello World')
-    }
+    },
+    icon: path.join(__dirname, '..', 'assets', 'extension_icon.svg')
   }
 ]
 

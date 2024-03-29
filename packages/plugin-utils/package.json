@@ -3,9 +3,12 @@
   "packageManager": "yarn@4.1.1",
   "dependencies": {
     "@starlight-app/plugin-sdk": "workspace:^",
+    "emoji-regex": "^10.3.0",
+    "mime-types": "^2.1.35",
     "rxjs": "^7.8.1"
   },
   "devDependencies": {
+    "@types/mime-types": "^2.1.4",
     "tsup": "^8.0.2"
   },
   "scripts": {

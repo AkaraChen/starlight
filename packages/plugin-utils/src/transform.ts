@@ -1,5 +1,8 @@
 import { ICommand, ILifecycle, IPlugin, IView, MaybeObservable } from '@starlight-app/plugin-sdk'
 import { map } from 'rxjs'
+import emojiRegex from 'emoji-regex'
+import fs from 'fs'
+import mime from 'mime-types'
 
 export interface ITranformedCommand extends ICommand {
   pluginId: string
@@ -48,7 +51,7 @@ const transformCommand = (plugin: IPlugin, command: ICommand): ITranformedComman
     ...command,
     pluginId: plugin.metaData.name,
     handler: () => callWithErrorHandling(plugin, () => command.handler()),
-    icon: command?.icon ?? plugin.metaData.icon
+    icon: command?.icon ? transformIcon(command.icon) : plugin.metaData.icon
   }
 }
 
@@ -56,13 +59,26 @@ const transformView = (plugin: IPlugin, view: IView): ITransformedView => {
   return {
     ...view,
     pluginId: plugin.metaData.name,
-    icon: view?.icon ?? plugin.metaData.icon
+    icon: view?.icon ? transformIcon(view.icon) : plugin.metaData.icon
   }
+}
+
+const transformIcon = (icon: string): string => {
+  const isEmoji = emojiRegex().test(icon)
+  if (isEmoji) {
+    return icon
+  }
+  const file = fs.readFileSync(icon)
+  const base64 = Buffer.from(file).toString('base64')
+  const mimeType = mime.lookup(icon)
+  if (!mimeType) throw new Error('Invalid mime type')
+  return `data:${mimeType};base64,${base64}`
 }
 
 export function transformPlugin(plugin: IPlugin): ITransformedPlugin {
   // Need better way to generate id
   const id = plugin.metaData.name
+  plugin.metaData.icon = transformIcon(plugin.metaData.icon)
   const getCommands = () => {
     if (!plugin.commands) return []
     if (plugin.commands instanceof Array) {
