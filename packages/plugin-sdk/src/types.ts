@@ -19,13 +19,15 @@ export interface ILifecycle {
   deactivate?: () => void
   update?: (oldVersion: string, newVersion: string) => void
   error?: (error: Error) => void
+  beforeShow?: () => void
 }
 
 export interface ICommand {
   displayName: string
   description: string
   handler: () => void
-  icon?: string
+  icon?: string,
+  runImediately?: boolean
 }
 
 export interface IView {

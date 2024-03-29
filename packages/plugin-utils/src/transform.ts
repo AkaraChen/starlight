@@ -8,6 +8,7 @@ import { IMetaData } from '@starlight-app/plugin-sdk'
 export interface ITranformedCommand extends ICommand {
   pluginId: string
   icon: string
+  runImediately: boolean
 }
 
 export interface ITransformedView extends IView {
@@ -82,7 +83,8 @@ const transformCommand = (plugin: IPlugin, command: ICommand): ITranformedComman
     ...command,
     pluginId: plugin.metaData.name,
     handler: () => callWithErrorHandling(plugin, () => command.handler()),
-    icon: command?.icon ? transformIcon(command.icon) : plugin.metaData.icon
+    icon: command?.icon ? transformIcon(command.icon) : plugin.metaData.icon,
+    runImediately: command.runImediately ?? true
   }
 }
 
