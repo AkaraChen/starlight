@@ -31,7 +31,9 @@ export const Command: FC<CommandProps> = (props) => {
       }}
     >
       {isEmoji ? (
-        <div className="size-3">{props.icon}</div>
+        <div className="size-5 flex items-center justify-center rounded bg-zinc-300">
+          {props.icon}
+        </div>
       ) : (
         <img src={props.icon || defaultIcon} alt={props.displayName} className={'size-5'} />
       )}

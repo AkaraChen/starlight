@@ -17,7 +17,6 @@ const lifecycle: ILifecycle = {
 
 const commands: ICommand[] = [
   {
-    id: 'hello-world',
     displayName: 'Hello World',
     description: 'Prints Hello World to the console',
     handler: () => {

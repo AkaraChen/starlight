@@ -8,7 +8,8 @@
     "build:package": "turbo build --filter='./packages/*'",
     "build:deps": "npm run build:package && npm run build:plugin",
     "update": "taze -w -r",
-    "prepare": "husky"
+    "prepare": "husky",
+    "dev": "turbo dev"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^7.4.0",

@@ -6,6 +6,7 @@ import { z } from 'zod'
 import { HTTPException } from 'hono/http-exception'
 import createDebug from 'debug'
 import { ICommandDto } from '@starlight/plugin-utils'
+import { mainWindow } from '../../window'
 
 const debug = createDebug('starlight:plugin-router')
 
@@ -82,7 +83,10 @@ export const createPluginRouter = () => {
             message: 'Command not found'
           })
         }
-        command.handler()
+        mainWindow.hide()
+        setTimeout(() => {
+          command.handler()
+        }, 3000)
         return c.json({
           message: 'Command executed'
         })

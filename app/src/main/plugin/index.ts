@@ -44,7 +44,7 @@ export class PluginManager extends EventEmitter {
       subject.next([...subject.value, ...arrayOrObservable])
     } else {
       debug('subscribe', transformed.id)
-      const sub = subject.subscribe((items) => {
+      const sub = arrayOrObservable.subscribe((items) => {
         subject.next([
           ...items,
           ...subject.value.filter((item) => item.pluginId !== transformed.id)

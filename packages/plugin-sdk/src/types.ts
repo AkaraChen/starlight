@@ -22,7 +22,6 @@ export interface ILifecycle {
 }
 
 export interface ICommand {
-  id: string
   displayName: string
   description: string
   handler: () => void
