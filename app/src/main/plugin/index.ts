@@ -79,6 +79,7 @@ export class PluginManager extends EventEmitter {
     }
     this.plugins.push(transformed)
     plugin.lifecycle?.activate?.()
+    debug('plugin registered', plugin.metaData.name)
     this.emit(StarLightEvent.PLUGIN_REGISTER)
   }
 
@@ -99,9 +100,7 @@ export class PluginManager extends EventEmitter {
 
   loadBuildIn() {
     debug('load build-in plugins')
-    buildInPlugins.forEach((plugin) => {
-      this.resister(plugin)
-    })
+    buildInPlugins.forEach((plugin) => this.resister(plugin))
   }
 
   // for singleton

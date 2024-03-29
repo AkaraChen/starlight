@@ -1802,6 +1802,7 @@ __metadata:
     "@types/react": "npm:^18.2.73"
     "@types/react-dom": "npm:^18.2.23"
     "@vitejs/plugin-react": "npm:^4.2.1"
+    app-launcher: "workspace:^"
     autoprefixer: "npm:^10.4.19"
     clsx: "npm:^2.1.0"
     cross-env: "npm:^7.0.3"
@@ -1823,8 +1824,10 @@ __metadata:
     react-dom: "npm:^18.2.0"
     react-use-websocket: "npm:^4.8.1"
     rxjs: "npm:^7.8.1"
+    scroll-into-view-if-needed: "npm:^3.1.0"
     supports-color: "npm:^9.4.0"
     swr: "npm:^2.2.5"
+    tailwind-scrollbar: "npm:^3.1.0"
     tailwindcss: "npm:^3.4.3"
     typescript: "npm:5.3.3"
     vite: "npm:^5.0.13"
@@ -2084,7 +2087,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*":
+"@types/node@npm:*, @types/node@npm:^20.11.30, @types/node@npm:^20.9.0":
   version: 20.11.30
   resolution: "@types/node@npm:20.11.30"
   dependencies:
@@ -3093,6 +3096,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"app-launcher@workspace:^, app-launcher@workspace:plugins/app-launcher":
+  version: 0.0.0-use.local
+  resolution: "app-launcher@workspace:plugins/app-launcher"
+  dependencies:
+    "@starlight-app/plugin-sdk": "workspace:^"
+    "@types/node": "npm:^20.11.30"
+    chokidar: "npm:^3.6.0"
+    electron: "npm:^29.1.6"
+    rxjs: "npm:^7.8.1"
+    tsup: "npm:^8.0.2"
+  languageName: unknown
+  linkType: soft
+
 "arg@npm:^5.0.0, arg@npm:^5.0.2":
   version: 5.0.2
   resolution: "arg@npm:5.0.2"
@@ -3878,7 +3894,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chokidar@npm:^3.5.1, chokidar@npm:^3.5.3":
+"chokidar@npm:^3.5.1, chokidar@npm:^3.5.3, chokidar@npm:^3.6.0":
   version: 3.6.0
   resolution: "chokidar@npm:3.6.0"
   dependencies:
@@ -4132,6 +4148,13 @@ __metadata:
   version: 0.1.2
   resolution: "compare-version@npm:0.1.2"
   checksum: 10c0/f38b853cf0d244c0af5f444409abde3d2198cd97312efa1dbc4ab41b520009327c2a63db59bbaf2d69288eff6167ef22be9788dc5476157d073ecdff1a8eeb2d
+  languageName: node
+  linkType: hard
+
+"compute-scroll-into-view@npm:^3.0.2":
+  version: 3.1.0
+  resolution: "compute-scroll-into-view@npm:3.1.0"
+  checksum: 10c0/bf305c4ece8e5c59ed3f7ed82b6dab5b7487ce26f56a693d903869964712870fccb08fe31d40edcbd600b03c99198f54d443acb315d674bd64fd344410c8672e
   languageName: node
   linkType: hard
 
@@ -4640,6 +4663,19 @@ __metadata:
   bin:
     electron: cli.js
   checksum: 10c0/6c4dbf84ce00556b80ac5a6da5d7b8e784d1c91ea3538221b86cedec154455f1bc3e1120adc9484f857f5334d5cbca050c8455cdd058538f0741239f576bc284
+  languageName: node
+  linkType: hard
+
+"electron@npm:^29.1.6":
+  version: 29.1.6
+  resolution: "electron@npm:29.1.6"
+  dependencies:
+    "@electron/get": "npm:^2.0.0"
+    "@types/node": "npm:^20.9.0"
+    extract-zip: "npm:^2.0.1"
+  bin:
+    electron: cli.js
+  checksum: 10c0/205e0be99b03d7e9f870c7fcc7d989b475105764440c993051c7d562454a271b78825750f7b62872f879c2e6ce75e8db6776824c859a9ce731410462c4c5cf65
   languageName: node
   linkType: hard
 
@@ -9718,6 +9754,15 @@ __metadata:
   dependencies:
     loose-envify: "npm:^1.1.0"
   checksum: 10c0/b777f7ca0115e6d93e126ac490dbd82642d14983b3079f58f35519d992fa46260be7d6e6cede433a92db70306310c6f5f06e144f0e40c484199e09c1f7be53dd
+  languageName: node
+  linkType: hard
+
+"scroll-into-view-if-needed@npm:^3.1.0":
+  version: 3.1.0
+  resolution: "scroll-into-view-if-needed@npm:3.1.0"
+  dependencies:
+    compute-scroll-into-view: "npm:^3.0.2"
+  checksum: 10c0/1f46b090e1e04fcfdef1e384f6d7e615f9f84d4176faf4dbba7347cc0a6e491e5d578eaf4dbe9618dd3d8d38efafde58535b3e00f2a21ce4178c14be364850ff
   languageName: node
   linkType: hard
 

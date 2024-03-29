@@ -1,10 +1,11 @@
-import { FC } from 'react'
+import { FC, useEffect, useRef } from 'react'
 import defaultIcon from '../assets/electron.svg'
 import { ICommandDto } from '@starlight/plugin-utils'
 import { api } from '../api'
 import clsx from 'clsx'
 import { useAppContext } from './context'
 import emojiRegex from 'emoji-regex'
+import scrollIntoView from 'scroll-into-view-if-needed'
 
 export interface CommandProps extends ICommandDto {
   active: boolean
@@ -14,12 +15,23 @@ export const Command: FC<CommandProps> = (props) => {
   const { active } = props
   const { setSelected } = useAppContext()
   const isEmoji = emojiRegex().test(props.icon)
+  useEffect(() => {
+    if (active && ref.current) {
+      scrollIntoView(ref.current, {
+        scrollMode: 'if-needed',
+        block: 'nearest',
+        inline: 'nearest'
+      })
+    }
+  }, [active])
+  const ref = useRef<HTMLDivElement>(null)
   return (
     <div
       className={clsx(
         'flex items-center justify-center px-3 py-2 hover:bg-black/5 rounded select-none',
         active && 'bg-black/5'
       )}
+      ref={ref}
       onClick={() => {
         setSelected(null)
         api.plugin.execute.$post({
