@@ -40,13 +40,13 @@ export function createWindow(): void {
     mainWindow.loadFile(join(__dirname, '../renderer/index.html'))
   }
 
-  if (!is.dev) {
-    globalShortcut.register('Alt+Space', () => {
-      debug('toggle window')
-      mainWindow.show()
-      mainWindow.focus()
-    })
+  globalShortcut.register(is.dev ? 'Alt+Z' : 'Alt+Space', () => {
+    debug('toggle window')
+    mainWindow.show()
+    mainWindow.focus()
+  })
 
+  if (!is.dev) {
     mainWindow.on('blur', () => {
       debug('hide window')
       mainWindow.hide()
