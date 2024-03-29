@@ -14,7 +14,7 @@ import { mainWindow } from '../window'
 const debug = createDebug('starlight:plugin-manager')
 
 export class MainWindowEmitter {
-  emit(event: string): void {
+  emit(event: ServerEvent): void {
     debug('emit', event)
     mainWindow.webContents.send(event)
   }
