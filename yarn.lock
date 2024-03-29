@@ -1855,6 +1855,7 @@ __metadata:
     electron-builder: "npm:^24.13.3"
     electron-updater: "npm:^6.1.8"
     electron-vite: "npm:^2.1.0"
+    emoji-regex: "npm:^10.3.0"
     eslint: "npm:^8.57.0"
     eslint-plugin-react: "npm:^7.34.1"
     fuse.js: "npm:^7.0.0"

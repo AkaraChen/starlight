@@ -4,6 +4,7 @@ import { ICommandDto } from '@starlight/plugin-utils'
 import { api } from '../api'
 import clsx from 'clsx'
 import { useAppContext } from './context'
+import emojiRegex from 'emoji-regex'
 
 export interface CommandProps extends ICommandDto {
   active: boolean
@@ -12,6 +13,7 @@ export interface CommandProps extends ICommandDto {
 export const Command: FC<CommandProps> = (props) => {
   const { active } = props
   const { setSelected } = useAppContext()
+  const isEmoji = emojiRegex().test(props.icon)
   return (
     <div
       className={clsx(
@@ -28,7 +30,11 @@ export const Command: FC<CommandProps> = (props) => {
         })
       }}
     >
-      <img src={defaultIcon} alt={props.displayName} className={'w-3 h-3'} />
+      {isEmoji ? (
+        <div className="size-3">{props.icon}</div>
+      ) : (
+        <img src={defaultIcon} alt={props.displayName} className={'w-3 h-3'} />
+      )}
       <div className={'ml-3 w-full flex items-center'}>
         <h2 className={'text-sm font-medium text-zinc-800'}>{props.displayName}</h2>
         <p className={'text-xs ml-3 text-zinc-600'}>{props.description}</p>
@@ -40,9 +46,9 @@ export const Command: FC<CommandProps> = (props) => {
   )
 }
 
-export interface CommandListProps {}
+// export interface CommandListProps {}
 
-export const CommandList: FC<CommandListProps> = () => {
+export const CommandList: FC = () => {
   const { query, selected } = useAppContext()
   return (
     <div className="flex flex-col px-3">

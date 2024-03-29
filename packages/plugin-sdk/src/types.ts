@@ -26,6 +26,7 @@ export interface ICommand {
   displayName: string
   description: string
   handler: () => void
+  icon?: string
 }
 
 export interface IView {
@@ -33,6 +34,7 @@ export interface IView {
   displayName: string
   component: React.JSX.Element
   searchable?: boolean
+  icon?: string
 }
 
 export type SearchFunction = (query: string, abortSignal: AbortSignal) => Promise<ICommand[]>

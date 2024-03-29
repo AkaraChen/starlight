@@ -1,12 +1,14 @@
 import { ICommand, ILifecycle, IPlugin, IView, MaybeObservable } from '@starlight-app/plugin-sdk'
-import { pipe, map } from 'rxjs'
+import { map } from 'rxjs'
 
 export interface ITranformedCommand extends ICommand {
   pluginId: string
+  icon: string
 }
 
 export interface ITransformedView extends IView {
   pluginId: string
+  icon: string
 }
 
 export interface ITransformedPlugin extends IPlugin {
@@ -45,14 +47,16 @@ const transformCommand = (plugin: IPlugin, command: ICommand): ITranformedComman
   return {
     ...command,
     pluginId: plugin.metaData.name,
-    handler: () => callWithErrorHandling(plugin, () => command.handler())
+    handler: () => callWithErrorHandling(plugin, () => command.handler()),
+    icon: command?.icon ?? plugin.metaData.icon
   }
 }
 
 const transformView = (plugin: IPlugin, view: IView): ITransformedView => {
   return {
     ...view,
-    pluginId: plugin.metaData.name
+    pluginId: plugin.metaData.name,
+    icon: view?.icon ?? plugin.metaData.icon
   }
 }
 
