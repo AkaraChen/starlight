@@ -12,7 +12,8 @@
     "tsup": "^8.0.2"
   },
   "scripts": {
-    "build": "tsup"
+    "build": "tsup",
+    "dev": "tsup --watch"
   },
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",

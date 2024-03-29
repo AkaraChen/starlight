@@ -7,9 +7,13 @@
     "build:plugin": "turbo build --filter='./plugins/*'",
     "build:package": "turbo build --filter='./packages/*'",
     "build:deps": "npm run build:package && npm run build:plugin",
-    "update": "taze -w -r"
+    "update": "taze -w -r",
+    "prepare": "husky"
   },
   "devDependencies": {
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.2",
+    "pinst": "^3.0.0",
     "prettier": "^3.2.5",
     "taze": "^0.13.3",
     "typescript": "^5.4.3"
