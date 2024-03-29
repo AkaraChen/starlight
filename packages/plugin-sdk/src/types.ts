@@ -2,7 +2,7 @@ import { Observable } from 'rxjs'
 
 export interface ISupport {
   windows: boolean
-  mac: boolean
+  macos: boolean
   linux: boolean
 }
 
@@ -26,7 +26,7 @@ export interface ICommand {
   displayName: string
   description: string
   handler: () => void
-  icon?: string,
+  icon?: string
   runImediately?: boolean
 }
 

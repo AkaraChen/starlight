@@ -1,69 +1,44 @@
 import { ICommand, PluginBuilder } from '@starlight-app/plugin-sdk'
 import { BehaviorSubject } from 'rxjs'
-import { Core } from './core'
-import os from 'os'
-import path from 'path'
+import { getCore } from './platform'
 import { shell } from 'electron'
+import { Core } from './core'
 
 const commands = new BehaviorSubject<ICommand[]>([])
+
+let core: Core
 
 const AppLauncher = new PluginBuilder()
   .meta({
     name: 'App Launcher',
     description: 'Launch your app',
     version: '0.0.1',
-    icon: '💎'
+    icon: '💎',
+    support: {
+      windows: true,
+      macos: false,
+      linux: false
+    }
   })
   .lifecycle({
     activate() {
-      const core = new Core({
-        dirs: [
-          // this one cause user experience issue
-          // {
-          //   dir: path.join(os.homedir(), 'scoop', 'shims'),
-          //   resursive: true
-          // }
-          {
-            dir: path.join(
-              os.homedir(),
-              'AppData',
-              'Roaming',
-              'Microsoft',
-              'Windows',
-              'Start Menu',
-              'Programs'
-            ),
-            resursive: true
-          },
-          {
-            dir: path.join(
-              os.homedir(),
-              'AppData',
-              'Roaming',
-              'Microsoft',
-              'Windows',
-              '「开始」菜单',
-              '程序'
-            ),
-            resursive: true
-          }
-        ],
-        exts: ['.exe', '.lnk']
-      })
-      core.subject.subscribe((execlutables) => {
-        commands.next(
-          execlutables.map((e) => {
-            const name = path.basename(e.path, path.extname(e.path))
-            return {
-              displayName: name,
-              description: `Launch ${name}`,
-              handler: () => {
+      getCore().then((_core) => {
+        core = _core
+        core?.subject.subscribe((execlutables) => {
+          commands.next(
+            execlutables.map((e) => ({
+              displayName: e.name,
+              description: `Launch ${e.name}`,
+              handler() {
                 shell.openPath(e.path)
               }
-            }
-          })
-        )
+            }))
+          )
+        })
       })
+    },
+    deactivate() {
+      core?.onDispose()
     }
   })
   .commands(commands)

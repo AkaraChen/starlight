@@ -50,7 +50,7 @@ const transformMetaData = (metaData: IMetaData): ITransformedMetaData => {
       case 'win32':
         return support?.windows ?? false
       case 'darwin':
-        return support?.mac ?? false
+        return support?.macos ?? false
       case 'linux':
         return support?.linux ?? false
       default:
