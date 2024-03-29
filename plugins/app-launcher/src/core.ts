@@ -28,9 +28,10 @@ export class Core {
         ignoreInitial: false,
         depth: resursive ? undefined : 0
       })
-      watcher.on('add', (path) => {
+      watcher.on('add', async (path) => {
+        const info = await opts.getInfo(path)
         if (exts.some((ext) => path.endsWith(ext))) {
-          this.subject.next([...this.subject.value, { name: path, path }])
+          this.subject.next([...this.subject.value, info])
         }
       })
       watcher.on('unlink', (path) => {

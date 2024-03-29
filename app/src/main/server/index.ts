@@ -6,6 +6,7 @@ import { createPluginRouter } from './router/plugin'
 import { cors } from 'hono/cors'
 import createDebug from 'debug'
 import { ClientEvent } from '../../constants/ipc'
+import { createServer as createNodeServer } from 'http2'
 
 const debug = createDebug('starlight:server')
 
@@ -35,7 +36,10 @@ export const createServer = async () => {
     .route('/plugin', createPluginRouter())
   serve({
     ...server,
-    port: await findPort()
+    port: await findPort(),
+    serverOptions: {
+      createServer: createNodeServer
+    }
   })
   return server
 }

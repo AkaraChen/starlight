@@ -5,15 +5,22 @@ import {
   ITransformedView,
   transformPlugin
 } from '@starlight/plugin-utils'
-import EventEmitter from 'events'
-import { StarLightEvent } from '../../constants/event'
-import { BehaviorSubject, Observable, Subscription, fromEvent, merge } from 'rxjs'
+import { ServerEvent } from '../../constants/ipc'
+import { BehaviorSubject, Subscription } from 'rxjs'
 import { buildInPlugins } from './load'
 import createDebug from 'debug'
+import { mainWindow } from '../window'
 
 const debug = createDebug('starlight:plugin-manager')
 
-export class PluginManager extends EventEmitter {
+export class MainWindowEmitter {
+  emit(event: string): void {
+    debug('emit', event)
+    mainWindow.webContents.send(event)
+  }
+}
+
+export class PluginManager extends MainWindowEmitter {
   plugins: ITransformedPlugin[] = []
   commands = new BehaviorSubject<ITranformedCommand[]>([])
   views = new BehaviorSubject<ITransformedView[]>([])
@@ -23,14 +30,6 @@ export class PluginManager extends EventEmitter {
     this.loadBuildIn()
   }
 
-  eventNames(): StarLightEvent[] {
-    return [StarLightEvent.PLUGIN_REGISTER, StarLightEvent.PLUGIN_UNREGISTER]
-  }
-
-  observable = merge(
-    ...this.eventNames().map((event) => fromEvent(this, event))
-  ) as Observable<StarLightEvent>
-
   commandSubcribeMap = new Map<string, Subscription>()
   viewsSubcribeMap = new Map<string, Subscription>()
 
@@ -38,10 +37,13 @@ export class PluginManager extends EventEmitter {
     transformed: ITransformedPlugin,
     arrayOrObservable: MaybeObservable<T[]>,
     subject: BehaviorSubject<T[]>,
-    subscribeMap: Map<string, Subscription>
+    subscribeMap: Map<string, Subscription>,
+    type: 'command' | 'view'
   ) {
+    const event = type === 'command' ? ServerEvent.COMMAND_UPDATE : ServerEvent.VIEW_UPDATE
     if (Array.isArray(arrayOrObservable)) {
       subject.next([...subject.value, ...arrayOrObservable])
+      this.emit(event)
     } else {
       debug('subscribe', transformed.id)
       const sub = arrayOrObservable.subscribe((items) => {
@@ -49,6 +51,7 @@ export class PluginManager extends EventEmitter {
           ...items,
           ...subject.value.filter((item) => item.pluginId !== transformed.id)
         ])
+        this.emit(event)
       })
       subscribeMap.set(transformed.id, sub)
     }
@@ -57,8 +60,8 @@ export class PluginManager extends EventEmitter {
   resister(plugin: IPlugin): void {
     debug('register plugin', plugin.metaData.name)
     const transformed = transformPlugin(plugin)
-    if (transformed.metaData.support) {
-      debug('plugin not supported', plugin.metaData.name)
+    if (!transformed.metaData.support) {
+      debug('plugin not supported', plugin.metaData.name, transformed.metaData.support)
       return
     }
     if (transformed.commands) {
@@ -66,7 +69,8 @@ export class PluginManager extends EventEmitter {
         transformed,
         transformed.commands,
         this.commands,
-        this.commandSubcribeMap
+        this.commandSubcribeMap,
+        'command'
       )
     }
     if (transformed.views) {
@@ -74,13 +78,14 @@ export class PluginManager extends EventEmitter {
         transformed,
         transformed.views,
         this.views,
-        this.viewsSubcribeMap
+        this.viewsSubcribeMap,
+        'view'
       )
     }
     this.plugins.push(transformed)
     plugin.lifecycle?.activate?.()
     debug('plugin registered', plugin.metaData.name)
-    this.emit(StarLightEvent.PLUGIN_REGISTER)
+    this.emit(ServerEvent.PLUGIN_REGISTER)
   }
 
   unregister(plugin: IPlugin): void {
@@ -95,7 +100,7 @@ export class PluginManager extends EventEmitter {
     this.viewsSubcribeMap.get(plugin.metaData.name)?.unsubscribe()
 
     debug('plugin unregistered', plugin.metaData.name)
-    this.emit(StarLightEvent.PLUGIN_UNREGISTER)
+    this.emit(ServerEvent.PLUGIN_UNREGISTER)
   }
 
   loadBuildIn() {

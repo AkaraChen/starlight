@@ -8,12 +8,7 @@ const metaData: IMetaData = {
   icon: '🌍'
 }
 
-const lifecycle: ILifecycle = {
-  activate() {
-    console.log('Hello World Plugin Activated')
-    return true
-  }
-}
+const lifecycle: ILifecycle = {}
 
 const commands: ICommand[] = [
   {

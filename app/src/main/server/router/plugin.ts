@@ -1,5 +1,5 @@
 import { Hono } from 'hono'
-import { stream } from 'hono/streaming'
+import { streamSSE } from 'hono/streaming'
 import { PluginManager } from '../../plugin'
 import { zValidator } from '@hono/zod-validator'
 import { z } from 'zod'
@@ -13,19 +13,6 @@ export const createPluginRouter = () => {
   const manager = PluginManager.getInstance()
 
   return new Hono()
-    .get('/events', (c) => {
-      debug('subscribe events')
-      return stream(c, async (sse) => {
-        // event will always be a StarLightEvent
-        manager.observable.subscribe((event) => {
-          debug('send event', event)
-          sse.write(event)
-        })
-        sse.onAbort(() => {
-          debug('unsubscribe events')
-        })
-      })
-    })
     .get('/commands', (c) => {
       debug('get commands')
       return c.json(manager.commands.value as unknown as ICommandDto[])
@@ -56,9 +43,9 @@ export const createPluginRouter = () => {
             .map((plugin) => plugin.search!(keyword, abortController.signal))
         )
         const result = search.flat()
-        return stream(c, async (sse) => {
-          sse.write(JSON.stringify(result))
-          sse.close()
+        return streamSSE(c, async (stream) => {
+          stream.write(JSON.stringify(result))
+          stream.close()
         })
       }
     )
