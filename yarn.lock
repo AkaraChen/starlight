@@ -1731,7 +1731,7 @@ __metadata:
     clsx: "npm:^2.1.0"
     cross-env: "npm:^7.0.3"
     debug: "npm:^4.3.4"
-    electron: "npm:28.2.0"
+    electron: "npm:29.1.6"
     electron-builder: "npm:^24.13.3"
     electron-updater: "npm:^6.1.8"
     electron-vite: "npm:^2.1.0"
@@ -2037,15 +2037,6 @@ __metadata:
   version: 17.0.45
   resolution: "@types/node@npm:17.0.45"
   checksum: 10c0/0db377133d709b33a47892581a21a41cd7958f22723a3cc6c71d55ac018121382de42fbfc7970d5ae3e7819dbe5f40e1c6a5174aedf7e7964e9cb8fa72b580b0
-  languageName: node
-  linkType: hard
-
-"@types/node@npm:^18.11.18":
-  version: 18.19.26
-  resolution: "@types/node@npm:18.19.26"
-  dependencies:
-    undici-types: "npm:~5.26.4"
-  checksum: 10c0/34b9ceb3366fc616f35a3f3a1467478182cc265ff142c02000503161a679d3036d8bbc410d343ae4012a868e879941d64d656bd509674b055c8735aba24d98e2
   languageName: node
   linkType: hard
 
@@ -4581,20 +4572,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"electron@npm:28.2.0":
-  version: 28.2.0
-  resolution: "electron@npm:28.2.0"
-  dependencies:
-    "@electron/get": "npm:^2.0.0"
-    "@types/node": "npm:^18.11.18"
-    extract-zip: "npm:^2.0.1"
-  bin:
-    electron: cli.js
-  checksum: 10c0/6c4dbf84ce00556b80ac5a6da5d7b8e784d1c91ea3538221b86cedec154455f1bc3e1120adc9484f857f5334d5cbca050c8455cdd058538f0741239f576bc284
-  languageName: node
-  linkType: hard
-
-"electron@npm:^29.1.6":
+"electron@npm:29.1.6, electron@npm:^29.1.6":
   version: 29.1.6
   resolution: "electron@npm:29.1.6"
   dependencies:

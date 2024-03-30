@@ -1,6 +1,5 @@
 {
   "name": "app-launcher",
-  "packageManager": "yarn@4.1.1",
   "dependencies": {
     "@starlight-app/plugin-sdk": "workspace:^",
     "chokidar": "^3.6.0",
@@ -16,14 +15,15 @@
     "@types/node": "^20.12.2",
     "tsup": "^8.0.2"
   },
+  "exports": {
+    "types": "./dist/index.d.ts",
+    "require": "./dist/index.js"
+  },
+  "main": "dist/index.js",
+  "packageManager": "yarn@4.1.1",
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch"
   },
-  "exports": {
-    "require": "./dist/index.js",
-    "types": "./dist/index.d.ts"
-  },
-  "main": "dist/index.js",
   "types": "dist/index.d.ts"
 }

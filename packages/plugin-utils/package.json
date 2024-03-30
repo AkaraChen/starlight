@@ -1,6 +1,5 @@
 {
   "name": "@starlight/plugin-utils",
-  "packageManager": "yarn@4.1.1",
   "dependencies": {
     "@starlight-app/plugin-sdk": "workspace:^",
     "emoji-regex": "^10.3.0",
@@ -11,11 +10,12 @@
     "@types/mime-types": "^2.1.4",
     "tsup": "^8.0.2"
   },
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "packageManager": "yarn@4.1.1",
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch"
   },
-  "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts"
 }

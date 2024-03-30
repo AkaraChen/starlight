@@ -1,14 +1,5 @@
 {
   "name": "starlight",
-  "private": true,
-  "scripts": {
-    "format": "prettier --write .",
-    "build": "turbo build",
-    "update": "taze -w -r",
-    "prepare": "husky",
-    "dev": "turbo dev --filter '!./{plugins,website}'",
-    "lint": "eslint ."
-  },
   "devDependencies": {
     "@electron-toolkit/eslint-config-prettier": "^2.0.0",
     "@electron-toolkit/eslint-config-ts": "^1.0.1",
@@ -26,6 +17,16 @@
     "taze": "^0.13.3",
     "typescript": "^5.4.3"
   },
+  "packageManager": "yarn@4.1.1",
+  "private": true,
+  "scripts": {
+    "build": "turbo build",
+    "dev": "turbo dev --filter '!./{plugins,website}'",
+    "format": "prettier --write .",
+    "lint": "eslint .",
+    "prepare": "husky",
+    "update": "taze -w -r"
+  },
   "workspaces": [
     "./packages/**",
     "./crates/**",
@@ -33,6 +34,5 @@
     "./app",
     "./docs",
     "./plugins/*"
-  ],
-  "packageManager": "yarn@4.1.1"
+  ]
 }

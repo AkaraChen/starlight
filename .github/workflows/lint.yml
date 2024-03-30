@@ -17,6 +17,7 @@ jobs:
       - run: yarn install
       - run: yarn lint --fix
       - run: yarn format
+      - run: yarn syncpack format
       - name: Commit files
         id: commit
         continue-on-error: true
