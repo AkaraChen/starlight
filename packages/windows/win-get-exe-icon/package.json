@@ -1,5 +1,6 @@
 {
   "name": "win-get-exe-icon",
+  "version": "1.0.0",
   "dependencies": {
     "icon-extractor": "^1.0.3"
   },

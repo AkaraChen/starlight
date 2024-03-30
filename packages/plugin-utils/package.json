@@ -1,5 +1,6 @@
 {
   "name": "@starlight/plugin-utils",
+  "version": "1.0.0",
   "dependencies": {
     "@starlight-app/plugin-sdk": "workspace:^",
     "emoji-regex": "^10.3.0",

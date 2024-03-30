@@ -1,5 +1,6 @@
 {
   "name": "win-dirs",
+  "version": "1.0.0",
   "dependencies": {
     "regedit": "^5.1.3"
   },
