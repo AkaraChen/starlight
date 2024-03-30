@@ -10,18 +10,6 @@ import { useAtomValue } from 'jotai'
 import { commandsAtom } from '../atoms/data'
 import { callMain, sendEvent } from '../ipc'
 
-window.addEventListener('keyup', (event) => {
-  if (event.key === 'Escape') {
-    if (history.length > 1) {
-      history.back()
-    } else {
-      if (!import.meta.env.DEV) {
-        sendEvent(ClientEvent.HIDE)
-      }
-    }
-  }
-})
-
 function App() {
   const inputRef = useRef<HTMLInputElement>(null)
   useEventListener(window, 'focus', () => {
@@ -44,15 +32,17 @@ function App() {
     sendEvent(ClientEvent.HIDE)
     callMain(IpcRequestEventName.EXECUTE_COMMAND, command.pluginId, command.id)
   }
-  useEventListener(window, 'keydown', (e: KeyboardEvent) => {
+  useEventListener(window, 'keyup', (e: KeyboardEvent) => {
     if (e.key === 'Escape') {
       if (selected !== null) {
+        e.stopPropagation()
         setSelected(null)
         inputRef.current?.focus()
-        e.stopPropagation()
         return
       }
+      sendEvent(ClientEvent.HIDE)
     }
+
     if (e.key === 'Enter') {
       const command = query[selected || 0]
       if (command) {
