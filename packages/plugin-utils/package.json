@@ -11,6 +11,11 @@
     "@types/mime-types": "^2.1.4",
     "tsup": "^8.0.2"
   },
+  "exports": {
+    "types": "./dist/index.d.ts",
+    "import": "./dist/index.mjs",
+    "require": "./dist/index.js"
+  },
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "packageManager": "yarn@4.1.1",

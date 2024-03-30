@@ -4,7 +4,7 @@ import emojiRegex from 'emoji-regex'
 import fs from 'fs'
 import mime from 'mime-types'
 import { IMetaData } from '@starlight-app/plugin-sdk'
-import { ICommandDto } from '.'
+import { ICommandDto } from './dto'
 
 export interface ITranformedCommand extends ICommand {
   pluginId: string
