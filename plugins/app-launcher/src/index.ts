@@ -23,14 +23,15 @@ const AppLauncher = new PluginBuilder()
   })
   .lifecycle({
     activate() {
-      getCore().then((_core) => {
-        core = _core
+      getCore().then((c) => {
+        core = c
         core?.subject.subscribe((execlutables) => {
           commands.next(
             execlutables.map((e) => ({
               id: `launch-${e.name}`,
               displayName: e.name,
               description: `Launch ${e.name}`,
+              icon: e.icon,
               handler() {
                 shell.openPath(e.path)
               }

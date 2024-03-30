@@ -1,27 +1,27 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import path from 'path'
 import { Core } from '../core'
-import { promisified as regedit } from 'regedit'
+import { getWindowsDirs } from 'win-dirs'
+import { shell } from 'electron'
+import { extractIcon } from 'win-get-exe-icon'
 
 export const getWindowsCore = async () => {
-  const key = `HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Shell Folders`
-  const list = await regedit.list([key])
-  const startMenu = list[key].values['Programs'].value
-  if (typeof startMenu !== 'string') {
-    throw new Error('Can not get start menu path')
-  }
-  return new Core({
-    dirs: [
-      {
-        dir: startMenu,
-        resursive: true
-      }
-    ],
+  const windowsDirs = await getWindowsDirs()
+  const core = new Core({
+    dirs: Object.entries(windowsDirs).map(([, dir]) => ({
+      dir,
+      resursive: true
+    })),
     exts: ['.exe', '.lnk'],
     async getInfo(file) {
-       return {
+      const isLnk = path.extname(file) === '.lnk'
+      const realPath = isLnk ? shell.readShortcutLink(file).target : file
+      return {
         name: path.basename(file, path.extname(file)),
-        path: file
+        path: realPath,
+        icon: await extractIcon(realPath)
       }
     }
   })
+  return core
 }

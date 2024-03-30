@@ -1,5 +1,6 @@
 import { BehaviorSubject } from 'rxjs'
 import chokidar from 'chokidar'
+import { uniqBy } from 'lodash'
 
 export interface SearchDir {
   dir: string
@@ -15,6 +16,11 @@ export interface CoreOptions {
 export interface Execlutable {
   name: string
   path: string
+  icon: string
+}
+
+const dedupe = (arr: Execlutable[]) => {
+  return uniqBy(arr, (e) => e.name + e.path)
 }
 
 export class Core {
@@ -31,11 +37,11 @@ export class Core {
       watcher.on('add', async (path) => {
         const info = await opts.getInfo(path)
         if (exts.some((ext) => path.endsWith(ext))) {
-          this.subject.next([...this.subject.value, info])
+          this.next(...this.subject.value, info)
         }
       })
       watcher.on('unlink', (path) => {
-        this.subject.next(this.subject.value.filter((e) => e.path !== path))
+        this.next(...this.subject.value.filter((e) => e.path !== path))
       })
       this.watchers.push(watcher)
     }
@@ -48,4 +54,8 @@ export class Core {
   }
 
   subject = new BehaviorSubject<Execlutable[]>([])
+
+  next(...values: Execlutable[]) {
+    this.subject.next(dedupe(values))
+  }
 }
