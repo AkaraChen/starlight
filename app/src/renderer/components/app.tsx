@@ -85,7 +85,7 @@ function App() {
         query
       }}
     >
-      <div className={clsx('flex flex-col w-screen h-screen', 'bg-transparent')}>
+      <div className={clsx('flex flex-col w-screen h-screen', 'bg-native/75')}>
         <div className="h-16 border-b border-zinc-900/10">
           <input
             ref={inputRef}
@@ -103,7 +103,7 @@ function App() {
         <div className="h-full my-2 flex flex-col overflow-x-hidden overflow-y-scroll scrollbar-none">
           {query && <CommandList />}
         </div>
-        <div className="h-16 bg-native/60 flex p-4">
+        <div className="h-16 bg-native/50 flex px-4 py-2">
           <KbdLabel kbd={[CommandIcon, ',']}>Settings</KbdLabel>
           <div className="ml-auto flex items-center justify-center">
             <KbdLabel
