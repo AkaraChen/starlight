@@ -7,6 +7,7 @@ extends:
   - '@electron-toolkit/eslint-config-prettier'
 settings:
   react:
-   version: detect
+    version: detect
 rules:
   '@typescript-eslint/explicit-function-return-type': off
+  'react/prop-types': off
