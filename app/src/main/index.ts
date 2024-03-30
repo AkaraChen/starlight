@@ -1,4 +1,4 @@
-import { app } from 'electron'
+import { BrowserWindow, app } from 'electron'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import { createWindow } from './window'
 import { PluginManager } from './plugin'
@@ -18,6 +18,10 @@ app.whenReady().then(() => {
 
   createWindow()
   PluginManager.init()
+
+  app.on('activate', function () {
+    if (BrowserWindow.getAllWindows().length === 0) createWindow()
+  })
 })
 
 if (!is.dev) {
@@ -27,3 +31,9 @@ if (!is.dev) {
     openAtLogin: true
   })
 }
+
+app.on('window-all-closed', () => {
+  if (process.platform !== 'darwin') {
+    app.quit()
+  }
+})

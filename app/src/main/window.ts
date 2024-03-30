@@ -41,7 +41,26 @@ export function createWindow(): void {
     mainWindow.loadFile(join(__dirname, '../renderer/index.html'))
   }
 
-  globalShortcut.register(is.dev ? 'Alt+Z' : 'Alt+Space', () => {
+  const getKey = () => {
+    const keymap = {
+      dev: {
+        unix: 'Cmd+Z',
+        win32: 'Alt+Z'
+      },
+      prod: {
+        unix: 'Command+Space',
+        win32: 'Alt+Space'
+      }
+    }
+
+    if (process.platform === 'darwin') {
+      return is.dev ? keymap.dev.unix : keymap.prod.unix
+    } else {
+      return is.dev ? keymap.dev.win32 : keymap.prod.win32
+    }
+  }
+
+  globalShortcut.register(getKey(), () => {
     debug('toggle window')
     mainWindow.show()
     mainWindow.focus()
