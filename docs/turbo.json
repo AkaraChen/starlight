@@ -1,16 +1,10 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "extends": [
-    "//"
-  ],
+  "extends": ["//"],
   "pipeline": {
     "build": {
-      "dependsOn": [
-        "^build"
-      ],
-      "outputs": [
-        "./.vitepress/dist/**"
-      ]
+      "dependsOn": ["^build"],
+      "outputs": ["./.vitepress/dist/**"]
     }
   }
 }

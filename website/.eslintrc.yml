@@ -4,12 +4,12 @@ env:
   es2021: true
   node: true
 extends:
-  - 'eslint:recommended'
-  - 'plugin:@typescript-eslint/recommended'
-  - 'plugin:astro/recommended'
+  - "eslint:recommended"
+  - "plugin:@typescript-eslint/recommended"
+  - "plugin:astro/recommended"
 parserOptions:
   ecmaVersion: latest
-  parser: '@typescript-eslint/parser'
+  parser: "@typescript-eslint/parser"
   sourceType: module
 plugins:
   - "@typescript-eslint"

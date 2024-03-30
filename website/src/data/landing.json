@@ -56,8 +56,6 @@
       { "label": "FAQs", "href": "/" },
       { "label": "Contact", "href": "/" }
     ],
-    "socials": [
-
-    ]
+    "socials": []
   }
 }
