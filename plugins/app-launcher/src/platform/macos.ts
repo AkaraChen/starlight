@@ -1,5 +1,5 @@
 import path from 'path'
-import { Core, Execlutable } from '../core'
+import { Core } from '../core'
 
 export const getMacOsCore = async () => {
   return new Core({
@@ -14,8 +14,9 @@ export const getMacOsCore = async () => {
       const name = path.basename(file, path.extname(file))
       return {
         name,
-        path: file
-      } as Execlutable
+        path: file,
+        icon: path.join(file, 'Contents', 'Resources', 'AppIcon.icns')
+      }
     }
   })
 }

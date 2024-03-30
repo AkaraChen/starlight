@@ -107,6 +107,9 @@ const transformIcon = (icon: string): string => {
   if (isEmoji) {
     return icon
   }
+  if (icon.startsWith('data:')) {
+    return icon
+  }
   const file = fs.readFileSync(icon)
   const base64 = Buffer.from(file).toString('base64')
   const mimeType = mime.lookup(icon)

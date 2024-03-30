@@ -64,7 +64,7 @@ export const CommandList: FC = () => {
       {query.map((command, index) => {
         return (
           <Command
-            key={`${command.pluginId}-${command.displayName}`}
+            key={`${command.pluginId}-${command.id}`}
             {...command}
             active={selected === index}
             onExecute={onExecute}
