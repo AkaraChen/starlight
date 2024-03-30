@@ -9,19 +9,23 @@ export const KbdLabel = forwardRef<HTMLElement, KbdLabelProps>(function KbdLabel
   const { kbd, children, ...rest } = props
   return (
     <kbd
-      className="flex items-center justify-center px-2 py-1 bg-black/5 text-xs rounded select-none"
+      className="flex items-center justify-center px-2 py-1 text-xs rounded select-none font-sans"
       {...rest}
       ref={ref}
     >
-      <div className="flex gap-1">
-        {kbd.map((Icon) => {
-          if (typeof Icon === 'string') {
-            return <span key={Icon}>{Icon}</span>
-          }
-          return <Icon key={Icon.displayName} size={16} />
+      {children}
+      <div className="flex gap-1 mx-1">
+        {kbd.map((Key) => {
+          return (
+            <div
+              key={typeof Key === 'string' ? Key : Key.displayName}
+              className="bg-black/5 size-6 flex items-center justify-center rounded text-black/60"
+            >
+              {typeof Key === 'string' ? <span>{Key}</span> : <Key size={14} />}
+            </div>
+          )
         })}
       </div>
-      <span className="ml-2">{children}</span>
     </kbd>
   )
 })
