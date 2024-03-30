@@ -1,11 +1,11 @@
 ---
 interface Props {
-  class?: string;
+  class?: string
 }
 
-const baseClass = "h-10 md:h-12 md:w-12 w-10";
+const baseClass = 'h-10 md:h-12 md:w-12 w-10'
 
-const { class: className = baseClass } = Astro.props;
+const { class: className = baseClass } = Astro.props
 ---
 
 <svg
@@ -16,6 +16,5 @@ const { class: className = baseClass } = Astro.props;
   stroke="currentColor"
   class={className}
 >
-  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"
-  ></path>
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"></path>
 </svg>

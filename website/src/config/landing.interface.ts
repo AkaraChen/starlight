@@ -1,115 +1,115 @@
 export interface LandingPageData {
-  meta: Meta;
-  headerData: HeaderData;
-  heroData: HeroData;
-  servicesData: ServicesData;
-  footerData: FooterData;
+  meta: Meta
+  headerData: HeaderData
+  heroData: HeroData
+  servicesData: ServicesData
+  footerData: FooterData
 }
 
 export interface HeaderData {
-  logo: string;
-  links: Link[];
+  logo: string
+  links: Link[]
 }
 
 export interface HeroData {
-  title: string;
-  subTitle: string;
-  primaryCta: string;
-  secondaryCta: string;
-  highlightedTitle: string;
+  title: string
+  subTitle: string
+  primaryCta: string
+  secondaryCta: string
+  highlightedTitle: string
 }
 
 export interface ServicesData {
-  title: string;
-  services: Service[];
+  title: string
+  services: Service[]
 }
 
 export interface Service {
-  title: string;
-  icon: string;
-  description: string;
+  title: string
+  icon: string
+  description: string
 }
 
 export interface AdventajesData {
-  title: string;
-  adventajes: Adventaje[];
+  title: string
+  adventajes: Adventaje[]
 }
 
 export interface Adventaje {
-  title: string;
-  description: string;
-  img: string;
-  imageAlt: string;
-  checks: string[];
+  title: string
+  description: string
+  img: string
+  imageAlt: string
+  checks: string[]
 }
 
 export interface FooterData {
-  logo: string;
-  description: string;
-  links: Link[];
-  socials: Social[];
+  logo: string
+  description: string
+  links: Link[]
+  socials: Social[]
 }
 
 export interface Link {
-  label: string;
-  href: string;
+  label: string
+  href: string
 }
 
 export interface Social {
-  icon: string;
-  href: string;
+  icon: string
+  href: string
 }
 
 export interface BrandsData {
-  title: string;
-  description: string;
-  brands: Brand[];
+  title: string
+  description: string
+  brands: Brand[]
 }
 
 export interface Brand {
-  label: string;
-  icon: string;
-  href: string;
+  label: string
+  icon: string
+  href: string
 }
 
 export interface PricingData {
-  title: string;
-  tiers: Tier[];
+  title: string
+  tiers: Tier[]
 }
 
 export interface Tier {
-  title: string;
-  description: string;
-  price: Price;
-  features: string[];
-  cta: string;
+  title: string
+  description: string
+  price: Price
+  features: string[]
+  cta: string
 }
 
 export interface Price {
-  amount: string;
-  period?: string;
+  amount: string
+  period?: string
 }
 
 export interface Meta {
-  title: string;
-  description: string;
-  lang: string;
-  charset: string;
+  title: string
+  description: string
+  lang: string
+  charset: string
 }
 
 export type Icon =
-  | "DevIcon"
-  | "FileIcon"
-  | "PlanetIcon"
-  | "ConfigIcon"
-  | "CheckIcon"
-  | "InstagramIcon"
-  | "GithubIcon"
-  | "TwitterIcon"
-  | "FacebookIcon"
-  | "ReactIcon"
-  | "SvelteIcon"
-  | "SolidIcon"
-  | "VueIcon"
-  | "VercelIcon"
-  | "NetlifyIcon";
+  | 'DevIcon'
+  | 'FileIcon'
+  | 'PlanetIcon'
+  | 'ConfigIcon'
+  | 'CheckIcon'
+  | 'InstagramIcon'
+  | 'GithubIcon'
+  | 'TwitterIcon'
+  | 'FacebookIcon'
+  | 'ReactIcon'
+  | 'SvelteIcon'
+  | 'SolidIcon'
+  | 'VueIcon'
+  | 'VercelIcon'
+  | 'NetlifyIcon'

@@ -1,15 +1,15 @@
 ---
-import Icon from "@/components/Icon.astro";
-import IconWrapper from "@/components/IconWrapper.astro";
-import { ASSET_PREFIX } from "@/config/constants";
-import type { Adventaje } from "@/config/landing.interface";
+import Icon from '@/components/Icon.astro'
+import IconWrapper from '@/components/IconWrapper.astro'
+import { ASSET_PREFIX } from '@/config/constants'
+import type { Adventaje } from '@/config/landing.interface'
 
 interface Props {
-  data: Adventaje;
-  reversed: boolean;
+  data: Adventaje
+  reversed: boolean
 }
 
-const { data, reversed } = Astro.props;
+const { data, reversed } = Astro.props
 ---
 
 <article

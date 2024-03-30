@@ -1,24 +1,22 @@
 ---
-import Action from "@/components/Action.astro";
-import Card from "@/components/Card.astro";
-import Icon from "@/components/Icon.astro";
-import SectionTitle from "@/components/SectionTitle.astro";
-import type { PricingData } from "@/config/landing.interface";
+import Action from '@/components/Action.astro'
+import Card from '@/components/Card.astro'
+import Icon from '@/components/Icon.astro'
+import SectionTitle from '@/components/SectionTitle.astro'
+import type { PricingData } from '@/config/landing.interface'
 
 interface Props {
-  data: PricingData;
+  data: PricingData
 }
 
-const { data } = Astro.props;
+const { data } = Astro.props
 ---
 
 <section class="mt-48">
   <SectionTitle>
     {data.title}
   </SectionTitle>
-  <div
-    class="my-20 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-y-10 place-items-center"
-  >
+  <div class="my-20 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-y-10 place-items-center">
     {
       data.tiers.map((tier) => (
         <Card>
@@ -30,9 +28,7 @@ const { data } = Astro.props;
             <h4 class="text-6xl font-semibold">
               {tier.price.amount}
               {tier.price.period && (
-                <span class="font-normal text-xl opacity-85">
-                  {tier.price.period}
-                </span>
+                <span class="font-normal text-xl opacity-85">{tier.price.period}</span>
               )}
             </h4>
           </section>
@@ -49,12 +45,7 @@ const { data } = Astro.props;
             </ul>
           </section>
           <footer class="flex justify-center">
-            <Action
-              as="a"
-              class="bg-primary text-white w-72"
-              type="button"
-              href="#"
-            >
+            <Action as="a" class="bg-primary text-white w-72" type="button" href="#">
               {tier.cta}
             </Action>
           </footer>

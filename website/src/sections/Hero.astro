@@ -1,17 +1,17 @@
 ---
-import Action from "@/components/Action.astro";
+import Action from '@/components/Action.astro'
 
 interface Props {
   data: {
-    title: string;
-    subTitle: string;
-    primaryCta: string;
-    secondaryCta: string;
-    highlightedTitle?: string;
-  };
+    title: string
+    subTitle: string
+    primaryCta: string
+    secondaryCta: string
+    highlightedTitle?: string
+  }
 }
 
-const { data } = Astro.props;
+const { data } = Astro.props
 ---
 
 <section id="hero-section" class="flex justify-center mt-48 h-screen">

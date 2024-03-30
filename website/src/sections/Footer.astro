@@ -1,18 +1,16 @@
 ---
-import Action from "@/components/Action.astro";
-import Icon from "@/components/Icon.astro";
-import type { FooterData, Icon as IconType } from "@/config/landing.interface";
+import Action from '@/components/Action.astro'
+import Icon from '@/components/Icon.astro'
+import type { FooterData, Icon as IconType } from '@/config/landing.interface'
 
 interface Props {
-  data: FooterData;
+  data: FooterData
 }
 
-const { data } = Astro.props;
+const { data } = Astro.props
 ---
 
-<footer
-  class="flex flex-col justify-center text-center gap-y-8 pt-8 bg-black text-white w-full"
->
+<footer class="flex flex-col justify-center text-center gap-y-8 pt-8 bg-black text-white w-full">
   <section>
     <Action as="a" type="text" class="text-xl md:text-2xl" href="/">
       {data.logo}
@@ -23,9 +21,7 @@ const { data } = Astro.props;
       {data.description}
     </p>
   </section>
-  <section
-    class="flex flex-row flex-wrap justify-center gap-x-3 px-4 md:px-0 md:text-xl"
-  >
+  <section class="flex flex-row flex-wrap justify-center gap-x-3 px-4 md:px-0 md:text-xl">
     {
       data.links.map((link) => (
         <Action as="a" type="text" href={link.href}>

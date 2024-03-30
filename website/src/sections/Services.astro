@@ -1,17 +1,14 @@
 ---
-import Icon from "@/components/Icon.astro";
-import IconWrapper from "@/components/IconWrapper.astro";
-import SectionTitle from "@/components/SectionTitle.astro";
-import type {
-  Icon as IconType,
-  ServicesData,
-} from "@/config/landing.interface";
+import Icon from '@/components/Icon.astro'
+import IconWrapper from '@/components/IconWrapper.astro'
+import SectionTitle from '@/components/SectionTitle.astro'
+import type { Icon as IconType, ServicesData } from '@/config/landing.interface'
 
 interface Props {
-  data: ServicesData;
+  data: ServicesData
 }
 
-const { data } = Astro.props;
+const { data } = Astro.props
 ---
 
 <section id="services-section" class="flex flex-col mb-60 gap-y-28">
@@ -28,12 +25,8 @@ const { data } = Astro.props;
             </IconWrapper>
           </div>
           <section>
-            <h3 class="text-xl font-medium md:text-4xl mb-3">
-              {service.title}
-            </h3>
-            <p class="text-pretty opacity-90 md:text-lg">
-              {service.description}
-            </p>
+            <h3 class="text-xl font-medium md:text-4xl mb-3">{service.title}</h3>
+            <p class="text-pretty opacity-90 md:text-lg">{service.description}</p>
           </section>
         </article>
       ))

@@ -1,27 +1,27 @@
 ---
-import type { Icon } from "@/config/landing.interface";
-import CheckIcon from "@/icons/commons/CheckIcon.astro";
-import ConfigIcon from "@/icons/commons/ConfigIcon.astro";
-import DevIcon from "@/icons/commons/DevIcon.astro";
-import FileIcon from "@/icons/commons/FileIcon.astro";
-import PlanetIcon from "@/icons/commons/PlanetIcon.astro";
-import FacebookIcon from "@/icons/socials/FacebookIcon.astro";
-import GithubIcon from "@/icons/socials/GithubIcon.astro";
-import InstagramIcon from "@/icons/socials/InstagramIcon.astro";
-import TwitterIcon from "@/icons/socials/TwitterIcon.astro";
-import NetlifyIcon from "@/icons/techs/NetlifyIcon.astro";
-import ReactIcon from "@/icons/techs/ReactIcon.astro";
-import SolidIcon from "@/icons/techs/SolidIcon.astro";
-import SvelteIcon from "@/icons/techs/SvelteIcon.astro";
-import VercelIcon from "@/icons/techs/VercelIcon.astro";
-import VueIcon from "@/icons/techs/VueIcon.astro";
+import type { Icon } from '@/config/landing.interface'
+import CheckIcon from '@/icons/commons/CheckIcon.astro'
+import ConfigIcon from '@/icons/commons/ConfigIcon.astro'
+import DevIcon from '@/icons/commons/DevIcon.astro'
+import FileIcon from '@/icons/commons/FileIcon.astro'
+import PlanetIcon from '@/icons/commons/PlanetIcon.astro'
+import FacebookIcon from '@/icons/socials/FacebookIcon.astro'
+import GithubIcon from '@/icons/socials/GithubIcon.astro'
+import InstagramIcon from '@/icons/socials/InstagramIcon.astro'
+import TwitterIcon from '@/icons/socials/TwitterIcon.astro'
+import NetlifyIcon from '@/icons/techs/NetlifyIcon.astro'
+import ReactIcon from '@/icons/techs/ReactIcon.astro'
+import SolidIcon from '@/icons/techs/SolidIcon.astro'
+import SvelteIcon from '@/icons/techs/SvelteIcon.astro'
+import VercelIcon from '@/icons/techs/VercelIcon.astro'
+import VueIcon from '@/icons/techs/VueIcon.astro'
 
 interface Props {
-  icon: Icon;
-  class?: string;
+  icon: Icon
+  class?: string
 }
 
-const { icon, class: className } = Astro.props;
+const { icon, class: className } = Astro.props
 
 const icons = [
   ConfigIcon,
@@ -38,16 +38,16 @@ const icons = [
   VueIcon,
   NetlifyIcon,
   SolidIcon,
-  VercelIcon,
-];
+  VercelIcon
+]
 
-let figures: Record<string, (_props: Record<string, unknown>) => unknown> = {};
+let figures: Record<string, (_props: Record<string, unknown>) => unknown> = {}
 
 icons.map((item) => {
-  figures[item.name] = item;
-});
+  figures[item.name] = item
+})
 
-const Figure = figures[icon];
+const Figure = figures[icon]
 ---
 
 {Figure ? <Figure class:list={[className]} /> : <p>Icon not found</p>}

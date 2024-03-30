@@ -1,1 +1,1 @@
-export const ASSET_PREFIX = "/";
+export const ASSET_PREFIX = '/'

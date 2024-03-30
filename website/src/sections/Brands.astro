@@ -1,14 +1,14 @@
 ---
-import Action from "@/components/Action.astro";
-import Icon from "@/components/Icon.astro";
-import SectionTitle from "@/components/SectionTitle.astro";
-import type { BrandsData, Icon as IconType } from "@/config/landing.interface";
+import Action from '@/components/Action.astro'
+import Icon from '@/components/Icon.astro'
+import SectionTitle from '@/components/SectionTitle.astro'
+import type { BrandsData, Icon as IconType } from '@/config/landing.interface'
 
 interface Props {
-  data: BrandsData;
+  data: BrandsData
 }
 
-const { data } = Astro.props;
+const { data } = Astro.props
 ---
 
 <section
@@ -22,9 +22,7 @@ const { data } = Astro.props;
       {data.description}
     </p>
   </div>
-  <div
-    class="grid grid-cols-2 md:grid-cols-3 gap-y-8 w-full justify-items-center"
-  >
+  <div class="grid grid-cols-2 md:grid-cols-3 gap-y-8 w-full justify-items-center">
     {
       data.brands.map((brand) => (
         <div class="md:grayscale hover:grayscale-0 hover:scale-110 transition">

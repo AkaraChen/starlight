@@ -1,12 +1,12 @@
 ---
-import Action from "@/components/Action.astro";
-import type { HeaderData } from "@/config/landing.interface";
+import Action from '@/components/Action.astro'
+import type { HeaderData } from '@/config/landing.interface'
 
 interface Props {
-  data: HeaderData;
+  data: HeaderData
 }
 
-const { data } = Astro.props;
+const { data } = Astro.props
 ---
 
 <header
@@ -33,22 +33,22 @@ const { data } = Astro.props;
 </header>
 
 <script>
-  window.addEventListener("scroll", function () {
-    const navbar = document.getElementById("navbar");
-    if (!navbar) return;
+  window.addEventListener('scroll', function () {
+    const navbar = document.getElementById('navbar')
+    if (!navbar) return
 
     if (window.scrollY >= 20) {
-      navbar.classList.remove("border-b-transparent");
-      navbar.classList.remove("bg-transparent");
-      navbar.classList.add("border-b");
-      navbar.classList.add("border-b-slate-300");
-      navbar.classList.add("bg-white");
+      navbar.classList.remove('border-b-transparent')
+      navbar.classList.remove('bg-transparent')
+      navbar.classList.add('border-b')
+      navbar.classList.add('border-b-slate-300')
+      navbar.classList.add('bg-white')
     } else {
-      navbar.classList.remove("border-b");
-      navbar.classList.remove("border-b-slate-300");
-      navbar.classList.remove("bg-white");
-      navbar.classList.add("border-b-transparent");
-      navbar.classList.add("bg-transparent");
+      navbar.classList.remove('border-b')
+      navbar.classList.remove('border-b-slate-300')
+      navbar.classList.remove('bg-white')
+      navbar.classList.add('border-b-transparent')
+      navbar.classList.add('bg-transparent')
     }
-  });
+  })
 </script>
