@@ -1,0 +1,21 @@
+{
+  "name": "window-manager",
+  "packageManager": "yarn@4.1.1",
+  "dependencies": {
+    "@starlight-app/plugin-sdk": "workspace:^",
+    "active-win": "^8.2.1",
+    "lodash": "^4.17.21",
+    "node-window-manager": "^2.2.4",
+    "rxjs": "^7.8.1",
+    "win-get-exe-icon": "workspace:^"
+  },
+  "devDependencies": {
+    "tsup": "^8.0.2"
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts"
+}
