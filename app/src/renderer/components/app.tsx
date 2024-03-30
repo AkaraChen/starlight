@@ -9,6 +9,8 @@ import { AppProvider } from './context'
 import { useAtomValue } from 'jotai'
 import { commandsAtom } from '../atoms/data'
 import { callMain, sendEvent } from '../ipc'
+import { KbdLabel } from './kbd'
+import { CornerDownLeftIcon as KbdEnterIcon, CommandIcon } from 'lucide-react'
 
 function App() {
   const inputRef = useRef<HTMLInputElement>(null)
@@ -101,7 +103,22 @@ function App() {
         <div className="h-full my-2 flex flex-col overflow-x-hidden overflow-y-scroll scrollbar-none">
           {query && <CommandList />}
         </div>
-        <div className="h-16 bg-native/60"></div>
+        <div className="h-16 bg-native/60 flex p-4">
+          <KbdLabel kbd={[CommandIcon, ',']}>Settings</KbdLabel>
+          <div className="ml-auto flex items-center justify-center">
+            <KbdLabel
+              kbd={[KbdEnterIcon]}
+              onClick={() => {
+                const command = query[selected || 0]
+                if (command) {
+                  execute(command)
+                }
+              }}
+            >
+              Open Command
+            </KbdLabel>
+          </div>
+        </div>
       </div>
     </AppProvider>
   )

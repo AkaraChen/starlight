@@ -8,11 +8,12 @@ import scrollIntoView from 'scroll-into-view-if-needed'
 
 export interface CommandProps extends ICommandDto {
   active: boolean
+  onExecute?: (command: ICommandDto) => void
+  setSelected?: (index: number | null) => void
 }
 
 export const Command: FC<CommandProps> = (props) => {
-  const { active } = props
-  const { setSelected, onExecute } = useAppContext()
+  const { active, onExecute, setSelected } = props
   const isEmoji = emojiRegex().test(props.icon)
   useEffect(() => {
     if (active && ref.current) {
@@ -32,8 +33,8 @@ export const Command: FC<CommandProps> = (props) => {
       )}
       ref={ref}
       onClick={() => {
-        setSelected(null)
-        onExecute(props)
+        setSelected?.(null)
+        onExecute?.(props)
       }}
     >
       {isEmoji ? (
@@ -57,7 +58,7 @@ export const Command: FC<CommandProps> = (props) => {
 // export interface CommandListProps {}
 
 export const CommandList: FC = () => {
-  const { query, selected } = useAppContext()
+  const { query, selected, setSelected, onExecute } = useAppContext()
   return (
     <div className="flex flex-col px-3">
       {query.map((command, index) => {
@@ -66,6 +67,8 @@ export const CommandList: FC = () => {
             key={`${command.pluginId}-${command.displayName}`}
             {...command}
             active={selected === index}
+            onExecute={onExecute}
+            setSelected={setSelected}
           />
         )
       })}
