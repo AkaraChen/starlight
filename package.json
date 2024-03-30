@@ -6,16 +6,22 @@
     "build": "turbo build",
     "update": "taze -w -r",
     "prepare": "husky",
-    "dev": "turbo dev --filter '!./{plugins,website}'"
+    "dev": "turbo dev --filter '!./{plugins,website}'",
+    "lint": "eslint ."
   },
   "devDependencies": {
+    "@electron-toolkit/eslint-config-prettier": "^2.0.0",
+    "@electron-toolkit/eslint-config-ts": "^1.0.1",
     "@typescript-eslint/eslint-plugin": "^7.4.0",
     "@typescript-eslint/parser": "^7.4.0",
     "eslint": "^8.57.0",
+    "eslint-plugin-astro": "^0.33.1",
+    "eslint-plugin-react": "^7.34.1",
     "husky": "^9.0.11",
     "lint-staged": "^15.2.2",
     "pinst": "^3.0.0",
     "prettier": "^3.2.5",
+    "prettier-plugin-astro": "^0.13.0",
     "taze": "^0.13.3",
     "typescript": "^5.4.3"
   },

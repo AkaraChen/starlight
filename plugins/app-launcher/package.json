@@ -13,7 +13,7 @@
   },
   "devDependencies": {
     "@types/lodash": "^4.17.0",
-    "@types/node": "^20.11.30",
+    "@types/node": "^20.12.2",
     "tsup": "^8.0.2"
   },
   "scripts": {

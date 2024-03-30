@@ -11,4 +11,20 @@ parserOptions:
   sourceType: module
 plugins:
   - '@typescript-eslint'
-rules: {}
+overrides:
+  - files:
+      - './app/**/*'
+    extends:
+      - 'plugin:react/recommended'
+      - 'plugin:react/jsx-runtime'
+      - '@electron-toolkit/eslint-config-ts/recommended'
+      - '@electron-toolkit/eslint-config-prettier'
+    rules:
+      '@typescript-eslint/explicit-function-return-type': off
+    settings:
+      react:
+        version: detect
+  - files:
+      - './website'
+    extends:
+      - 'plugin:astro/recommended'
