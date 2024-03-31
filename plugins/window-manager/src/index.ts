@@ -9,14 +9,14 @@ const commands = new BehaviorSubject<ICommand[]>([])
 export const getActiveWindowCommands = (): Promise<ICommand[]> => {
   const windows = getOpenWindowsSync()
   const promises = windows.map(async (window) => {
+    const target = new Window(window.id)
     return {
       id: `window-manager-${window.id}`,
       displayName: window.title,
       icon: await extractIcon(window.owner.path),
       description: `Focus on ${window.owner.name}`,
       handler() {
-        const target = new Window(window.id)
-        if (!target.isWindow()) {
+         if (!target.isWindow()) {
           console.error('Window not found')
         }
         // Is there any better way to check if the window is minimized?
