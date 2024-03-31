@@ -6,6 +6,25 @@ import { extractIcon } from 'win-get-exe-icon'
 
 const commands = new BehaviorSubject<ICommand[]>([])
 
+const baseCommands: ICommand[] = [
+  {
+    id: 'window-manager-hide-all',
+    displayName: 'Hide all windows',
+    icon: '🙈',
+    description: 'Hide all windows',
+    handler() {
+      getOpenWindowsSync().forEach((window) => {
+        const target = new Window(window.id)
+        target.minimize()
+      })
+    }
+  }
+]
+
+const next = (newCommands: ICommand[]) => {
+  commands.next([...baseCommands, ...newCommands])
+}
+
 export const getActiveWindowCommands = (): Promise<ICommand[]> => {
   const windows = getOpenWindowsSync()
   const promises = windows.map(async (window) => {
@@ -49,7 +68,7 @@ const WindowManagerPlugin = new PluginBuilder()
     activate() {
       windowManager.on('window-activated', () => {
         getActiveWindowCommands().then((newCommands) => {
-          commands.next(newCommands)
+          next(newCommands)
         })
       })
     }
