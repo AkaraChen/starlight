@@ -77,14 +77,19 @@ export class PluginManager {
       )
     }
     this.plugins.push(transformed)
-    plugin.lifecycle?.activate?.()
+    transformed.lifecycle?.activate?.()
     debug('plugin registered', plugin.metaData.name)
     sendEvent(ServerEvent.PLUGIN_REGISTER)
   }
 
   unregister(plugin: IPlugin): void {
     debug('unregister plugin', plugin.metaData.name)
-    plugin.lifecycle?.deactivate?.()
+    const transformed = this.plugins.find((p) => p.metaData.name === plugin.metaData.name)
+    if (!transformed) {
+      debug('plugin not found', plugin.metaData.name)
+      return
+    }
+    transformed.lifecycle?.deactivate?.()
     this.plugins = this.plugins.filter((p) => p.id !== plugin.metaData.name)
 
     this.commands.next(this.commands.value.filter((c) => c.pluginId !== plugin.metaData.name))
