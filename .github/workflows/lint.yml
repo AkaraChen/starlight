@@ -13,7 +13,7 @@ jobs:
         with:
           node-version: '21'
       - run: corepack enable
-      - run: yarn install
+      - run: yarn workspace focus starlight
       - run: yarn lint --fix
       - run: yarn format
       - run: yarn syncpack format
