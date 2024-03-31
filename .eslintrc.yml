@@ -23,7 +23,7 @@ overrides:
       '@typescript-eslint/explicit-function-return-type': off
     settings:
       react:
-        version: detect
+        version: '18.2'
   - files:
       - './website'
     extends:
