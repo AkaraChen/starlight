@@ -1,6 +1,5 @@
 {
   "name": "window-manager",
-  "packageManager": "yarn@4.1.1",
   "dependencies": {
     "@starlight-app/plugin-sdk": "workspace:^",
     "active-win": "^8.2.1",
@@ -12,10 +11,11 @@
   "devDependencies": {
     "tsup": "^8.0.2"
   },
+  "main": "dist/index.js",
+  "packageManager": "yarn@4.1.1",
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch"
   },
-  "main": "dist/index.js",
   "types": "dist/index.d.ts"
 }
