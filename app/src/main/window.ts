@@ -3,6 +3,7 @@ import { BrowserWindow, shell, globalShortcut, ipcMain } from 'electron'
 import { join } from 'path'
 import createDebug from 'debug'
 import { ClientEvent } from '../constants/ipc'
+import { PluginManager } from './plugin'
 
 const debug = createDebug('starlight:window')
 
@@ -64,6 +65,11 @@ export function createWindow(): void {
     debug('toggle window')
     mainWindow.show()
     mainWindow.focus()
+  })
+
+  mainWindow.on('show', () => {
+    debug('show window')
+    PluginManager.onFocus()
   })
 
   if (!is.dev) {

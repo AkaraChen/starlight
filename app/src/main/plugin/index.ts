@@ -144,4 +144,8 @@ export class PluginManager {
       command.handler()
     })
   }
+
+  static onFocus() {
+    this.instance.plugins.forEach((p) => p.lifecycle?.focus?.())
+  }
 }

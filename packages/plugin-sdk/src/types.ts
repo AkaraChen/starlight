@@ -20,7 +20,7 @@ export interface ILifecycle {
   deactivate?: () => void
   update?: (oldVersion: string, newVersion: string) => void
   error?: (error: Error) => void
-  beforeShow?: () => void
+  focus?: () => void
 }
 
 export interface ICommand {
