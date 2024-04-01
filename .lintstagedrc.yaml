@@ -1,6 +1,6 @@
 '*.{ts,tsx,js,jsx,astro}':
   - 'eslint --fix'
-  - 'prettier --write'
+  - 'biome format --write'
 
 '*.{json,md,yml,yaml}':
-  - 'prettier --write'
+  - 'biome format --write'

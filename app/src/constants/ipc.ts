@@ -5,7 +5,7 @@ export enum ServerEvent {
   PLUGIN_UNREGISTER = 'plugin-unregister',
 
   COMMAND_UPDATE = 'command-update',
-  VIEW_UPDATE = 'view-update'
+  VIEW_UPDATE = 'view-update',
 }
 
 export enum ClientEvent {
@@ -13,13 +13,13 @@ export enum ClientEvent {
   HIDE = 'hide',
   BLUR = 'blur',
   FOCUS = 'focus',
-  SHOW = 'show'
+  SHOW = 'show',
 }
 
 export enum IpcRequestEventName {
   GET_COMMANDS = 'get-commands',
   GET_VIEWS = 'get-views',
-  EXECUTE_COMMAND = 'execute-command'
+  EXECUTE_COMMAND = 'execute-command',
 }
 
 export type IpcRequestPayload = {

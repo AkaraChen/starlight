@@ -6,7 +6,7 @@ const metaData: IMetaData = {
   name: 'Hello World',
   version: '1.0.0',
   description: 'A simple plugin that says hello world',
-  icon: '🌍'
+  icon: '🌍',
 }
 
 const lifecycle: ILifecycle = {}
@@ -19,8 +19,8 @@ const commands: ICommand[] = [
     handler: () => {
       console.log('Hello World')
     },
-    icon: path.join(__dirname, '..', 'assets', 'extension_icon.svg')
-  }
+    icon: path.join(__dirname, '..', 'assets', 'extension_icon.svg'),
+  },
 ]
 
 const HelloWorld = new PluginBuilder()

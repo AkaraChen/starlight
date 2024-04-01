@@ -5,7 +5,7 @@ import {
   ITransformedPlugin,
   ITransformedView,
   getICommandDto,
-  transformPlugin
+  transformPlugin,
 } from '@starlight/plugin-utils'
 import { IpcRequestEventName, ServerEvent } from '../../constants/ipc'
 import { BehaviorSubject, Subscription } from 'rxjs'
@@ -64,10 +64,10 @@ export class PluginManager {
           transformed.commands.subscribe((commands) => {
             this.commands.next([
               ...this.commands.value.filter((c) => c.pluginId !== transformed.id),
-              ...commands
+              ...commands,
             ])
             sendEvent(ServerEvent.COMMAND_UPDATE)
-          })
+          }),
         )
       }
     }
@@ -135,7 +135,7 @@ export class PluginManager {
       const [pluginId, commandId] = payload
       debug('execute command', pluginId, commandId)
       const command = this.instance.commands.value.find(
-        (c) => c.pluginId === pluginId && c.id === commandId
+        (c) => c.pluginId === pluginId && c.id === commandId,
       )
       if (!command) {
         debug('command not found', pluginId, commandId)

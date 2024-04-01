@@ -17,8 +17,8 @@ const baseCommands: ICommand[] = [
         const target = new Window(window.id)
         target.minimize()
       })
-    }
-  }
+    },
+  },
 ]
 
 const next = (newCommands: ICommand[]) => {
@@ -45,7 +45,7 @@ export const getActiveWindowCommands = (): Promise<ICommand[]> => {
         }
         target.bringToTop()
         console.log(`Focus on ${window.owner.name}`)
-      }
+      },
     }
   })
   return Promise.all(promises)
@@ -61,8 +61,8 @@ const WindowManagerPlugin = new PluginBuilder()
     support: {
       windows: true,
       macos: false,
-      linux: false
-    }
+      linux: false,
+    },
   })
   .lifecycle({
     activate() {
@@ -71,7 +71,7 @@ const WindowManagerPlugin = new PluginBuilder()
           next(newCommands)
         })
       })
-    }
+    },
   })
   .commands(commands)
   .build()

@@ -28,7 +28,7 @@ export class Core {
       const watcher = chokidar.watch(dir, {
         persistent: true,
         ignoreInitial: false,
-        depth: resursive ? undefined : 0
+        depth: resursive ? undefined : 0,
       })
       watcher.on('add', async (path) => {
         const info = await opts.getInfo(path)

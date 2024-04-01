@@ -10,7 +10,7 @@ export const getWindowsCore = async () => {
   const core = new Core({
     dirs: Object.entries(windowsDirs).map(([, dir]) => ({
       dir,
-      resursive: true
+      resursive: true,
     })),
     exts: ['.exe', '.lnk'],
     async getInfo(file) {
@@ -23,9 +23,9 @@ export const getWindowsCore = async () => {
       return {
         name: path.basename(file, path.extname(file)),
         path: realPath,
-        icon
+        icon,
       }
-    }
+    },
   })
   return core
 }

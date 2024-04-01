@@ -6,9 +6,9 @@ const api = {
   sendNotification: (title: string, body: string) => {
     new Notification({
       title,
-      body
+      body,
     }).show()
-  }
+  },
 }
 
 export type API = typeof api

@@ -7,5 +7,5 @@ import robotsTxt from 'astro-robots-txt'
 // https://astro.build/config
 export default defineConfig({
   site: import.meta.env.DEV ? 'http://localhost:4321' : 'https://starlight-website.vercel.app',
-  integrations: [tailwind(), sitemap(), robotsTxt()]
+  integrations: [tailwind(), sitemap(), robotsTxt()],
 })

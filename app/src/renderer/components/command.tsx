@@ -20,7 +20,7 @@ export const Command: FC<CommandProps> = (props) => {
       scrollIntoView(ref.current, {
         scrollMode: 'if-needed',
         block: 'nearest',
-        inline: 'nearest'
+        inline: 'nearest',
       })
     }
   }, [active])
@@ -29,7 +29,7 @@ export const Command: FC<CommandProps> = (props) => {
     <div
       className={clsx(
         'flex items-center justify-center px-3 py-2 hover:bg-black/5 rounded select-none',
-        active && 'bg-black/5'
+        active && 'bg-black/5',
       )}
       ref={ref}
       onClick={() => {

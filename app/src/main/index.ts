@@ -28,7 +28,7 @@ if (!is.dev) {
   debug('set login item settings')
   app.setLoginItemSettings({
     openAsHidden: true,
-    openAtLogin: true
+    openAtLogin: true,
   })
 }
 

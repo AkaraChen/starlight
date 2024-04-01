@@ -18,8 +18,8 @@ const AppLauncher = new PluginBuilder()
     support: {
       windows: true,
       macos: false,
-      linux: false
-    }
+      linux: false,
+    },
   })
   .lifecycle({
     activate() {
@@ -34,15 +34,15 @@ const AppLauncher = new PluginBuilder()
               icon: e.icon,
               handler() {
                 shell.openPath(e.path)
-              }
-            }))
+              },
+            })),
           )
         })
       })
     },
     deactivate() {
       core?.onDispose()
-    }
+    },
   })
   .commands(commands)
   .build()

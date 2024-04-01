@@ -18,13 +18,12 @@ overrides:
       - 'plugin:react/recommended'
       - 'plugin:react/jsx-runtime'
       - '@electron-toolkit/eslint-config-ts/recommended'
-      - '@electron-toolkit/eslint-config-prettier'
     rules:
       '@typescript-eslint/explicit-function-return-type': off
     settings:
       react:
         version: '18.2'
   - files:
-      - './website'
+      - './website/**/*.astro'
     extends:
       - 'plugin:astro/recommended'

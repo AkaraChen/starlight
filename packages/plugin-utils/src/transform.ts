@@ -64,7 +64,7 @@ const transformMetaData = (metaData: IMetaData): ITransformedMetaData => {
   const support = isSupported()
   return {
     ...metaData,
-    support
+    support,
   }
 }
 
@@ -90,7 +90,7 @@ const transformCommand = (plugin: IPlugin, command: ICommand): ITranformedComman
     pluginId: plugin.metaData.id,
     handler: () => callWithErrorHandling(plugin, () => command.handler()),
     icon: command?.icon ? transformIcon(command.icon) : plugin.metaData.icon,
-    runImediately: command.runImediately ?? true
+    runImediately: command.runImediately ?? true,
   }
 }
 
@@ -98,7 +98,7 @@ const transformView = (plugin: IPlugin, view: IView): ITransformedView => {
   return {
     ...view,
     pluginId: plugin.metaData.id,
-    icon: view?.icon ? transformIcon(view.icon) : plugin.metaData.icon
+    icon: view?.icon ? transformIcon(view.icon) : plugin.metaData.icon,
   }
 }
 
@@ -127,7 +127,7 @@ export function transformPlugin(plugin: IPlugin): ITransformedPlugin {
     return plugin.commands.pipe(
       map((project) => {
         return project.map((command) => transformCommand(plugin, command))
-      })
+      }),
     )
   }
   return {
@@ -135,13 +135,13 @@ export function transformPlugin(plugin: IPlugin): ITransformedPlugin {
     metaData: transformMetaData(plugin.metaData),
     lifecycle: transformLifecycle(plugin),
     commands: getCommands(),
-    views: plugin.views?.map((view) => transformView(plugin, view))
+    views: plugin.views?.map((view) => transformView(plugin, view)),
   }
 }
 
 export const getICommandDto = (command: ITranformedCommand): ICommandDto => {
   return {
     ...command,
-    handler: undefined
+    handler: undefined,
   }
 }

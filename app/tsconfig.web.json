@@ -5,12 +5,12 @@
     "./src/renderer/**/*",
     "./src/renderer/**/*.tsx",
     "./src/preload/*.d.ts",
-    "./src/constants/**/*",
+    "./src/constants/**/*"
   ],
   "compilerOptions": {
     "composite": true,
     "jsx": "react-jsx",
     "baseUrl": ".",
     "noEmit": true
-  },
+  }
 }

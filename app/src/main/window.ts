@@ -21,10 +21,10 @@ export function createWindow(): void {
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
       sandbox: false,
-      webSecurity: false
+      webSecurity: false,
     },
     backgroundMaterial: 'acrylic',
-    frame: false
+    frame: false,
   })
 
   mainWindow.on('ready-to-show', () => {
@@ -46,12 +46,12 @@ export function createWindow(): void {
     const keymap = {
       dev: {
         unix: 'Cmd+Z',
-        win32: 'Alt+Z'
+        win32: 'Alt+Z',
       },
       prod: {
         unix: 'Command+Space',
-        win32: 'Alt+Space'
-      }
+        win32: 'Alt+Space',
+      },
     }
 
     if (process.platform === 'darwin') {

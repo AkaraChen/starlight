@@ -13,9 +13,9 @@ export default defineConfig({
         items: [
           {
             text: 'Get Started',
-            link: '/user/get-started'
-          }
-        ]
+            link: '/user/get-started',
+          },
+        ],
       },
       {
         text: 'Developer',
@@ -23,25 +23,25 @@ export default defineConfig({
         items: [
           {
             text: 'Get Started',
-            link: '/developer/get-started'
+            link: '/developer/get-started',
           },
           {
             text: 'Concepts',
-            link: '/developer/concepts'
+            link: '/developer/concepts',
           },
           {
             text: 'Life Cycle',
-            link: '/developer/life-cycle'
+            link: '/developer/life-cycle',
           },
           {
             text: 'Commands',
-            link: '/developer/commands'
+            link: '/developer/commands',
           },
           {
             text: 'Views',
-            link: '/developer/views'
-          }
-        ]
+            link: '/developer/views',
+          },
+        ],
       },
       {
         text: 'Maintainer',
@@ -49,15 +49,15 @@ export default defineConfig({
         items: [
           {
             text: 'Get Started',
-            link: '/maintainer/get-started'
-          }
-        ]
-      }
+            link: '/maintainer/get-started',
+          },
+        ],
+      },
     ],
 
     socialLinks: [{ icon: 'github', link: 'https://github.com/vuejs/vitepress' }],
     search: {
-      provider: 'local'
-    }
-  }
+      provider: 'local',
+    },
+  },
 })

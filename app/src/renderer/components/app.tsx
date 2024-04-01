@@ -25,7 +25,7 @@ function App() {
     if (!commands) return []
     if (!search) return commands
     const fuse = new Fuse(commands, {
-      keys: ['displayName', 'description']
+      keys: ['displayName', 'description'],
     })
     return fuse.search(search).map((r) => r.item)
   }, [commands, search])
@@ -82,7 +82,7 @@ function App() {
         setSelected,
         onExecute: execute,
         comands: commands || [],
-        query
+        query,
       }}
     >
       <div className={clsx('flex flex-col w-screen h-screen', 'bg-native/75')}>

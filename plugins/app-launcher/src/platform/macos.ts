@@ -6,8 +6,8 @@ export const getMacOsCore = async () => {
     dirs: [
       {
         dir: path.join('/Applications'),
-        resursive: true
-      }
+        resursive: true,
+      },
     ],
     exts: ['.app'],
     async getInfo(file) {
@@ -15,8 +15,8 @@ export const getMacOsCore = async () => {
       return {
         name,
         path: file,
-        icon: path.join(file, 'Contents', 'Resources', 'AppIcon.icns')
+        icon: path.join(file, 'Contents', 'Resources', 'AppIcon.icns'),
       }
-    }
+    },
   })
 }

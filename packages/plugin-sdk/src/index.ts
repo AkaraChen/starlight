@@ -37,7 +37,7 @@ export class PluginBuilder {
       commands: this._commands,
       views: this._views,
       lifecycle: this._lifecycle,
-      search: this._search
+      search: this._search,
     }
   }
 }
