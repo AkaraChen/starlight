@@ -1,6 +1,6 @@
 import { BehaviorSubject } from 'rxjs'
 import chokidar from 'chokidar'
-import { uniqBy } from 'lodash'
+import { unique } from 'radash'
 
 export interface SearchDir {
   dir: string
@@ -17,10 +17,6 @@ export interface Execlutable {
   name: string
   path: string
   icon: string
-}
-
-const dedupe = (arr: Execlutable[]) => {
-  return uniqBy(arr, (e) => e.name + e.path)
 }
 
 export class Core {
@@ -56,6 +52,6 @@ export class Core {
   subject = new BehaviorSubject<Execlutable[]>([])
 
   next(...values: Execlutable[]) {
-    this.subject.next(dedupe(values))
+    this.subject.next(unique(values, (e) => e.path))
   }
 }

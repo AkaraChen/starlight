@@ -6,13 +6,12 @@
     "chokidar": "^3.6.0",
     "electron": "29.1.6",
     "icon-extractor": "^1.0.3",
-    "lodash": "^4.17.21",
+    "radash": "^12.1.0",
     "rxjs": "^7.8.1",
     "win-dirs": "workspace:^",
     "win-get-exe-icon": "workspace:^"
   },
   "devDependencies": {
-    "@types/lodash": "^4.17.0",
     "@types/node": "^20.12.2",
     "tsup": "^8.0.2"
   },
