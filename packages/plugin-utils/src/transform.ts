@@ -2,7 +2,7 @@ import { ICommand, ILifecycle, IPlugin, IView, MaybeObservable } from '@starligh
 import { map } from 'rxjs'
 import emojiRegex from 'emoji-regex'
 import fs from 'fs'
-import mime from 'mime-types'
+import mime from 'mime'
 import { IMetaData } from '@starlight-app/plugin-sdk'
 import { ICommandDto } from './dto'
 
@@ -112,7 +112,7 @@ const transformIcon = (icon: string): string => {
   }
   const file = fs.readFileSync(icon)
   const base64 = Buffer.from(file).toString('base64')
-  const mimeType = mime.lookup(icon)
+  const mimeType = mime.getType(icon)
   if (!mimeType) throw new Error('Invalid mime type')
   return `data:${mimeType};base64,${base64}`
 }
