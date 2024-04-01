@@ -25,7 +25,7 @@ export interface ITransformedPlugin extends IPlugin {
   id: string
   metaData: ITransformedMetaData
   commands?: MaybeObservable<ITranformedCommand[]>
-  views?: MaybeObservable<ITransformedView[]>
+  views?: ITransformedView[]
 }
 
 const callWithErrorHandling = (plugin: IPlugin, callback: () => void): void => {
@@ -130,23 +130,12 @@ export function transformPlugin(plugin: IPlugin): ITransformedPlugin {
       })
     )
   }
-  const getViews = () => {
-    if (!plugin.views) return []
-    if (plugin.views instanceof Array) {
-      return plugin.views.map((view) => transformView(plugin, view))
-    }
-    return plugin.views.pipe(
-      map((project) => {
-        return project.map((view) => transformView(plugin, view))
-      })
-    )
-  }
   return {
     id: plugin.metaData.id,
     metaData: transformMetaData(plugin.metaData),
     lifecycle: transformLifecycle(plugin),
     commands: getCommands(),
-    views: getViews()
+    views: plugin.views?.map((view) => transformView(plugin, view))
   }
 }
 

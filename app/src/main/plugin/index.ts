@@ -1,4 +1,4 @@
-import { IPlugin, MaybeObservable } from '@starlight-app/plugin-sdk'
+import { IPlugin } from '@starlight-app/plugin-sdk'
 import {
   ICommandDto,
   ITranformedCommand,
@@ -15,66 +15,64 @@ import { answerEvent, sendEvent } from '../ipc'
 
 const debug = createDebug('starlight:plugin-manager')
 
+class SubscriptionManager {
+  private map = new Map<string, Subscription>()
+
+  add(key: string, sub: Subscription) {
+    this.map.set(key, sub)
+  }
+
+  remove(key: string) {
+    const sub = this.map.get(key)
+    if (sub) {
+      sub.unsubscribe()
+    }
+    this.map.delete(key)
+  }
+
+  dispose() {
+    const arr = Array.from(this.map.values())
+    arr.forEach((sub) => sub.unsubscribe())
+  }
+}
+
 export class PluginManager {
   plugins: ITransformedPlugin[] = []
   commands = new BehaviorSubject<ITranformedCommand[]>([])
-  views = new BehaviorSubject<ITransformedView[]>([])
+  views: ITransformedView[] = []
 
   constructor() {
-    this.loadBuildIn()
+    this.loadBuildInPlugin()
   }
 
-  commandSubcribeMap = new Map<string, Subscription>()
-  viewsSubcribeMap = new Map<string, Subscription>()
-
-  handleArrayOrObservable<T extends ITranformedCommand | ITransformedView>(
-    transformed: ITransformedPlugin,
-    arrayOrObservable: MaybeObservable<T[]>,
-    subject: BehaviorSubject<T[]>,
-    subscribeMap: Map<string, Subscription>,
-    type: 'command' | 'view'
-  ) {
-    const event = type === 'command' ? ServerEvent.COMMAND_UPDATE : ServerEvent.VIEW_UPDATE
-    if (Array.isArray(arrayOrObservable)) {
-      subject.next([...subject.value, ...arrayOrObservable])
-      sendEvent(event)
-    } else {
-      debug('subscribe', transformed.id)
-      const sub = arrayOrObservable.subscribe((items) => {
-        subject.next([
-          ...items,
-          ...subject.value.filter((item) => item.pluginId !== transformed.id)
-        ])
-        sendEvent(event)
-      })
-      subscribeMap.set(transformed.id, sub)
-    }
-  }
+  subManager = new SubscriptionManager()
 
   resister(plugin: IPlugin): void {
     debug('register plugin', plugin.metaData.name)
     const transformed = transformPlugin(plugin)
     if (!transformed.metaData.support) {
-      debug('plugin not supported', plugin.metaData.name, transformed.metaData.support)
+      debug('plugin not supported', plugin.metaData.name)
       return
     }
     if (transformed.commands) {
-      this.handleArrayOrObservable<ITranformedCommand>(
-        transformed,
-        transformed.commands,
-        this.commands,
-        this.commandSubcribeMap,
-        'command'
-      )
+      if (Array.isArray(transformed.commands)) {
+        this.commands.next([...this.commands.value, ...transformed.commands])
+        sendEvent(ServerEvent.COMMAND_UPDATE)
+      } else {
+        this.subManager.add(
+          transformed.id,
+          transformed.commands.subscribe((commands) => {
+            this.commands.next([
+              ...this.commands.value.filter((c) => c.pluginId !== transformed.id),
+              ...commands
+            ])
+            sendEvent(ServerEvent.COMMAND_UPDATE)
+          })
+        )
+      }
     }
     if (transformed.views) {
-      this.handleArrayOrObservable<ITransformedView>(
-        transformed,
-        transformed.views,
-        this.views,
-        this.viewsSubcribeMap,
-        'view'
-      )
+      this.views.push(...transformed.views)
     }
     this.plugins.push(transformed)
     transformed.lifecycle?.activate?.()
@@ -93,16 +91,15 @@ export class PluginManager {
     this.plugins = this.plugins.filter((p) => p.id !== plugin.metaData.name)
 
     this.commands.next(this.commands.value.filter((c) => c.pluginId !== plugin.metaData.name))
-    this.commandSubcribeMap.get(plugin.metaData.name)?.unsubscribe()
+    this.subManager.remove(plugin.metaData.name)
 
-    this.views.next(this.views.value.filter((v) => v.pluginId !== plugin.metaData.name))
-    this.viewsSubcribeMap.get(plugin.metaData.name)?.unsubscribe()
+    this.views = this.views.filter((v) => v.pluginId !== plugin.metaData.name)
 
     debug('plugin unregistered', plugin.metaData.name)
     sendEvent(ServerEvent.PLUGIN_REGISTER)
   }
 
-  loadBuildIn() {
+  loadBuildInPlugin() {
     debug('load build-in plugins')
     buildInPlugins.forEach((plugin) => this.resister(plugin))
   }
@@ -122,13 +119,16 @@ export class PluginManager {
   static init(): void {
     debug('init PluginManager')
     this.instance = new PluginManager()
+    this.listen()
+  }
 
+  static listen(): void {
     answerEvent(IpcRequestEventName.GET_COMMANDS, () => {
       return this.instance.commands.value.map(getICommandDto) as ICommandDto[]
     })
 
     answerEvent(IpcRequestEventName.GET_VIEWS, () => {
-      return this.instance.views.value
+      return this.instance.views
     })
 
     answerEvent(IpcRequestEventName.EXECUTE_COMMAND, (payload) => {

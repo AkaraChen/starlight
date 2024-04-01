@@ -48,6 +48,6 @@ export interface IPlugin {
   metaData: IMetaData
   lifecycle?: ILifecycle
   commands?: MaybeObservable<ICommand[]>
-  views?: MaybeObservable<IView[]>
+  views?: IView[]
   search?: SearchFunction
 }
