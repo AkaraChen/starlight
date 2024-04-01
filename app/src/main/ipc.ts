@@ -7,7 +7,7 @@ export const sendEvent = (event: ServerEvent) => {
 }
 
 export const answerEvent = <T extends IpcRequestEventName>(
-  eventName: IpcRequestEventName,
+  eventName: T,
   anwser: (payload: IpcRequestPayload[T]) => IpcResponse[T]
 ) => {
   ipcMain.on(eventName, (event, payload) => {
