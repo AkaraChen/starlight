@@ -25,5 +25,12 @@
     "prepare": "husky",
     "update": "taze -w -r"
   },
-  "workspaces": ["./packages/**", "./crates/**", "./website", "./app", "./docs", "./plugins/*"]
+  "workspaces": [
+    "./packages/**",
+    "./crates/**",
+    "./website",
+    "./app",
+    "./docs",
+    "./plugins/*"
+  ]
 }
