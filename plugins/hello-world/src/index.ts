@@ -1,5 +1,10 @@
-import { ICommand, ILifecycle, IMetaData, PluginBuilder } from '@starlight-app/plugin-sdk'
-import path from 'path'
+import path from 'node:path'
+import {
+  type ICommand,
+  type ILifecycle,
+  type IMetaData,
+  PluginBuilder,
+} from '@starlight-app/plugin-sdk'
 
 const metaData: IMetaData = {
   id: 'hello-world',

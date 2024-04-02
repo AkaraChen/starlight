@@ -5,10 +5,18 @@ env:
 extends:
   - eslint:recommended
   - plugin:@typescript-eslint/recommended
+  - plugin:unicorn/recommended
 parser: '@typescript-eslint/parser'
 parserOptions:
   ecmaVersion: latest
   sourceType: module
+rules:
+  unicorn/prevent-abbreviations: off
+  unicorn/prefer-top-level-await: off
+  unicorn/prefer-module: off
+  unicorn/no-array-callback-reference: off
+  unicorn/no-null: off
+  unicorn/filename-case: off
 plugins:
   - '@typescript-eslint'
 overrides:
@@ -24,6 +32,12 @@ overrides:
       react:
         version: '18.2'
   - files:
-      - './website/**/*.astro'
+      - '**/*.astro'
     extends:
       - 'plugin:astro/recommended'
+    rules:
+      '@typescript-eslint/no-unused-vars': off
+  - files:
+      - '**/*.config.{js,ts,mjs,cjs}'
+    rules:
+      'unicorn/prefer-module': off

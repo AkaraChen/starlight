@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs'
+import type { Observable } from 'rxjs'
 
 export interface ISupport {
   windows: boolean
@@ -35,12 +35,15 @@ export interface ICommand {
 export interface IView {
   id: string
   displayName: string
-  component: React.JSX.Element
+  component: () => void
   searchable?: boolean
   icon?: string
 }
 
-export type SearchFunction = (query: string, abortSignal: AbortSignal) => Promise<ICommand[]>
+export type SearchFunction = (
+  query: string,
+  abortSignal: AbortSignal,
+) => Promise<ICommand[]>
 
 export type MaybeObservable<T> = T | Observable<T>
 

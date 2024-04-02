@@ -1,17 +1,17 @@
-import { IPlugin } from '@starlight-app/plugin-sdk'
+import type { IPlugin } from '@starlight-app/plugin-sdk'
 import {
-  ICommandDto,
-  ITranformedCommand,
-  ITransformedPlugin,
-  ITransformedView,
+  type ICommandDto,
+  type ITranformedCommand,
+  type ITransformedPlugin,
+  type ITransformedView,
   getICommandDto,
   transformPlugin,
 } from '@starlight/plugin-utils'
-import { IpcRequestEventName, ServerEvent } from '../../constants/ipc'
-import { BehaviorSubject, Subscription } from 'rxjs'
-import { buildInPlugins } from './load'
 import createDebug from 'debug'
+import { BehaviorSubject, type Subscription } from 'rxjs'
+import { IpcRequestEventName, ServerEvent } from '../../constants/ipc'
 import { answerEvent, sendEvent } from '../ipc'
+import { buildInPlugins } from './load'
 
 const debug = createDebug('starlight:plugin-manager')
 
@@ -31,8 +31,8 @@ class SubscriptionManager {
   }
 
   dispose() {
-    const arr = Array.from(this.map.values())
-    arr.forEach((sub) => sub.unsubscribe())
+    const array = [...this.map.values()]
+    for (const sub of array) sub.unsubscribe()
   }
 }
 
@@ -63,7 +63,9 @@ export class PluginManager {
           transformed.id,
           transformed.commands.subscribe((commands) => {
             this.commands.next([
-              ...this.commands.value.filter((c) => c.pluginId !== transformed.id),
+              ...this.commands.value.filter(
+                (c) => c.pluginId !== transformed.id,
+              ),
               ...commands,
             ])
             sendEvent(ServerEvent.COMMAND_UPDATE)
@@ -82,7 +84,9 @@ export class PluginManager {
 
   unregister(plugin: IPlugin): void {
     debug('unregister plugin', plugin.metaData.name)
-    const transformed = this.plugins.find((p) => p.metaData.name === plugin.metaData.name)
+    const transformed = this.plugins.find(
+      (p) => p.metaData.name === plugin.metaData.name,
+    )
     if (!transformed) {
       debug('plugin not found', plugin.metaData.name)
       return
@@ -90,7 +94,9 @@ export class PluginManager {
     transformed.lifecycle?.deactivate?.()
     this.plugins = this.plugins.filter((p) => p.id !== plugin.metaData.name)
 
-    this.commands.next(this.commands.value.filter((c) => c.pluginId !== plugin.metaData.name))
+    this.commands.next(
+      this.commands.value.filter((c) => c.pluginId !== plugin.metaData.name),
+    )
     this.subManager.remove(plugin.metaData.name)
 
     this.views = this.views.filter((v) => v.pluginId !== plugin.metaData.name)
@@ -101,7 +107,7 @@ export class PluginManager {
 
   loadBuildInPlugin() {
     debug('load build-in plugins')
-    buildInPlugins.forEach((plugin) => this.resister(plugin))
+    for (const plugin of buildInPlugins) this.resister(plugin)
   }
 
   // for singleton
@@ -146,6 +152,6 @@ export class PluginManager {
   }
 
   static onFocus() {
-    this.instance.plugins.forEach((p) => p.lifecycle?.focus?.())
+    for (const p of this.instance.plugins) p.lifecycle?.focus?.()
   }
 }

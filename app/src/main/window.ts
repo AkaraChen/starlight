@@ -1,7 +1,7 @@
+import { join } from 'node:path'
 import { is } from '@electron-toolkit/utils'
-import { BrowserWindow, shell, globalShortcut, ipcMain } from 'electron'
-import { join } from 'path'
 import createDebug from 'debug'
+import { BrowserWindow, globalShortcut, ipcMain, shell } from 'electron'
 import { ClientEvent } from '../constants/ipc'
 import { PluginManager } from './plugin'
 

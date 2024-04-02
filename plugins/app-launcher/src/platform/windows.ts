@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import path from 'path'
-import { Core } from '../core'
-import { getWindowsDirs } from 'win-dirs'
+import path from 'node:path'
 import { shell } from 'electron'
+import { getWindowsDirs } from 'win-dirs'
 import { extractIcon } from 'win-get-exe-icon'
+import { Core } from '../core'
 
 export const getWindowsCore = async () => {
-  const windowsDirs = await getWindowsDirs()
+  const windowsDirectories = await getWindowsDirs()
   const core = new Core({
-    dirs: Object.entries(windowsDirs).map(([, dir]) => ({
+    dirs: Object.entries(windowsDirectories).map(([, dir]) => ({
       dir,
       resursive: true,
     })),
@@ -16,9 +16,6 @@ export const getWindowsCore = async () => {
     async getInfo(file) {
       const isLnk = path.extname(file) === '.lnk'
       const realPath = isLnk ? shell.readShortcutLink(file).target : file
-      if (file.includes('Element')) {
-        console.log(file, 'file')
-      }
       const icon = await extractIcon(realPath)
       return {
         name: path.basename(file, path.extname(file)),

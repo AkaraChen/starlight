@@ -32,7 +32,9 @@ function _extractIcon(path: string): Promise<string> {
 }
 
 export async function extractIcon(path: string): Promise<string> {
-  const nativeIcon = await app.getFileIcon(path, { size: 'large' }).then((icon) => icon.toDataURL())
+  const nativeIcon = await app
+    .getFileIcon(path, { size: 'large' })
+    .then((icon) => icon.toDataURL())
   const icon = nativeIcon === emptyImage ? await _extractIcon(path) : nativeIcon
   return icon
 }

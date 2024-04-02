@@ -1,22 +1,22 @@
-import clsx from 'clsx'
-import { useMemo, useRef, useState } from 'react'
-import { CommandList } from './command'
 import { ICommandDto } from '@starlight/plugin-utils'
+import clsx from 'clsx'
 import Fuse from 'fuse.js'
-import { useEventListener } from '../hooks/event'
-import { ClientEvent, IpcRequestEventName } from '../../constants/ipc'
-import { AppProvider } from './context'
 import { useAtomValue } from 'jotai'
+import { CommandIcon, CornerDownLeftIcon as KbdEnterIcon } from 'lucide-react'
+import { useMemo, useRef, useState } from 'react'
+import { ClientEvent, IpcRequestEventName } from '../../constants/ipc'
 import { commandsAtom } from '../atoms/data'
+import { useEventListener } from '../hooks/event'
 import { callMain, sendEvent } from '../ipc'
+import { CommandList } from './command'
+import { AppProvider } from './context'
 import { KbdLabel } from './kbd'
-import { CornerDownLeftIcon as KbdEnterIcon, CommandIcon } from 'lucide-react'
 
 function App() {
-  const inputRef = useRef<HTMLInputElement>(null)
+  const inputReference = useRef<HTMLInputElement>(null)
   useEventListener(window, 'focus', () => {
-    if (inputRef.current) {
-      inputRef.current.focus()
+    if (inputReference.current) {
+      inputReference.current.focus()
     }
   })
   const commands = useAtomValue(commandsAtom)
@@ -39,7 +39,7 @@ function App() {
       if (selected !== null) {
         e.stopPropagation()
         setSelected(null)
-        inputRef.current?.focus()
+        inputReference.current?.focus()
         return
       }
       sendEvent(ClientEvent.HIDE)
@@ -67,10 +67,8 @@ function App() {
       setSelected((s) => Math.max(s! - 1, 0))
     }
     // detect if key is alphanumeric
-    if (e.key.length === 1) {
-      if (selected !== null) {
-        inputRef.current?.focus()
-      }
+    if (e.key.length === 1 && selected !== null) {
+      inputReference.current?.focus()
     }
   })
   return (
@@ -88,7 +86,7 @@ function App() {
       <div className={clsx('flex flex-col w-screen h-screen', 'bg-native/75')}>
         <div className="h-16 border-b border-zinc-900/10">
           <input
-            ref={inputRef}
+            ref={inputReference}
             value={search}
             onChange={(e) => {
               setSearch(e.target.value)

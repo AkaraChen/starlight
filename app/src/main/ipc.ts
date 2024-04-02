@@ -1,5 +1,10 @@
 import { ipcMain } from 'electron'
-import { IpcRequestEventName, IpcRequestPayload, IpcResponse, ServerEvent } from '../constants/ipc'
+import {
+  IpcRequestEventName,
+  IpcRequestPayload,
+  IpcResponse,
+  ServerEvent,
+} from '../constants/ipc'
 import { mainWindow } from './window'
 
 export const sendEvent = (event: ServerEvent) => {

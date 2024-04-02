@@ -1,8 +1,8 @@
-import { BrowserWindow, app } from 'electron'
-import { electronApp, optimizer, is } from '@electron-toolkit/utils'
-import { createWindow } from './window'
-import { PluginManager } from './plugin'
+import { electronApp, is, optimizer } from '@electron-toolkit/utils'
 import createDebug from 'debug'
+import { BrowserWindow, app } from 'electron'
+import { PluginManager } from './plugin'
+import { createWindow } from './window'
 
 const debug = createDebug('starlight:main')
 

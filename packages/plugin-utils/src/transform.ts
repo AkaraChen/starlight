@@ -1,10 +1,16 @@
-import { ICommand, ILifecycle, IPlugin, IView, MaybeObservable } from '@starlight-app/plugin-sdk'
-import { map } from 'rxjs'
+import fs from 'node:fs'
+import type {
+  ICommand,
+  ILifecycle,
+  IPlugin,
+  IView,
+  MaybeObservable,
+} from '@starlight-app/plugin-sdk'
+import type { IMetaData } from '@starlight-app/plugin-sdk'
 import emojiRegex from 'emoji-regex'
-import fs from 'fs'
 import mime from 'mime'
-import { IMetaData } from '@starlight-app/plugin-sdk'
-import { ICommandDto } from './dto'
+import { map } from 'rxjs'
+import type { ICommandDto } from './dto'
 
 export interface ITranformedCommand extends ICommand {
   pluginId: string
@@ -28,7 +34,10 @@ export interface ITransformedPlugin extends IPlugin {
   views?: ITransformedView[]
 }
 
-const callWithErrorHandling = (plugin: IPlugin, callback: () => void): void => {
+export const callWithErrorHandling = (
+  plugin: IPlugin,
+  callback: () => void,
+): void => {
   try {
     callback()
   } catch (error) {
@@ -38,9 +47,11 @@ const callWithErrorHandling = (plugin: IPlugin, callback: () => void): void => {
   }
 }
 
-const transformMetaData = (metaData: IMetaData): ITransformedMetaData => {
+export const transformMetaData = (
+  metaData: IMetaData,
+): ITransformedMetaData => {
   const isSupported = () => {
-    if (typeof metaData.support === 'undefined') {
+    if (metaData.support === undefined) {
       return true
     }
     const support = metaData.support
@@ -51,14 +62,18 @@ const transformMetaData = (metaData: IMetaData): ITransformedMetaData => {
       return support
     }
     switch (process.platform) {
-      case 'win32':
+      case 'win32': {
         return support?.windows ?? false
-      case 'darwin':
+      }
+      case 'darwin': {
         return support?.macos ?? false
-      case 'linux':
+      }
+      case 'linux': {
         return support?.linux ?? false
-      default:
+      }
+      default: {
         return false
+      }
     }
   }
   const support = isSupported()
@@ -68,23 +83,23 @@ const transformMetaData = (metaData: IMetaData): ITransformedMetaData => {
   }
 }
 
-const transformLifecycle = (plugin: IPlugin): ILifecycle => {
+export const transformLifecycle = (plugin: IPlugin): ILifecycle => {
   const lifecycle = plugin.lifecycle
   if (!lifecycle) {
     return {}
   }
-  for (const key in lifecycle) {
-    if (key === 'error') {
-      continue
-    }
-    if (typeof lifecycle[key] === 'function') {
-      lifecycle[key] = callWithErrorHandling(plugin, () => lifecycle[key]())
-    }
+  const keys = Object.keys(lifecycle).filter((key) => key !== 'error')
+  for (const key of keys) {
+    const original = lifecycle[key] || (() => {})
+    lifecycle[key] = () => callWithErrorHandling(plugin, original)
   }
   return lifecycle
 }
 
-const transformCommand = (plugin: IPlugin, command: ICommand): ITranformedCommand => {
+export const transformCommand = (
+  plugin: IPlugin,
+  command: ICommand,
+): ITranformedCommand => {
   return {
     ...command,
     pluginId: plugin.metaData.id,
@@ -94,7 +109,10 @@ const transformCommand = (plugin: IPlugin, command: ICommand): ITranformedComman
   }
 }
 
-const transformView = (plugin: IPlugin, view: IView): ITransformedView => {
+export const transformView = (
+  plugin: IPlugin,
+  view: IView,
+): ITransformedView => {
   return {
     ...view,
     pluginId: plugin.metaData.id,
@@ -102,7 +120,7 @@ const transformView = (plugin: IPlugin, view: IView): ITransformedView => {
   }
 }
 
-const transformIcon = (icon: string): string => {
+export const transformIcon = (icon: string): string => {
   const isEmoji = emojiRegex().test(icon)
   if (isEmoji) {
     return icon
@@ -121,7 +139,7 @@ export function transformPlugin(plugin: IPlugin): ITransformedPlugin {
   plugin.metaData.icon = transformIcon(plugin.metaData.icon)
   const getCommands = () => {
     if (!plugin.commands) return []
-    if (plugin.commands instanceof Array) {
+    if (Array.isArray(plugin.commands)) {
       return plugin.commands.map((command) => transformCommand(plugin, command))
     }
     return plugin.commands.pipe(

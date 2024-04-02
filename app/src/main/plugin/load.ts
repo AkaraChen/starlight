@@ -1,5 +1,5 @@
+import { createRequire } from 'node:module'
 import { IPlugin } from '@starlight-app/plugin-sdk'
-import { createRequire } from 'module'
 
 const require = createRequire(import.meta.url)
 

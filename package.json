@@ -8,19 +8,21 @@
     "eslint": "^8.57.0",
     "eslint-plugin-astro": "^0.33.1",
     "eslint-plugin-react": "^7.34.1",
+    "eslint-plugin-unicorn": "^51.0.1",
     "husky": "^9.0.11",
     "lint-staged": "^15.2.2",
     "pinst": "^3.0.0",
     "syncpack": "^12.3.0",
     "taze": "^0.13.3",
-    "typescript": "5.3.3"
+    "typescript": "5.3.3",
+    "vitest": "^1.4.0"
   },
   "packageManager": "yarn@4.1.1",
   "private": true,
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev --filter '!./{plugins,website}'",
-    "format": "biome format --write .",
+    "format": "biome check --apply .",
     "lint": "eslint .",
     "prepare": "husky",
     "update": "taze -w -r"

@@ -1,4 +1,4 @@
-import path from 'path'
+import path from 'node:path'
 import { Core } from '../core'
 
 export const getMacOsCore = async () => {

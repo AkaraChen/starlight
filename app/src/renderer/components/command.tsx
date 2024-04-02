@@ -1,52 +1,58 @@
-import { FC, useEffect, useRef } from 'react'
-import defaultIcon from '../assets/electron.svg'
 import { ICommandDto } from '@starlight/plugin-utils'
 import clsx from 'clsx'
-import { useAppContext } from './context'
 import emojiRegex from 'emoji-regex'
+import { FC, useEffect, useRef } from 'react'
 import scrollIntoView from 'scroll-into-view-if-needed'
+import defaultIcon from '../assets/electron.svg'
+import { useAppContext } from './context'
 
-export interface CommandProps extends ICommandDto {
+export interface CommandProperties extends ICommandDto {
   active: boolean
   onExecute?: (command: ICommandDto) => void
   setSelected?: (index: number | null) => void
 }
 
-export const Command: FC<CommandProps> = (props) => {
-  const { active, onExecute, setSelected } = props
-  const isEmoji = emojiRegex().test(props.icon)
+export const Command: FC<CommandProperties> = (properties) => {
+  const { active, onExecute, setSelected } = properties
+  const isEmoji = emojiRegex().test(properties.icon)
   useEffect(() => {
-    if (active && ref.current) {
-      scrollIntoView(ref.current, {
+    if (active && reference.current) {
+      scrollIntoView(reference.current, {
         scrollMode: 'if-needed',
         block: 'nearest',
         inline: 'nearest',
       })
     }
   }, [active])
-  const ref = useRef<HTMLDivElement>(null)
+  const reference = useRef<HTMLDivElement>(null)
   return (
     <div
       className={clsx(
         'flex items-center justify-center px-3 py-2 hover:bg-black/5 rounded select-none',
         active && 'bg-black/5',
       )}
-      ref={ref}
+      ref={reference}
       onClick={() => {
         setSelected?.(null)
-        onExecute?.(props)
+        onExecute?.(properties)
       }}
     >
       {isEmoji ? (
         <div className="size-5 flex items-center justify-center rounded bg-zinc-300">
-          {props.icon}
+          {properties.icon}
         </div>
       ) : (
-        <img src={props.icon || defaultIcon} alt={props.displayName} className={'size-5'} />
+        <img
+          src={properties.icon || defaultIcon}
+          alt={properties.displayName}
+          className={'size-5'}
+        />
       )}
       <div className={'ml-3 w-full flex items-center'}>
-        <h2 className={'text-sm font-medium text-zinc-800'}>{props.displayName}</h2>
-        <p className={'text-xs ml-3 text-zinc-600'}>{props.description}</p>
+        <h2 className={'text-sm font-medium text-zinc-800'}>
+          {properties.displayName}
+        </h2>
+        <p className={'text-xs ml-3 text-zinc-600'}>{properties.description}</p>
       </div>
       <div className="ml-auto">
         <span className={'text-xs text-zinc-500'}>Command</span>

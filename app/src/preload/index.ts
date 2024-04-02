@@ -1,5 +1,5 @@
-import { contextBridge, Notification } from 'electron'
 import { electronAPI } from '@electron-toolkit/preload'
+import { Notification, contextBridge } from 'electron'
 
 // Custom APIs for renderer
 const api = {

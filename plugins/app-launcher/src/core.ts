@@ -1,6 +1,6 @@
-import { BehaviorSubject } from 'rxjs'
 import chokidar from 'chokidar'
 import { unique } from 'radash'
+import { BehaviorSubject } from 'rxjs'
 
 export interface SearchDir {
   dir: string
@@ -22,8 +22,8 @@ export interface Execlutable {
 export class Core {
   watchers: chokidar.FSWatcher[] = []
 
-  constructor(opts: CoreOptions) {
-    const { dirs, exts } = opts
+  constructor(options: CoreOptions) {
+    const { dirs, exts } = options
     for (const { dir, resursive } of dirs) {
       const watcher = chokidar.watch(dir, {
         persistent: true,
@@ -31,8 +31,8 @@ export class Core {
         depth: resursive ? undefined : 0,
       })
       watcher.on('add', async (path) => {
-        const info = await opts.getInfo(path)
-        if (exts.some((ext) => path.endsWith(ext))) {
+        const info = await options.getInfo(path)
+        if (exts.some((extension) => path.endsWith(extension))) {
           this.next(...this.subject.value, info)
         }
       })

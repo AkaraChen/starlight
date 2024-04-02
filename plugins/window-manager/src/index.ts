@@ -1,7 +1,7 @@
-import { ICommand, PluginBuilder } from '@starlight-app/plugin-sdk'
-import { BehaviorSubject } from 'rxjs'
-import { windowManager, Window } from 'node-window-manager'
+import { type ICommand, PluginBuilder } from '@starlight-app/plugin-sdk'
 import { getOpenWindowsSync } from 'active-win'
+import { Window, windowManager } from 'node-window-manager'
+import { BehaviorSubject } from 'rxjs'
 import { extractIcon } from 'win-get-exe-icon'
 
 const commands = new BehaviorSubject<ICommand[]>([])
@@ -13,10 +13,10 @@ const baseCommands: ICommand[] = [
     icon: '🙈',
     description: 'Hide all windows',
     handler() {
-      getOpenWindowsSync().forEach((window) => {
+      for (const window of getOpenWindowsSync()) {
         const target = new Window(window.id)
         target.minimize()
-      })
+      }
     },
   },
 ]
@@ -44,7 +44,6 @@ export const getActiveWindowCommands = (): Promise<ICommand[]> => {
           target.restore()
         }
         target.bringToTop()
-        console.log(`Focus on ${window.owner.name}`)
       },
     }
   })
