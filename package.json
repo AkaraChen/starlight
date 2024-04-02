@@ -23,11 +23,14 @@
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev --filter '!./{plugins,website}'",
-    "format": "biome check --apply .",
+    "format": "npm run format:source && npm run format:syncpack && npm run format:config",
+    "format:config": "prettier --write **/*.{yml,yaml,md}",
+    "format:source": "biome check --apply .",
+    "format:syncpack": "syncpack format",
     "lint": "eslint .",
     "prepare": "husky",
-    "update": "taze -w -r",
-    "test": "vitest"
+    "test": "vitest",
+    "update": "taze -w -r"
   },
   "workspaces": ["./packages/**", "./website", "./app", "./docs", "./plugins/*"]
 }

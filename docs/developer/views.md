@@ -62,9 +62,9 @@ const view: View = {
 
     return (
       <Container>
-        <Search value={keyword} onChange={(e) => setKeyword(e.target.value)} />
+        <Search value={keyword} onChange={e => setKeyword(e.target.value)} />
         <List>
-          {filteredFiles.map((file) => (
+          {filteredFiles.map(file => (
             <File
               key={file}
               name={file}
@@ -83,6 +83,6 @@ const view: View = {
         </Button>
       </Container>
     )
-  }
+  },
 }
 ```

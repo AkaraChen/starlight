@@ -24,7 +24,7 @@ The deactivation event is triggered when the plugin is disabled or uninstalled i
 export const lifecycle = {
   async deactivate() {
     console.log('Plugin deactivated')
-  }
+  },
 }
 ```
 

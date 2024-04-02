@@ -33,22 +33,25 @@ export const spec = {
   commands: [
     /* ... */
   ],
-  search: async (query: string, abortSignal: AbortSignal): Command[] | undefined => {
+  search: async (
+    query: string,
+    abortSignal: AbortSignal,
+  ): Command[] | undefined => {
     const files = await fs.readdir(os.homedir())
     if (abortSignal.aborted) {
       return
     }
     return files
-      .filter((file) => file.includes(query))
-      .map((file) => ({
+      .filter(file => file.includes(query))
+      .map(file => ({
         id: file,
         displayName: file,
         description: 'Open file',
         handler: () => {
           // Open file
-        }
+        },
       }))
-  }
+  },
 }
 ```
 
