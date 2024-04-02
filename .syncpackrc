@@ -1,25 +1,15 @@
 {
   "versionGroups": [
     {
-      "dependencies": [
-        "@types/**"
-      ],
-      "dependencyTypes": [
-        "!dev"
-      ],
+      "dependencies": ["@types/**"],
+      "dependencyTypes": ["!dev"],
       "isBanned": true,
       "label": "@types packages should only be under devDependencies"
     },
     {
-      "label": "Use workspace protocol when developing local packages",
-      "dependencies": [
-        "$LOCAL"
-      ],
-      "dependencyTypes": [
-        "dev",
-        "prod"
-      ],
-      "pinVersion": "workspace:^"
+      "dependencies": ["electron"],
+      "pinVersion": "29.1.6",
+      "label": "Electron should be pinned to a specific version"
     }
   ]
 }

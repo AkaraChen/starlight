@@ -12,6 +12,7 @@
     "husky": "^9.0.11",
     "lint-staged": "^15.2.2",
     "pinst": "^3.0.0",
+    "prettier": "^3.2.5",
     "syncpack": "^12.3.0",
     "taze": "^0.13.3",
     "typescript": "5.3.3",
@@ -27,12 +28,5 @@
     "prepare": "husky",
     "update": "taze -w -r"
   },
-  "workspaces": [
-    "./packages/**",
-    "./crates/**",
-    "./website",
-    "./app",
-    "./docs",
-    "./plugins/*"
-  ]
+  "workspaces": ["./packages/**", "./website", "./app", "./docs", "./plugins/*"]
 }

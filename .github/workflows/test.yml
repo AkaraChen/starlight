@@ -12,11 +12,12 @@ jobs:
   test:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: '21'
+          node-version: latest
       - run: corepack enable
-      - run: yarn
-      - run: yarn build
+      - name: Install dependencies
+        run: yarn
+      - run: yarn dlx turbo build
       - run: yarn test --reporter=github-actions

@@ -2,14 +2,14 @@
   "name": "app-launcher",
   "version": "1.0.0",
   "dependencies": {
-    "@starlight-app/plugin-sdk": "workspace:^",
+    "@starlight-app/plugin-sdk": "1.0.0",
     "chokidar": "^3.6.0",
     "electron": "29.1.6",
     "icon-extractor": "^1.0.3",
     "radash": "^12.1.0",
     "rxjs": "^7.8.1",
-    "win-dirs": "workspace:^",
-    "win-get-exe-icon": "workspace:^"
+    "win-dirs": "1.0.0",
+    "win-get-exe-icon": "1.0.0"
   },
   "devDependencies": {
     "@types/node": "^20.12.2",

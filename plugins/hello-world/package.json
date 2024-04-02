@@ -2,7 +2,7 @@
   "name": "hello-world",
   "version": "1.0.0",
   "dependencies": {
-    "@starlight-app/plugin-sdk": "workspace:^"
+    "@starlight-app/plugin-sdk": "1.0.0"
   },
   "devDependencies": {
     "tsup": "^8.0.2"
