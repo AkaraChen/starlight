@@ -20,4 +20,4 @@ jobs:
       - name: Install dependencies
         run: yarn
       - run: yarn dlx turbo build
-      - run: yarn test --reporter=github-actions
+      - run: yarn test run --reporter=github-actions

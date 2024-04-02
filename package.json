@@ -26,7 +26,8 @@
     "format": "biome check --apply .",
     "lint": "eslint .",
     "prepare": "husky",
-    "update": "taze -w -r"
+    "update": "taze -w -r",
+    "test": "vitest"
   },
   "workspaces": ["./packages/**", "./website", "./app", "./docs", "./plugins/*"]
 }
