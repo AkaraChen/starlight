@@ -1,8 +1,9 @@
-import { ICommandDto } from '@starlight/plugin-utils'
+import type { ICommandDto } from '@starlight/plugin-utils'
 import clsx from 'clsx'
 import Fuse from 'fuse.js'
 import { useAtomValue } from 'jotai'
 import { CommandIcon, CornerDownLeftIcon as KbdEnterIcon } from 'lucide-react'
+import { sort } from 'radash'
 import { useMemo, useRef, useState } from 'react'
 import { ClientEvent, IpcRequestEventName } from '../../constants/ipc'
 import { commandsAtom } from '../atoms/data'
@@ -23,9 +24,14 @@ function App() {
   const [search, setSearch] = useState('')
   const query: ICommandDto[] = useMemo(() => {
     if (!commands) return []
-    if (!search) return commands
+    if (search === '') {
+      return sort(commands, (c) => c.priority, true)
+    }
     const fuse = new Fuse(commands, {
       keys: ['displayName', 'description'],
+      threshold: 0.4,
+      ignoreLocation: true,
+      useExtendedSearch: true,
     })
     return fuse.search(search).map((r) => r.item)
   }, [commands, search])
@@ -33,6 +39,8 @@ function App() {
   const execute = (command: ICommandDto) => {
     sendEvent(ClientEvent.HIDE)
     callMain(IpcRequestEventName.EXECUTE_COMMAND, command.pluginId, command.id)
+    setSelected(null)
+    setSearch('')
   }
   useEventListener(window, 'keyup', (e: KeyboardEvent) => {
     if (e.key === 'Escape') {
@@ -68,6 +76,7 @@ function App() {
     }
     // detect if key is alphanumeric
     if (e.key.length === 1 && selected !== null) {
+      setSelected(null)
       inputReference.current?.focus()
     }
   })

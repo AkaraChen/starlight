@@ -2,6 +2,9 @@
   "name": "@starlight-app/app",
   "description": "An Electron application with React and TypeScript",
   "version": "1.0.0",
+  "author": {
+    "name": "AkaraChen"
+  },
   "dependencies": {
     "@electron-toolkit/preload": "^3.0.0",
     "@electron-toolkit/utils": "^3.0.0",
@@ -17,11 +20,13 @@
     "hello-world": "1.0.0",
     "jotai": "^2.7.2",
     "lucide-react": "^0.363.0",
+    "radash": "^12.1.0",
     "rxjs": "^7.8.1",
     "scroll-into-view-if-needed": "^3.1.0",
     "window-manager": "1.0.0"
   },
   "devDependencies": {
+    "@akrc/ci-toolkit": "^1.1.0",
     "@electron-toolkit/tsconfig": "^1.0.1",
     "@types/node": "^20.12.2",
     "@types/react": "^18.2.73",
@@ -47,6 +52,7 @@
     "build": "npm run typecheck && electron-vite build",
     "build:unpack": "npm run build && electron-builder --dir",
     "build:win": "npm run build && electron-builder --win",
+    "postinstall": "skip-in-ci yarn electron-builder install-app-deps",
     "dev": "cross-env DEBUG=\"starlight*\" DEBUG_COLORS=1 electron-vite dev",
     "lint": "eslint . --ext .js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix",
     "start": "electron-vite preview",

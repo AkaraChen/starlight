@@ -2,11 +2,12 @@ import fs from 'node:fs'
 import type {
   ICommand,
   ILifecycle,
+  IMetaData,
   IPlugin,
   IView,
   MaybeObservable,
 } from '@starlight-app/plugin-sdk'
-import type { IMetaData } from '@starlight-app/plugin-sdk'
+import { ECommandPiority } from '@starlight-app/plugin-sdk'
 import emojiRegex from 'emoji-regex'
 import mime from 'mime'
 import { map } from 'rxjs'
@@ -16,6 +17,7 @@ export interface ITranformedCommand extends ICommand {
   pluginId: string
   icon: string
   runImediately: boolean
+  priority: ECommandPiority
 }
 
 export interface ITransformedView extends IView {
@@ -106,6 +108,7 @@ export const transformCommand = (
     handler: () => callWithErrorHandling(plugin, () => command.handler()),
     icon: command?.icon ? transformIcon(command.icon) : plugin.metaData.icon,
     runImediately: command.runImediately ?? true,
+    priority: command?.priority ?? ECommandPiority.NORMAL,
   }
 }
 

@@ -1,6 +1,7 @@
 {
   "name": "starlight",
   "devDependencies": {
+    "@akrc/ci-toolkit": "^1.0.1",
     "@biomejs/biome": "1.6.3",
     "@electron-toolkit/eslint-config-ts": "^1.0.1",
     "@typescript-eslint/eslint-plugin": "^7.4.0",
@@ -32,11 +33,5 @@
     "test": "vitest",
     "update": "taze -w -r"
   },
-  "workspaces": [
-    "./packages/**",
-    "./website",
-    "./app",
-    "./docs",
-    "./plugins/*"
-  ]
+  "workspaces": ["./packages/**", "./website", "./app", "./docs", "./plugins/*"]
 }

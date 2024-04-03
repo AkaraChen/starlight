@@ -12,13 +12,13 @@ files:
 asarUnpack:
   - resources/**
 win:
+  target: msi
   executableName: starlight
   requestedExecutionLevel: requireAdministrator
-nsis:
-  artifactName: ${name}-${version}-setup.${ext}
-  shortcutName: ${productName}
-  uninstallDisplayName: ${productName}
-  createDesktopShortcut: always
+msi:
+  oneClick: false
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
 mac:
   entitlementsInherit: build/entitlements.mac.plist
   extendInfo:

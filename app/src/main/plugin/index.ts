@@ -8,7 +8,7 @@ import {
   transformPlugin,
 } from '@starlight/plugin-utils'
 import createDebug from 'debug'
-import { BehaviorSubject, type Subscription } from 'rxjs'
+import { BehaviorSubject, type Subscription, debounceTime, map } from 'rxjs'
 import { IpcRequestEventName, ServerEvent } from '../../constants/ipc'
 import { answerEvent, sendEvent } from '../ipc'
 import { buildInPlugins } from './load'
@@ -61,15 +61,20 @@ export class PluginManager {
       } else {
         this.subManager.add(
           transformed.id,
-          transformed.commands.subscribe((commands) => {
-            this.commands.next([
-              ...this.commands.value.filter(
-                (c) => c.pluginId !== transformed.id,
-              ),
-              ...commands,
-            ])
-            sendEvent(ServerEvent.COMMAND_UPDATE)
-          }),
+          transformed.commands
+            .pipe(
+              debounceTime(500),
+              map((commands) => commands.flat()),
+            )
+            .subscribe((commands) => {
+              this.commands.next([
+                ...this.commands.value.filter(
+                  (c) => c.pluginId !== transformed.id,
+                ),
+                ...commands,
+              ])
+              sendEvent(ServerEvent.COMMAND_UPDATE)
+            }),
         )
       }
     }

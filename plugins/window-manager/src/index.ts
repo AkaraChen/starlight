@@ -1,4 +1,8 @@
-import { type ICommand, PluginBuilder } from '@starlight-app/plugin-sdk'
+import {
+  ECommandPiority,
+  type ICommand,
+  PluginBuilder,
+} from '@starlight-app/plugin-sdk'
 import { getOpenWindowsSync } from 'active-win'
 import { Window, windowManager } from 'node-window-manager'
 import { BehaviorSubject } from 'rxjs'
@@ -45,6 +49,7 @@ export const getActiveWindowCommands = (): Promise<ICommand[]> => {
         }
         target.bringToTop()
       },
+      priority: ECommandPiority.HIGHTEST,
     }
   })
   return Promise.all(promises)

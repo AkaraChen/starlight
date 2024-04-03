@@ -23,6 +23,14 @@ export interface ILifecycle {
   focus?: () => void
 }
 
+export enum ECommandPiority {
+  DEBUG = 0,
+  LOW = 1,
+  NORMAL = 2,
+  HIGH = 3,
+  HIGHTEST = 4,
+}
+
 export interface ICommand {
   id: string
   displayName: string
@@ -30,6 +38,7 @@ export interface ICommand {
   handler: () => void
   icon?: string
   runImediately?: boolean
+  priority?: ECommandPiority
 }
 
 export interface IView {

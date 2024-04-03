@@ -1,7 +1,7 @@
-import { ICommandDto } from '@starlight/plugin-utils'
+import type { ICommandDto } from '@starlight/plugin-utils'
 import clsx from 'clsx'
 import emojiRegex from 'emoji-regex'
-import { FC, useEffect, useRef } from 'react'
+import { type FC, useEffect, useMemo, useRef } from 'react'
 import scrollIntoView from 'scroll-into-view-if-needed'
 import defaultIcon from '../assets/electron.svg'
 import { useAppContext } from './context'
@@ -25,6 +25,17 @@ export const Command: FC<CommandProperties> = (properties) => {
     }
   }, [active])
   const reference = useRef<HTMLDivElement>(null)
+  const displayName = useMemo(() => {
+    if (properties.displayName.length > 30) {
+      // find the first space after 30 characters
+      const spaceIndex = properties.displayName.indexOf(' ', 30)
+      if (spaceIndex > 0) {
+        return `${properties.displayName.slice(0, spaceIndex)}...`
+      }
+      return `${properties.displayName.slice(0, 30)}...`
+    }
+    return properties.displayName
+  }, [])
   return (
     <div
       className={clsx(
@@ -49,10 +60,10 @@ export const Command: FC<CommandProperties> = (properties) => {
         />
       )}
       <div className={'ml-3 w-full flex items-center'}>
-        <h2 className={'text-sm font-medium text-zinc-800'}>
-          {properties.displayName}
-        </h2>
-        <p className={'text-xs ml-3 text-zinc-600'}>{properties.description}</p>
+        <h2 className={'text-sm font-medium text-zinc-800'}>{displayName}</h2>
+        <p className={'text-xs ml-3 text-zinc-600 max-w-96'}>
+          {properties.description}
+        </p>
       </div>
       <div className="ml-auto">
         <span className={'text-xs text-zinc-500'}>Command</span>
