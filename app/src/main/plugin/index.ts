@@ -159,4 +159,11 @@ export class PluginManager {
   static onFocus() {
     for (const p of this.instance.plugins) p.lifecycle?.focus?.()
   }
+
+  static onClose() {
+    this.instance.subManager.dispose()
+    for (const p of this.instance.plugins) {
+      this.instance.unregister(p)
+    }
+  }
 }

@@ -19,9 +19,13 @@ app.whenReady().then(() => {
   createWindow()
   PluginManager.init()
 
-  app.on('activate', function () {
+  app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow()
   })
+})
+
+app.on('before-quit', () => {
+  PluginManager.onClose()
 })
 
 if (!is.dev) {
