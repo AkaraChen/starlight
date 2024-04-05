@@ -41,6 +41,10 @@ export default defineConfig({
             text: 'Views',
             link: '/developer/views',
           },
+          {
+            text: 'Persistence',
+            link: '/developer/persistence',
+          }
         ],
       },
       {
@@ -51,6 +55,10 @@ export default defineConfig({
             text: 'Get Started',
             link: '/maintainer/get-started',
           },
+          {
+            text: 'Persistence',
+            link: '/maintainer/persistence',
+          }
         ],
       },
     ],
