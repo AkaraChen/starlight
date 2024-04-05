@@ -23,7 +23,7 @@
   "private": true,
   "scripts": {
     "build": "turbo build",
-    "dev": "turbo dev --filter '!./{plugins,website}'",
+    "dev": "turbo dev --filter='!./website' --filter='!./docs'",
     "format": "npm run format:source && npm run format:syncpack && npm run format:config",
     "format:config": "prettier --write **/*.{yml,yaml,md}",
     "format:source": "biome check --apply .",
@@ -33,11 +33,5 @@
     "test": "vitest",
     "update": "taze -w -r"
   },
-  "workspaces": [
-    "./packages/**",
-    "./website",
-    "./app",
-    "./docs",
-    "./plugins/*"
-  ]
+  "workspaces": ["./packages/**", "./website", "./app", "./docs", "./plugins/*"]
 }
