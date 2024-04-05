@@ -5,7 +5,7 @@ import {
 } from '@starlight-app/plugin-sdk'
 import { getOpenWindowsSync } from 'active-win'
 import { Window, windowManager } from 'node-window-manager'
-import { BehaviorSubject } from 'rxjs'
+import { BehaviorSubject, fromEvent, switchMap } from 'rxjs'
 import { extractIcon } from 'win-get-exe-icon'
 
 const commands = new BehaviorSubject<ICommand[]>([])
@@ -29,8 +29,10 @@ const next = (newCommands: ICommand[]) => {
   commands.next([...baseCommands, ...newCommands])
 }
 
+const { pid } = process
+
 export const getActiveWindowCommands = (): Promise<ICommand[]> => {
-  const windows = getOpenWindowsSync()
+  const windows = getOpenWindowsSync().filter((w) => w.owner.processId !== pid)
   const promises = windows.map(async (window) => {
     return {
       id: `window-manager-${window.id}`,
@@ -70,11 +72,10 @@ const WindowManagerPlugin = new PluginBuilder()
   })
   .lifecycle({
     activate() {
-      windowManager.on('window-activated', () => {
-        getActiveWindowCommands().then((newCommands) => {
-          next(newCommands)
-        })
-      })
+      const windowActivated = fromEvent(windowManager, 'window-activated')
+      windowActivated
+        .pipe(switchMap(() => getActiveWindowCommands()))
+        .subscribe(next)
     },
     deactivate() {
       windowManager.removeAllListeners()
