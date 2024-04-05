@@ -1,13 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { StoreProvider } from './atoms/store'
-import App from './components/app'
 import './index.css'
+import { Router } from './router'
 
 ReactDOM.createRoot(document.querySelector('#root') as HTMLElement).render(
   <React.StrictMode>
     <StoreProvider>
-      <App />
+      <Router />
     </StoreProvider>
   </React.StrictMode>,
 )

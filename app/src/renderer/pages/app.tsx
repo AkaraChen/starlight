@@ -1,5 +1,4 @@
 import type { ICommandDto } from '@starlight/plugin-utils'
-import clsx from 'clsx'
 import Fuse from 'fuse.js'
 import { useAtomValue } from 'jotai'
 import { CommandIcon, CornerDownLeftIcon as KbdEnterIcon } from 'lucide-react'
@@ -7,11 +6,12 @@ import { sort } from 'radash'
 import { useMemo, useRef, useState } from 'react'
 import { ClientEvent, IpcRequestEventName } from '../../constants/ipc'
 import { commandsAtom } from '../atoms/data'
+import { ActionBar } from '../components/action-bar'
+import { CommandList } from '../components/command'
+import { AppProvider } from '../components/context'
+import { KbdLabel } from '../components/kbd'
 import { useEventListener } from '../hooks/event'
 import { callMain, sendEvent } from '../ipc'
-import { CommandList } from './command'
-import { AppProvider } from './context'
-import { KbdLabel } from './kbd'
 
 function App() {
   const inputReference = useRef<HTMLInputElement>(null)
@@ -92,41 +92,40 @@ function App() {
         query,
       }}
     >
-      <div className={clsx('flex flex-col w-screen h-screen', 'bg-native/75')}>
-        <div className="h-16 border-b border-zinc-900/10">
-          <input
-            ref={inputReference}
-            value={search}
-            onChange={(e) => {
-              setSearch(e.target.value)
-              setSelected(null)
-            }}
-            type="text"
-            className="w-full h-full px-6 text-sm bg-transparent border-none focus:outline-none placeholder:text-zinc-600"
-            placeholder="Search for apps and commands..."
-          />
-        </div>
-
-        <div className="h-full my-2 flex flex-col overflow-x-hidden overflow-y-scroll scrollbar-none">
-          {query && <CommandList />}
-        </div>
-        <div className="h-16 bg-native/50 flex px-4 py-2">
-          <KbdLabel kbd={[CommandIcon, ',']}>Settings</KbdLabel>
-          <div className="ml-auto flex items-center justify-center">
-            <KbdLabel
-              kbd={[KbdEnterIcon]}
-              onClick={() => {
-                const command = query[selected || 0]
-                if (command) {
-                  execute(command)
-                }
-              }}
-            >
-              Open Command
-            </KbdLabel>
-          </div>
-        </div>
+      <div className="h-16 border-b border-zinc-900/10">
+        <input
+          ref={inputReference}
+          value={search}
+          onChange={(e) => {
+            setSearch(e.target.value)
+            setSelected(null)
+          }}
+          type="text"
+          className="w-full h-full px-6 text-sm bg-transparent border-none focus:outline-none placeholder:text-zinc-600"
+          placeholder="Search for apps and commands..."
+        />
       </div>
+
+      <div className="h-full my-2 flex flex-col overflow-x-hidden overflow-y-scroll scrollbar-none">
+        {query && <CommandList />}
+      </div>
+
+      <ActionBar
+        left={<KbdLabel kbd={[CommandIcon, ',']}>Settings</KbdLabel>}
+        right={
+          <KbdLabel
+            kbd={[KbdEnterIcon]}
+            onClick={() => {
+              const command = query[selected || 0]
+              if (command) {
+                execute(command)
+              }
+            }}
+          >
+            Open Command
+          </KbdLabel>
+        }
+      />
     </AppProvider>
   )
 }
