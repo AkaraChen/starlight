@@ -47,6 +47,7 @@ export class Core {
     for (const watcher of this.watchers) {
       watcher.close()
     }
+    this.subject.complete()
   }
 
   subject = new BehaviorSubject<Execlutable[]>([])

@@ -1,7 +1,7 @@
-import { ICommand, PluginBuilder } from '@starlight-app/plugin-sdk'
+import { type ICommand, PluginBuilder } from '@starlight-app/plugin-sdk'
 import { shell } from 'electron'
 import { BehaviorSubject } from 'rxjs'
-import { Core } from './core'
+import type { Core } from './core'
 import { getCore } from './platform'
 
 const commands = new BehaviorSubject<ICommand[]>([])

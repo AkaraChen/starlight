@@ -76,6 +76,10 @@ const WindowManagerPlugin = new PluginBuilder()
         })
       })
     },
+    deactivate() {
+      windowManager.removeAllListeners()
+      commands.unsubscribe()
+    },
   })
   .commands(commands)
   .build()
