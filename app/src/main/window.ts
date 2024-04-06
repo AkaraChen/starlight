@@ -44,7 +44,7 @@ export function createWindow(): void {
   const getKey = () => {
     const keymap = {
       dev: {
-        unix: 'Cmd+Z',
+        unix: 'Cmd+N',
         win32: 'Alt+Z',
       },
       prod: {
