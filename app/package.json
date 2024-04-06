@@ -16,7 +16,6 @@
     "electron-updater": "^6.1.8",
     "emoji-regex": "^10.3.0",
     "fuse.js": "^7.0.0",
-    "get-port-please": "^3.1.2",
     "hello-world": "1.0.0",
     "jotai": "^2.7.2",
     "lucide-react": "^0.365.0",
@@ -27,13 +26,12 @@
     "window-manager": "1.0.0"
   },
   "devDependencies": {
-    "@akrc/ci-toolkit": "^1.1.0",
+    "@akrc/ci-toolkit": "^1.2.0",
     "@electron-toolkit/tsconfig": "^1.0.1",
     "@types/node": "^20.12.2",
     "@types/react": "^18.2.74",
     "@types/react-dom": "^18.2.24",
     "@vitejs/plugin-react": "^4.2.1",
-    "autoprefixer": "^10.4.19",
     "cross-env": "^7.0.3",
     "electron": "29.1.6",
     "electron-builder": "^24.13.3",

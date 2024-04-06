@@ -19,14 +19,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@akrc/ci-toolkit@npm:^1.1.0":
-  version: 1.1.0
-  resolution: "@akrc/ci-toolkit@npm:1.1.0"
+"@akrc/ci-toolkit@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "@akrc/ci-toolkit@npm:1.2.0"
   dependencies:
     cross-spawn: "npm:^7.0.3"
   bin:
     skip-in-ci: bin/skip-in-ci.cjs
-  checksum: 10c0/4e938069a6d05c25d5488db72255acb8728d74a4b673a7b46c5b3ee777e29b46f41ce78719f921c2c107d68ba30991b93cc290de099ff829d2a0d65f28f420ae
+  checksum: 10c0/32a9994e5cd9a96a55fe3a16a956c99053396c01b46d7476c396f1109b3e56dea32a6d4b1f3ac74738f99866c7c9eaf4b39c8e0cb958d952798746b17668915e
   languageName: node
   linkType: hard
 
@@ -1900,7 +1900,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@starlight-app/app@workspace:app"
   dependencies:
-    "@akrc/ci-toolkit": "npm:^1.1.0"
+    "@akrc/ci-toolkit": "npm:^1.2.0"
     "@electron-toolkit/preload": "npm:^3.0.0"
     "@electron-toolkit/tsconfig": "npm:^1.0.1"
     "@electron-toolkit/utils": "npm:^3.0.0"
@@ -1911,7 +1911,6 @@ __metadata:
     "@types/react-dom": "npm:^18.2.24"
     "@vitejs/plugin-react": "npm:^4.2.1"
     app-launcher: "npm:1.0.0"
-    autoprefixer: "npm:^10.4.19"
     clsx: "npm:^2.1.0"
     cross-env: "npm:^7.0.3"
     debug: "npm:^4.3.4"
@@ -1921,7 +1920,6 @@ __metadata:
     electron-vite: "npm:^2.1.0"
     emoji-regex: "npm:^10.3.0"
     fuse.js: "npm:^7.0.0"
-    get-port-please: "npm:^3.1.2"
     hello-world: "npm:1.0.0"
     jotai: "npm:^2.7.2"
     lucide-react: "npm:^0.365.0"
@@ -3278,7 +3276,6 @@ __metadata:
     "@types/node": "npm:^20.12.2"
     chokidar: "npm:^3.6.0"
     electron: "npm:29.1.6"
-    icon-extractor: "npm:^1.0.3"
     radash: "npm:^12.1.0"
     rxjs: "npm:^7.8.1"
     tsup: "npm:^8.0.2"
@@ -3626,7 +3623,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"autoprefixer@npm:^10.4.15, autoprefixer@npm:^10.4.19":
+"autoprefixer@npm:^10.4.15":
   version: 10.4.19
   resolution: "autoprefixer@npm:10.4.19"
   dependencies:
@@ -6141,13 +6138,6 @@ __metadata:
     has-symbols: "npm:^1.0.3"
     hasown: "npm:^2.0.0"
   checksum: 10c0/0a9b82c16696ed6da5e39b1267104475c47e3a9bdbe8b509dfe1710946e38a87be70d759f4bb3cda042d76a41ef47fe769660f3b7c0d1f68750299344ffb15b7
-  languageName: node
-  linkType: hard
-
-"get-port-please@npm:^3.1.2":
-  version: 3.1.2
-  resolution: "get-port-please@npm:3.1.2"
-  checksum: 10c0/61237342fe035967e5ad1b67a2dee347a64de093bf1222b7cd50072568d73c48dad5cc5cd4fa44635b7cfdcd14d6c47554edb9891c2ec70ab33ecb831683e257
   languageName: node
   linkType: hard
 
@@ -11077,7 +11067,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "starlight@workspace:."
   dependencies:
-    "@akrc/ci-toolkit": "npm:^1.1.0"
     "@biomejs/biome": "npm:1.6.3"
     "@electron-toolkit/eslint-config-ts": "npm:^1.0.1"
     "@typescript-eslint/eslint-plugin": "npm:^7.4.0"
