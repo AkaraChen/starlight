@@ -1,8 +1,12 @@
 const { FusesPlugin } = require('@electron-forge/plugin-fuses')
 const { FuseV1Options, FuseVersion } = require('@electron/fuses')
 
-module.exports = {
+/**
+ * @type {import('@electron-forge/shared-types').ForgeConfig}
+ */
+const config = {
   packagerConfig: {
+    asar: true,
     ignore: [
       /^\/src/,
       /(.eslintrc.json)|(.gitignore)|(electron.vite.config.ts)|(forge.config.cjs)|(tsconfig.*)/,
@@ -29,10 +33,10 @@ module.exports = {
     },
   ],
   plugins: [
-    // {
-    //   name: '@electron-forge/plugin-auto-unpack-natives',
-    //   config: {},
-    // },
+    {
+      name: '@electron-forge/plugin-auto-unpack-natives',
+      config: {},
+    },
     // Fuses are used to enable/disable various Electron functionality
     // at package time, before code signing the application
     new FusesPlugin({
@@ -46,3 +50,5 @@ module.exports = {
     }),
   ],
 }
+
+module.exports = config
