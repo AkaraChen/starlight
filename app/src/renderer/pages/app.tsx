@@ -4,6 +4,7 @@ import { useAtomValue } from 'jotai'
 import { CommandIcon, CornerDownLeftIcon as KbdEnterIcon } from 'lucide-react'
 import { sort } from 'radash'
 import { useMemo, useRef, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { ClientEvent, IpcRequestEventName } from '../../shared/ipc'
 import { commandsAtom } from '../atoms/data'
 import { ActionBar } from '../components/action-bar'
@@ -42,6 +43,10 @@ function App() {
     setSelected(null)
     setSearch('')
   }
+  const navigate = useNavigate()
+  const gotoSettings = () => {
+    navigate('/settings')
+  }
   useEventListener(window, 'keyup', (e: KeyboardEvent) => {
     if (e.key === 'Escape') {
       if (selected !== null) {
@@ -74,12 +79,17 @@ function App() {
       }
       setSelected((s) => Math.max(s! - 1, 0))
     }
+    // if cmd+comma, open settings
+    if (e.key === ',' && e.metaKey) {
+      gotoSettings()
+    }
     // detect if key is alphanumeric
     if (e.key.length === 1 && selected !== null) {
       setSelected(null)
       inputReference.current?.focus()
     }
   })
+
   return (
     <AppProvider
       value={{
@@ -111,7 +121,16 @@ function App() {
       </div>
 
       <ActionBar
-        left={<KbdLabel kbd={[CommandIcon, ',']}>Settings</KbdLabel>}
+        left={
+          <KbdLabel
+            kbd={[CommandIcon, ',']}
+            onClick={() => {
+              navigate('/settings')
+            }}
+          >
+            Settings
+          </KbdLabel>
+        }
         right={
           <KbdLabel
             kbd={[KbdEnterIcon]}

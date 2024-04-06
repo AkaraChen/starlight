@@ -7,12 +7,13 @@ import {
 } from 'react-router-dom'
 import { AppLayout } from './layout/app'
 import App from './pages/app'
+import Settings from './pages/settings'
 
 const router = createHashRouter(
   createRoutesFromElements(
     <Route element={<AppLayout />}>
       <Route path="/" element={<App />} />
-      <Route path="/settings" element={<div>settings</div>} />
+      <Route path="/settings" element={<Settings />} />
       <Route path="/about" element={<div>about</div>} />
     </Route>,
   ),
