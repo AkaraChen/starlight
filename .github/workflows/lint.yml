@@ -1,4 +1,4 @@
-name: Starlight Lint
+name: Lint
 on:
   schedule:
     - cron: '0 0 * * *'
