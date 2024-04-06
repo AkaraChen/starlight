@@ -44,7 +44,7 @@ export default defineConfig({
           {
             text: 'Persistence',
             link: '/developer/persistence',
-          }
+          },
         ],
       },
       {
@@ -58,7 +58,7 @@ export default defineConfig({
           {
             text: 'Persistence',
             link: '/maintainer/persistence',
-          }
+          },
         ],
       },
     ],
