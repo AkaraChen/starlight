@@ -1,6 +1,7 @@
 import type { Schema } from 'zod'
 
 export interface IPreferenceBase {
+  id: string
   name: string
   description: string
   required: boolean
@@ -22,17 +23,20 @@ export interface INumberPreference extends IPreferenceBase {
   defaultValue?: number
 }
 
-export interface IListPreference<T extends IPreferenceBase>
+export interface IListPreference<T extends TBasicPreference>
   extends IPreferenceBase {
   type: 'list'
-  defaultValue?: T
+  defaultValue?: TBasicPreference['defaultValue'][]
   options: T[]
 }
 
-export type TPreference =
+export type TBasicPreference =
   | IBooleanPreference
   | IStringPreference
   | INumberPreference
+
+export type TPreference =
+  | TBasicPreference
   | IListPreference<IBooleanPreference>
   | IListPreference<IStringPreference>
   | IListPreference<INumberPreference>

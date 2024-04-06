@@ -1,4 +1,4 @@
-import type { ICommandDto } from '@starlight/plugin-utils'
+import type { ICommandDto } from '@starlight-app/plugin-utils'
 import clsx from 'clsx'
 import emojiRegex from 'emoji-regex'
 import { type FC, useEffect, useMemo, useRef } from 'react'

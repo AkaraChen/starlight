@@ -1,4 +1,4 @@
-import type { ICommandDto } from '@starlight/plugin-utils'
+import type { ICommandDto } from '@starlight-app/plugin-utils'
 import Fuse from 'fuse.js'
 import { useAtomValue } from 'jotai'
 import { CommandIcon, CornerDownLeftIcon as KbdEnterIcon } from 'lucide-react'
