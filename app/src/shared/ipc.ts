@@ -1,4 +1,4 @@
-import { ICommandDto, ITransformedView } from '@starlight/plugin-utils'
+import type { ICommandDto, ITransformedView } from '@starlight-app/plugin-utils'
 
 export enum ServerEvent {
   PLUGIN_REGISTER = 'plugin-register',

@@ -13,3 +13,4 @@ export {
   IListPreference,
   TPreference,
 } from '@starlight-app/plugin-sdk/preference'
+export * from './types'

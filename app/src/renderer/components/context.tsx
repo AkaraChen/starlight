@@ -1,4 +1,4 @@
-import { ICommandDto } from '@starlight/plugin-utils'
+import type { ICommandDto } from '@starlight-app/plugin-utils'
 import { createContext, useContext } from 'react'
 
 export interface AppContext {

@@ -1,4 +1,4 @@
-import type { ICommandDto, ITransformedView } from '@starlight/plugin-utils'
+import type { ICommandDto, ITransformedView } from '@starlight-app/plugin-utils'
 import { atom } from 'jotai'
 import { IpcRequestEventName, ServerEvent } from '../../shared/ipc'
 import { callMain } from '../ipc'
