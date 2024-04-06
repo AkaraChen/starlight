@@ -9,7 +9,7 @@
     "@electron-toolkit/preload": "^3.0.1",
     "@electron-toolkit/utils": "^3.0.0",
     "@starlight-app/plugin-sdk": "1.0.0",
-    "@starlight/plugin-utils": "1.0.0",
+    "@starlight-app/plugin-utils": "1.0.0",
     "app-launcher": "1.0.0",
     "clsx": "^2.1.0",
     "debug": "^4.3.4",
@@ -23,7 +23,9 @@
     "react-router-dom": "^6.22.3",
     "rxjs": "^7.8.1",
     "scroll-into-view-if-needed": "^3.1.0",
-    "window-manager": "1.0.0"
+    "window-manager": "1.0.0",
+    "yaml": "^2.4.1",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@akrc/ci-toolkit": "^1.2.0",
@@ -56,7 +58,6 @@
     "check:web": "tsc --noEmit -p tsconfig.web.json --composite false",
     "dev": "cross-env DEBUG=\"starlight*\" DEBUG_COLORS=1 electron-vite dev",
     "lint": "eslint . --ext .js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix",
-    "postinstall": "skip-in-ci yarn electron-builder install-app-deps",
     "start": "electron-vite preview"
   }
 }
