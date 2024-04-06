@@ -4,6 +4,5 @@ export {
   ITransformedMetaData,
   ITransformedPlugin,
   ITransformedView,
-  getICommandDto,
 } from './transform'
 export * from './dto'

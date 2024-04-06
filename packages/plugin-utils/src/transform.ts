@@ -11,7 +11,6 @@ import { ECommandPiority } from '@starlight-app/plugin-sdk'
 import emojiRegex from 'emoji-regex'
 import mime from 'mime'
 import { map } from 'rxjs'
-import type { ICommandDto } from './dto'
 
 export interface ITranformedCommand extends ICommand {
   pluginId: string
@@ -157,12 +156,5 @@ export function transformPlugin(plugin: IPlugin): ITransformedPlugin {
     lifecycle: transformLifecycle(plugin),
     commands: getCommands(),
     views: plugin.views?.map((view) => transformView(plugin, view)),
-  }
-}
-
-export const getICommandDto = (command: ITranformedCommand): ICommandDto => {
-  return {
-    ...command,
-    handler: undefined,
   }
 }
