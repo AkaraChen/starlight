@@ -1,4 +1,4 @@
-import { ITranformedCommand } from './transform'
+import type { ITranformedCommand } from './transform'
 
 export type OmitFunction<T> = {
   // eslint-disable-next-line @typescript-eslint/ban-types
@@ -6,3 +6,10 @@ export type OmitFunction<T> = {
 }
 
 export type ICommandDto = OmitFunction<ITranformedCommand>
+
+export const getICommandDto = (command: ITranformedCommand): ICommandDto => {
+  return {
+    ...command,
+    handler: undefined,
+  }
+}

@@ -1,4 +1,4 @@
-import { ICommandDto, ITransformedView } from '@starlight/plugin-utils'
+import type { ICommandDto, ITransformedView } from '@starlight/plugin-utils'
 import { atom } from 'jotai'
 import { IpcRequestEventName, ServerEvent } from '../../shared/ipc'
 import { callMain } from '../ipc'
@@ -21,7 +21,5 @@ const updateViews = () => {
   store.set(viewsAtom, views)
 }
 
-window.electron.ipcRenderer.on(ServerEvent.COMMAND_UPDATE, () =>
-  updateCommands(),
-)
-window.electron.ipcRenderer.on(ServerEvent.VIEW_UPDATE, () => updateViews())
+window.electron.ipcRenderer.on(ServerEvent.COMMAND_UPDATE, updateCommands)
+window.electron.ipcRenderer.on(ServerEvent.VIEW_UPDATE, updateViews)
