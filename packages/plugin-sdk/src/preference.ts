@@ -8,24 +8,24 @@ export interface IPreferenceBase {
 
 export interface IBooleanPreference extends IPreferenceBase {
   type: 'boolean'
-  defaultValue: boolean
+  defaultValue?: boolean
 }
 
 export interface IStringPreference extends IPreferenceBase {
   type: 'string'
-  defaultValue: string
-  schema: Schema
+  defaultValue?: string
+  schema?: Schema
 }
 
 export interface INumberPreference extends IPreferenceBase {
   type: 'number'
-  defaultValue: number
+  defaultValue?: number
 }
 
 export interface IListPreference<T extends IPreferenceBase>
   extends IPreferenceBase {
   type: 'list'
-  defaultValue: T
+  defaultValue?: T
   options: T[]
 }
 
