@@ -2,7 +2,7 @@ import { join } from 'node:path'
 import { is } from '@electron-toolkit/utils'
 import createDebug from 'debug'
 import { BrowserWindow, globalShortcut, ipcMain, shell } from 'electron'
-import { ClientEvent } from '../constants/ipc'
+import { ClientEvent } from '../shared/ipc'
 import { PluginManager } from './plugin'
 
 const debug = createDebug('starlight:window')

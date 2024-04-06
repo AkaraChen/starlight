@@ -4,7 +4,7 @@ import {
   IpcRequestPayload,
   IpcResponse,
   ServerEvent,
-} from '../constants/ipc'
+} from '../shared/ipc'
 import { mainWindow } from './window'
 
 export const sendEvent = (event: ServerEvent) => {

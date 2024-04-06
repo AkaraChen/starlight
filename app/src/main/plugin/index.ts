@@ -9,7 +9,7 @@ import {
 } from '@starlight/plugin-utils'
 import createDebug from 'debug'
 import { BehaviorSubject, type Subscription, debounceTime, map } from 'rxjs'
-import { IpcRequestEventName, ServerEvent } from '../../constants/ipc'
+import { IpcRequestEventName, ServerEvent } from '../../shared/ipc'
 import { answerEvent, sendEvent } from '../ipc'
 import { buildInPlugins } from './load'
 
