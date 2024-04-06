@@ -3,7 +3,7 @@ import {
   IpcRequestEventName,
   IpcRequestPayload,
   IpcResponse,
-} from '../constants/ipc'
+} from '../shared/ipc'
 
 export const callMain = <T extends IpcRequestEventName>(
   event: T,
