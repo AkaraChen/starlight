@@ -4,6 +4,8 @@ import { BrowserWindow, app } from 'electron'
 import { PluginManager } from './plugin'
 import { createWindow } from './window'
 
+if (require('electron-squirrel-startup')) app.quit()
+
 const debug = createDebug('starlight:main')
 
 debug('start')
