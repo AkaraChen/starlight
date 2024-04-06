@@ -19,15 +19,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@akrc/ci-toolkit@npm:^1.0.1":
-  version: 1.0.1
-  resolution: "@akrc/ci-toolkit@npm:1.0.1"
-  bin:
-    skip-in-ci: bin/skip-in-ci.cjs
-  checksum: 10c0/3f6ff6161117e16f02c0995878e77e8c91f3f14a28570d18ff45bb90c48a9fc2b4311fbad0de5b26b8822f88340f46798217d073e46744362a522c45d2544ec9
-  languageName: node
-  linkType: hard
-
 "@akrc/ci-toolkit@npm:^1.1.0":
   version: 1.1.0
   resolution: "@akrc/ci-toolkit@npm:1.1.0"
@@ -1980,6 +1971,7 @@ __metadata:
   dependencies:
     rxjs: "npm:^7.8.1"
     tsup: "npm:^8.0.2"
+    zod: "npm:^3.22.4"
   languageName: unknown
   linkType: soft
 
@@ -11075,7 +11067,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "starlight@workspace:."
   dependencies:
-    "@akrc/ci-toolkit": "npm:^1.0.1"
+    "@akrc/ci-toolkit": "npm:^1.1.0"
     "@biomejs/biome": "npm:1.6.3"
     "@electron-toolkit/eslint-config-ts": "npm:^1.0.1"
     "@typescript-eslint/eslint-plugin": "npm:^7.4.0"

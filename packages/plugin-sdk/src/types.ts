@@ -1,4 +1,5 @@
 import type { Observable } from 'rxjs'
+import type { TPreference } from './preference'
 
 export interface ISupport {
   windows: boolean
@@ -58,6 +59,7 @@ export type MaybeObservable<T> = T | Observable<T>
 
 export interface IPlugin {
   metaData: IMetaData
+  preferences?: TPreference[]
   lifecycle?: ILifecycle
   commands?: MaybeObservable<ICommand[]>
   views?: IView[]
