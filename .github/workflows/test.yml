@@ -21,4 +21,4 @@ jobs:
         run: yarn
       - run: yarn dlx turbo build
       - run: yarn test run --reporter=github-actions
-      - run: yarn dlx turbo lint
+      - run: yarn dlx turbo check
