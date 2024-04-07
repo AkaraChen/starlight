@@ -27,6 +27,6 @@ jobs:
           git commit -a -m "style: lint"
       - name: Push changes
         uses: ad-m/github-push-action@master
-        if: ${{ steps.commit.outcome == 'success' || github.event != 'pull_request' }}
+        if: ${{ steps.commit.outcome == 'success' && github.event != 'pull_request' }}
         with:
           branch: ${{ github.head_ref }}
