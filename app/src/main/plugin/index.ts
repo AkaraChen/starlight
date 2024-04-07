@@ -6,7 +6,7 @@ import {
   type ITransformedView,
   getICommandDto,
   transformPlugin,
-} from '@starlight/plugin-utils'
+} from '@starlight-app/plugin-utils'
 import createDebug from 'debug'
 import { BehaviorSubject, type Subscription, debounceTime, map } from 'rxjs'
 import { IpcRequestEventName, ServerEvent } from '../../shared/ipc'

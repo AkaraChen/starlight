@@ -7,6 +7,7 @@ import { Core } from '../core'
 
 export const getWindowsCore = async () => {
   const windowsDirectories = await getWindowsDirs()
+  console.log(windowsDirectories)
   const core = new Core({
     dirs: Object.entries(windowsDirectories).map(([, dir]) => ({
       dir,

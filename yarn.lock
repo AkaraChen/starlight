@@ -1905,7 +1905,7 @@ __metadata:
     "@electron-toolkit/tsconfig": "npm:^1.0.1"
     "@electron-toolkit/utils": "npm:^3.0.0"
     "@starlight-app/plugin-sdk": "npm:1.0.0"
-    "@starlight/plugin-utils": "npm:1.0.0"
+    "@starlight-app/plugin-utils": "npm:1.0.0"
     "@types/node": "npm:^20.12.2"
     "@types/react": "npm:^18.2.74"
     "@types/react-dom": "npm:^18.2.24"
@@ -1936,6 +1936,8 @@ __metadata:
     typescript: "npm:^5.4.4"
     vite: "npm:^5.2.8"
     window-manager: "npm:1.0.0"
+    yaml: "npm:^2.4.1"
+    zod: "npm:^3.22.4"
   languageName: unknown
   linkType: soft
 
@@ -1974,9 +1976,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@starlight/plugin-utils@npm:1.0.0, @starlight/plugin-utils@workspace:packages/plugin-utils":
+"@starlight-app/plugin-utils@npm:1.0.0, @starlight-app/plugin-utils@workspace:packages/plugin-utils":
   version: 0.0.0-use.local
-  resolution: "@starlight/plugin-utils@workspace:packages/plugin-utils"
+  resolution: "@starlight-app/plugin-utils@workspace:packages/plugin-utils"
   dependencies:
     "@starlight-app/plugin-sdk": "npm:1.0.0"
     emoji-regex: "npm:^10.3.0"
@@ -13027,7 +13029,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"yaml@npm:^2.3.4":
+"yaml@npm:^2.3.4, yaml@npm:^2.4.1":
   version: 2.4.1
   resolution: "yaml@npm:2.4.1"
   bin:
