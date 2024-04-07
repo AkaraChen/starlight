@@ -48,15 +48,15 @@
   "main": "./out/main/index.js",
   "packageManager": "yarn@4.1.1",
   "scripts": {
-    "build": "npm run typecheck && electron-vite build",
+    "build": "npm run check && electron-vite build",
     "build:unpack": "npm run build && electron-builder --dir",
     "build:win": "npm run build && electron-builder --win",
     "dev": "cross-env DEBUG=\"starlight*\" DEBUG_COLORS=1 electron-vite dev",
     "lint": "eslint . --ext .js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix",
     "postinstall": "skip-in-ci yarn electron-builder install-app-deps",
     "start": "electron-vite preview",
-    "typecheck": "npm run typecheck:node && npm run typecheck:web",
-    "typecheck:node": "tsc --noEmit -p tsconfig.node.json --composite false",
-    "typecheck:web": "tsc --noEmit -p tsconfig.web.json --composite false"
+    "check": "npm run check:node && npm run check:web",
+    "check:node": "tsc --noEmit -p tsconfig.node.json --composite false",
+    "check:web": "tsc --noEmit -p tsconfig.web.json --composite false"
   }
 }

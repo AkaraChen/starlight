@@ -8,6 +8,7 @@
     "lint": {},
     "dev": {
       "cache": false
-    }
+    },
+    "check": {}
   }
 }

@@ -9,13 +9,15 @@
     "win-get-exe-icon": "1.0.0"
   },
   "devDependencies": {
-    "tsup": "^8.0.2"
+    "tsup": "^8.0.2",
+    "typescript": "^5.4.4"
   },
   "main": "dist/index.js",
   "packageManager": "yarn@4.1.1",
   "scripts": {
     "build": "tsup",
-    "dev": "tsup --watch"
+    "dev": "tsup --watch",
+    "check": "tsc --noEmit"
   },
   "types": "dist/index.d.ts"
 }

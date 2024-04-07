@@ -8,6 +8,7 @@
   },
   "devDependencies": {
     "tsup": "^8.0.2",
+    "typescript": "^5.4.4",
     "zod": "^3.22.4"
   },
   "exports": {
@@ -30,7 +31,8 @@
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "check": "tsc --noEmit"
   },
   "types": "./dist/index.d.mts"
 }
