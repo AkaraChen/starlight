@@ -20,13 +20,13 @@ jobs:
       - run: yarn format
       - name: Commit files
         id: commit
-        continue-on-error: ${{ github.event != 'pull_request' }}
+        continue-on-error: ${{ github.event_name != 'pull_request' }}
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git commit -a -m "style: lint"
       - name: Push changes
         uses: ad-m/github-push-action@master
-        if: ${{ steps.commit.outcome == 'success' && github.event != 'pull_request' }}
+        if: ${{ steps.commit.outcome == 'success' && github.event_name != 'pull_request' }}
         with:
           branch: ${{ github.head_ref }}
