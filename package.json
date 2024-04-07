@@ -15,7 +15,7 @@
     "prettier": "^3.2.5",
     "syncpack": "^12.3.0",
     "taze": "^0.13.3",
-    "typescript": "5.3.3",
+    "typescript": "5.4.4",
     "vitest": "^1.4.0"
   },
   "packageManager": "yarn@4.1.1",
