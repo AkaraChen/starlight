@@ -6,7 +6,7 @@
     "name": "AkaraChen"
   },
   "dependencies": {
-    "@electron-toolkit/preload": "^3.0.0",
+    "@electron-toolkit/preload": "^3.0.1",
     "@electron-toolkit/utils": "^3.0.0",
     "@starlight-app/plugin-sdk": "1.0.0",
     "@starlight/plugin-utils": "1.0.0",

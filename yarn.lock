@@ -873,12 +873,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@electron-toolkit/preload@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "@electron-toolkit/preload@npm:3.0.0"
+"@electron-toolkit/preload@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "@electron-toolkit/preload@npm:3.0.1"
   peerDependencies:
     electron: ">=13.0.0"
-  checksum: 10c0/cab9954dc38f97a7a09d7f038fe97ded04a12d36d933657c7efbbb798e7575fd88a01efe6042342847da81e9e46ce8198050fe771b45d388ba5221be323360e5
+  checksum: 10c0/7ebc3738dbdbc7295f37fa5cfc4dbc0b60576405c04a017aa121f6b3377674fc38871c030f0506cf9c7dc61c96f944576731dd8ae1aac471b8b63f4651b9451f
   languageName: node
   linkType: hard
 
@@ -1901,7 +1901,7 @@ __metadata:
   resolution: "@starlight-app/app@workspace:app"
   dependencies:
     "@akrc/ci-toolkit": "npm:^1.2.0"
-    "@electron-toolkit/preload": "npm:^3.0.0"
+    "@electron-toolkit/preload": "npm:^3.0.1"
     "@electron-toolkit/tsconfig": "npm:^1.0.1"
     "@electron-toolkit/utils": "npm:^3.0.0"
     "@starlight-app/plugin-sdk": "npm:1.0.0"
