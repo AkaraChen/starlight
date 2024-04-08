@@ -1914,7 +1914,7 @@ __metadata:
     clsx: "npm:^2.1.0"
     cross-env: "npm:^7.0.3"
     debug: "npm:^4.3.4"
-    electron: "npm:29.1.6"
+    electron: "npm:29.2.0"
     electron-builder: "npm:^24.13.3"
     electron-updater: "npm:^6.1.8"
     electron-vite: "npm:^2.1.0"
@@ -3172,7 +3172,7 @@ __metadata:
     "@starlight-app/plugin-sdk": "npm:1.0.0"
     "@types/node": "npm:^20.12.2"
     chokidar: "npm:^3.6.0"
-    electron: "npm:29.1.6"
+    electron: "npm:29.2.0"
     radash: "npm:^12.1.0"
     rxjs: "npm:^7.8.1"
     tsup: "npm:^8.0.2"
@@ -4889,16 +4889,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"electron@npm:29.1.6":
-  version: 29.1.6
-  resolution: "electron@npm:29.1.6"
+"electron@npm:29.2.0":
+  version: 29.2.0
+  resolution: "electron@npm:29.2.0"
   dependencies:
     "@electron/get": "npm:^2.0.0"
     "@types/node": "npm:^20.9.0"
     extract-zip: "npm:^2.0.1"
   bin:
     electron: cli.js
-  checksum: 10c0/205e0be99b03d7e9f870c7fcc7d989b475105764440c993051c7d562454a271b78825750f7b62872f879c2e6ce75e8db6776824c859a9ce731410462c4c5cf65
+  checksum: 10c0/7418c1c45c06b30efccb2c1d2c05644bc3f441050a64a75cf9ca3d30f8e9aa7f4a044b17b215ab280b2613735493e12c47fc9a9ac1f0c47e8737a2e273a71143
   languageName: node
   linkType: hard
 
@@ -12924,7 +12924,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "win-get-exe-icon@workspace:packages/windows/win-get-exe-icon"
   dependencies:
-    electron: "npm:29.1.6"
+    electron: "npm:29.2.0"
     icon-extractor: "npm:^1.0.3"
     tsup: "npm:^8.0.2"
     typescript: "npm:^5.4.4"

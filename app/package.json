@@ -33,7 +33,7 @@
     "@types/react-dom": "^18.2.24",
     "@vitejs/plugin-react": "^4.2.1",
     "cross-env": "^7.0.3",
-    "electron": "29.1.6",
+    "electron": "29.2.0",
     "electron-builder": "^24.13.3",
     "electron-vite": "^2.1.0",
     "postcss": "^8.4.38",

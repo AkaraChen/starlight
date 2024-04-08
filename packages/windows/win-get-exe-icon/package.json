@@ -2,7 +2,7 @@
   "name": "win-get-exe-icon",
   "version": "1.0.0",
   "dependencies": {
-    "electron": "29.1.6",
+    "electron": "29.2.0",
     "icon-extractor": "^1.0.3"
   },
   "devDependencies": {
