@@ -16,8 +16,8 @@
   "packageManager": "yarn@4.1.1",
   "scripts": {
     "build": "tsup",
-    "dev": "tsup --watch",
-    "check": "tsc --noEmit"
+    "check": "tsc --noEmit",
+    "dev": "tsup --watch"
   },
   "types": "dist/index.d.ts"
 }

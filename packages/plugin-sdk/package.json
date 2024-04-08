@@ -30,9 +30,9 @@
   "module": "./dist/index.mjs",
   "scripts": {
     "build": "tsup",
+    "check": "tsc --noEmit",
     "dev": "tsup --watch",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "check": "tsc --noEmit"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "types": "./dist/index.d.mts"
 }
