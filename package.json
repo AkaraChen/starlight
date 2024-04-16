@@ -1,7 +1,7 @@
 {
   "name": "starlight",
   "devDependencies": {
-    "@biomejs/biome": "1.6.3",
+    "@biomejs/biome": "1.7.0",
     "@electron-toolkit/eslint-config-ts": "^2.0.0",
     "@typescript-eslint/eslint-plugin": "^7.4.0",
     "@typescript-eslint/parser": "^7.4.0",
