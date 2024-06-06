@@ -1906,7 +1906,7 @@ __metadata:
     "@electron-toolkit/utils": "npm:^3.0.0"
     "@starlight-app/plugin-sdk": "npm:1.0.0"
     "@starlight/plugin-utils": "npm:1.0.0"
-    "@types/node": "npm:^20.12.2"
+    "@types/node": "npm:^20.14.2"
     "@types/react": "npm:^18.2.74"
     "@types/react-dom": "npm:^18.2.24"
     "@vitejs/plugin-react": "npm:^4.2.1"
@@ -2179,7 +2179,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:^20.12.2, @types/node@npm:^20.9.0":
+"@types/node@npm:*, @types/node@npm:^20.9.0":
   version: 20.12.2
   resolution: "@types/node@npm:20.12.2"
   dependencies:
@@ -2192,6 +2192,15 @@ __metadata:
   version: 17.0.45
   resolution: "@types/node@npm:17.0.45"
   checksum: 10c0/0db377133d709b33a47892581a21a41cd7958f22723a3cc6c71d55ac018121382de42fbfc7970d5ae3e7819dbe5f40e1c6a5174aedf7e7964e9cb8fa72b580b0
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:^20.14.2":
+  version: 20.14.2
+  resolution: "@types/node@npm:20.14.2"
+  dependencies:
+    undici-types: "npm:~5.26.4"
+  checksum: 10c0/2d86e5f2227aaa42212e82ea0affe72799111b888ff900916376450b02b09b963ca888b20d9c332d8d2b833ed4781987867a38eaa2e4863fa8439071468b0a6f
   languageName: node
   linkType: hard
 
@@ -3170,7 +3179,7 @@ __metadata:
   resolution: "app-launcher@workspace:plugins/app-launcher"
   dependencies:
     "@starlight-app/plugin-sdk": "npm:1.0.0"
-    "@types/node": "npm:^20.12.2"
+    "@types/node": "npm:^20.14.2"
     chokidar: "npm:^3.6.0"
     electron: "npm:29.3.0"
     radash: "npm:^12.1.0"
