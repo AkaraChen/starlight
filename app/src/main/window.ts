@@ -1,4 +1,4 @@
-import { join } from 'node:path'
+import path from 'node:path'
 import { is } from '@electron-toolkit/utils'
 import createDebug from 'debug'
 import { BrowserWindow, globalShortcut, ipcMain, shell } from 'electron'
@@ -19,7 +19,7 @@ export function createWindow(): void {
     show: false,
     autoHideMenuBar: true,
     webPreferences: {
-      preload: join(__dirname, '../preload/index.js'),
+      preload: path.join(__dirname, '../preload/index.js'),
       sandbox: false,
     },
     backgroundMaterial: 'acrylic',
@@ -38,7 +38,7 @@ export function createWindow(): void {
   if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
     mainWindow.loadURL(process.env['ELECTRON_RENDERER_URL'])
   } else {
-    mainWindow.loadFile(join(__dirname, '../renderer/index.html'))
+    mainWindow.loadFile(path.join(__dirname, '../renderer/index.html'))
   }
 
   const getKey = () => {
