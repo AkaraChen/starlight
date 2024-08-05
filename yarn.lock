@@ -1784,10 +1784,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fontsource-variable/rubik@npm:^5.0.21":
-  version: 5.0.21
-  resolution: "@fontsource-variable/rubik@npm:5.0.21"
-  checksum: 10c0/ee3b22aeb4ffdcc19007e17f3478c615f3f37f6d93a5d279919d331b49fe5edb5d39bc019a1fa7f94d18d2aa693783fcac524df137b8321ee8fff5ca51fd5104
+"@fontsource-variable/rubik@npm:^5.0.22":
+  version: 5.0.22
+  resolution: "@fontsource-variable/rubik@npm:5.0.22"
+  checksum: 10c0/1ec590e32aa728dd7a71c144538563e6221b504cc0d71452f5d0258eb5ed702208ed61596c42dfa432817a9a878fbf342a0fb2dc5550d391feaa3e9d52d317ef
   languageName: node
   linkType: hard
 
@@ -2556,7 +2556,7 @@ __metadata:
     "@astrojs/check": "npm:^0.5.10"
     "@astrojs/sitemap": "npm:^3.1.2"
     "@astrojs/tailwind": "npm:^5.1.0"
-    "@fontsource-variable/rubik": "npm:^5.0.21"
+    "@fontsource-variable/rubik": "npm:^5.0.22"
     astro: "npm:^4.11.5"
     astro-robots-txt: "npm:^1.0.0"
     tailwind-scrollbar: "npm:^3.1.0"

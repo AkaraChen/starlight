@@ -5,7 +5,7 @@
     "@astrojs/check": "^0.5.10",
     "@astrojs/sitemap": "^3.1.2",
     "@astrojs/tailwind": "^5.1.0",
-    "@fontsource-variable/rubik": "^5.0.21",
+    "@fontsource-variable/rubik": "^5.0.22",
     "astro": "^4.11.5",
     "astro-robots-txt": "^1.0.0",
     "tailwindcss": "^3.4.3",
