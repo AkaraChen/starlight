@@ -13,7 +13,7 @@
     "lint-staged": "^15.2.2",
     "pinst": "^3.0.0",
     "prettier": "^3.2.5",
-    "syncpack": "^12.3.0",
+    "syncpack": "^12.4.0",
     "taze": "^0.13.3",
     "typescript": "^5.4.4",
     "vitest": "^1.4.0"
