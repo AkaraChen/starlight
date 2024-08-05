@@ -12,7 +12,7 @@
     "@starlight/plugin-utils": "1.0.0",
     "app-launcher": "1.0.0",
     "clsx": "^2.1.0",
-    "debug": "^4.3.4",
+    "debug": "^4.3.6",
     "electron-updater": "^6.1.8",
     "emoji-regex": "^10.3.0",
     "fuse.js": "^7.0.0",
