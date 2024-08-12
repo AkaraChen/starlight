@@ -7,8 +7,8 @@
     "electron": "29.3.0",
     "radash": "^12.1.0",
     "rxjs": "^7.8.1",
-    "win-dirs": "1.0.0",
-    "win-get-exe-icon": "1.0.0"
+    "win-dirs": "1.1.0",
+    "win-get-exe-icon": "1.1.0"
   },
   "devDependencies": {
     "@types/node": "^20.14.10",
