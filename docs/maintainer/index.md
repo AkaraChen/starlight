@@ -1,3 +1,0 @@
-# Maintainer Guide
-
-1.

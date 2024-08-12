@@ -35,9 +35,7 @@
   },
   "workspaces": [
     "./packages/**",
-    "./website",
-    "./app",
-    "./docs",
-    "./plugins/*"
+    "./plugins/*",
+    "./app"
   ]
 }

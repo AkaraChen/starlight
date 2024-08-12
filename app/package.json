@@ -8,22 +8,22 @@
   "dependencies": {
     "@electron-toolkit/preload": "^3.0.1",
     "@electron-toolkit/utils": "^3.0.0",
-    "@starlight-app/plugin-sdk": "1.0.0",
-    "@starlight-app/plugin-utils": "1.0.0",
-    "app-launcher": "1.0.0",
+    "@starlight-app/plugin-sdk": "link:../packages/plugin-sdk",
+    "@starlight-app/plugin-utils": "link:../packages/plugin-utils",
+    "app-launcher": "link:../plugins/app-launcher",
     "clsx": "^2.1.0",
     "debug": "^4.3.4",
     "electron-updater": "^6.1.8",
     "emoji-regex": "^10.3.0",
     "fuse.js": "^7.0.0",
-    "hello-world": "1.0.0",
+    "hello-world": "link:../plugins/hello-world",
     "jotai": "^2.7.2",
     "lucide-react": "^0.365.0",
     "radash": "^12.1.0",
     "react-router-dom": "^6.22.3",
     "rxjs": "^7.8.1",
     "scroll-into-view-if-needed": "^3.1.0",
-    "window-manager": "1.0.0",
+    "window-manager": "link:../plugins/window-manager",
     "yaml": "^2.4.1",
     "zod": "^3.22.4"
   },
@@ -48,7 +48,6 @@
     "vite": "^5.2.8"
   },
   "main": "./out/main/index.js",
-  "packageManager": "yarn@4.1.1",
   "scripts": {
     "build": "npm run check && electron-vite build",
     "build:unpack": "npm run build && electron-builder --dir",
@@ -58,6 +57,7 @@
     "check:web": "tsc --noEmit -p tsconfig.web.json --composite false",
     "dev": "cross-env DEBUG=\"starlight*\" DEBUG_COLORS=1 electron-vite dev",
     "lint": "eslint . --ext .js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix",
-    "start": "electron-vite preview"
+    "start": "electron-vite preview",
+    "prepare": "electron-builder install-app-deps"
   }
 }
