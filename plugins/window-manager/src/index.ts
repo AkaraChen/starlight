@@ -3,7 +3,7 @@ import {
   type ICommand,
   PluginBuilder,
 } from '@starlight-app/plugin-sdk'
-import { getOpenWindowsSync } from 'active-win'
+import { openWindowsSync } from 'get-windows'
 import { Window, windowManager } from 'node-window-manager'
 import { BehaviorSubject, fromEvent, switchMap } from 'rxjs'
 import { extractIcon } from 'win-get-exe-icon'
@@ -17,7 +17,7 @@ const baseCommands: ICommand[] = [
     icon: '🙈',
     description: 'Hide all windows',
     handler() {
-      for (const window of getOpenWindowsSync()) {
+      for (const window of openWindowsSync()) {
         const target = new Window(window.id)
         target.minimize()
       }
@@ -32,7 +32,7 @@ const next = (newCommands: ICommand[]) => {
 const { pid } = process
 
 export const getActiveWindowCommands = (): Promise<ICommand[]> => {
-  const windows = getOpenWindowsSync().filter((w) => w.owner.processId !== pid)
+  const windows = openWindowsSync().filter((w) => w.owner.processId !== pid)
   const promises = windows.map(async (window) => {
     return {
       id: `window-manager-${window.id}`,
