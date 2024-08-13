@@ -57,7 +57,7 @@
     "check:web": "tsc --noEmit -p tsconfig.web.json --composite false",
     "dev": "cross-env DEBUG=\"starlight*\" DEBUG_COLORS=1 electron-vite dev",
     "lint": "eslint . --ext .js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix",
-    "start": "electron-vite preview",
-    "prepare": "skip-in-ci electron-builder install-app-deps"
+    "prepare": "skip-in-ci electron-builder install-app-deps",
+    "start": "electron-vite preview"
   }
 }
