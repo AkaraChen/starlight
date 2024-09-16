@@ -1272,7 +1272,7 @@ __metadata:
     scroll-into-view-if-needed: "npm:^3.1.0"
     supports-color: "npm:^9.4.0"
     tailwind-scrollbar: "npm:^3.1.0"
-    tailwindcss: "npm:^3.4.3"
+    tailwindcss: "npm:^3.4.11"
     typescript: "npm:^5.4.4"
     vite: "npm:^5.2.8"
     window-manager: "link:../plugins/window-manager"
@@ -7975,9 +7975,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tailwindcss@npm:^3.4.3":
-  version: 3.4.9
-  resolution: "tailwindcss@npm:3.4.9"
+"tailwindcss@npm:^3.4.11":
+  version: 3.4.11
+  resolution: "tailwindcss@npm:3.4.11"
   dependencies:
     "@alloc/quick-lru": "npm:^5.2.0"
     arg: "npm:^5.0.2"
@@ -8004,7 +8004,7 @@ __metadata:
   bin:
     tailwind: lib/cli.js
     tailwindcss: lib/cli.js
-  checksum: 10c0/b072028e87dd9dcbf858285681bdb8b5a1ff0b4439b956cc1b7aae4ae288f4d531867dea6ce3a2d974cbbd9699f3552ee515a56d079903fdd1eeae06305f60ba
+  checksum: 10c0/b5bce27a6370e7a1c68a8c61db1e5379ccd14dcc5410149342f7742f45be0f2af72cbc0f3ac4e97535fc214d3f2546ade5edbb737f5b74d0a2431b8bb8e54b0d
   languageName: node
   linkType: hard
 
