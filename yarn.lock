@@ -1261,7 +1261,7 @@ __metadata:
     emoji-regex: "npm:^10.3.0"
     fuse.js: "npm:^7.0.0"
     hello-world: "link:../plugins/hello-world"
-    jotai: "npm:^2.7.2"
+    jotai: "npm:^2.10.1"
     lucide-react: "npm:^0.365.0"
     postcss: "npm:^8.4.38"
     radash: "npm:^12.1.0"
@@ -5250,9 +5250,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jotai@npm:^2.7.2":
-  version: 2.9.2
-  resolution: "jotai@npm:2.9.2"
+"jotai@npm:^2.10.1":
+  version: 2.10.1
+  resolution: "jotai@npm:2.10.1"
   peerDependencies:
     "@types/react": ">=17.0.0"
     react: ">=17.0.0"
@@ -5261,7 +5261,7 @@ __metadata:
       optional: true
     react:
       optional: true
-  checksum: 10c0/a54e708d192f18c4a4e26920ad63aead67469345f18a6cb87349a0d6cd73ccbaacb150f3c7f8cf1a162f1ea7d0da80885d57ac2554ea2f9818b54aa0c3a37b63
+  checksum: 10c0/9ec75716e1bae68b41abb2ca8451de0f7b35dd9107064c92d6cca284ebc7cbf884e37656d5bca7db3223b4a21b885b29b490e5922dde7d28d47ff22a058cbae3
   languageName: node
   linkType: hard
 
